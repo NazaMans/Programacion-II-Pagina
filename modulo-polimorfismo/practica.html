@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Módulo 5: Polimorfismo - Práctica</title>
+    <link rel="stylesheet" href="../css/style.css">
+</head>
+<body>
+    <header>
+        <h1>Módulo 5: Polimorfismo</h1>
+        <nav>
+            <a href="../index.html">Volver al Índice Principal</a>
+        </nav>
+    </header>
+
+    <main>
+        <section>
+            <h2>Práctica: Ejercicios de Polimorfismo</h2>
+            <p>Es el momento de poner a prueba tu comprensión del polimorfismo en C++, tanto estático (sobrecarga) como dinámico (funciones virtuales y clases abstractas). Estos ejercicios te ayudarán a ver cómo el mismo nombre puede tener "muchas formas" en tus programas.</p>
+            <p>Asegúrate de compilar y ejecutar tus soluciones en Qt Creator.</p>
+        </section>
+
+        <section class="ejercicio">
+            <h3>Ejercicio 1: Polimorfismo Estático (Sobrecarga de Funciones)</h3>
+            <p>Crea una clase llamada `Operaciones` que contenga métodos sobrecargados para realizar sumas y mostrar información:</p>
+            <ol>
+                <li>Define un método `sumar()` que acepte dos enteros (`int`) y retorne su suma.</li>
+                <li>Sobrecarga `sumar()` para que acepte dos números flotantes (`double`) y retorne su suma.</li>
+                <li>Define un método `mostrar()` que acepte un entero (`int`) e imprima "Valor entero: X".</li>
+                <li>Sobrecarga `mostrar()` para que acepte una cadena de texto (`std::string`) e imprima "Mensaje: Y".</li>
+            </ol>
+            <p>En la función `main`:</p>
+            <ol>
+                <li>Crea un objeto de la clase `Operaciones`.</li>
+                <li>Llama a ambas versiones de `sumar()` con argumentos apropiados (enteros y flotantes) e imprime los resultados.</li>
+                <li>Llama a ambas versiones de `mostrar()` con argumentos apropiados (un entero y una cadena de texto).</li>
+            </ol>
+            <details>
+                <summary>Pista (si necesitas ayuda)</summary>
+                <p>La sobrecarga se basa en la firma de la función (número y tipo de parámetros). El tipo de retorno no es suficiente para sobrecargar.</p>
+            </details>
+        </section>
+
+        <section class="ejercicio">
+            <h3>Ejercicio 2: Polimorfismo Dinámico (Funciones Virtuales)</h3>
+            <p>Crea una jerarquía de clases para modelar diferentes tipos de empleados y demostrar el polimorfismo dinámico:</p>
+            <ol>
+                <li>Define una clase base `Empleado` con:
+                    <ul>
+                        <li>Atributo protegido: `nombre` (string).</li>
+                        <li>Constructor que inicialice el nombre.</li>
+                        <li>Un método <strong>virtual</strong> público `calcularSalario()` que retorne un `double` (ej. un valor base `1000.0`). Imprime un mensaje si es llamado (ej. "Calculando salario base...").</li>
+                        <li>Un método <strong>virtual</strong> público `mostrarDetalles()` que imprima el nombre del empleado.</li>
+                    </ul>
+                </li>
+                <li>Define una clase derivada `EmpleadoTiempoCompleto` que herede públicamente de `Empleado` con:
+                    <ul>
+                        <li>Atributo privado: `salarioMensual` (double).</li>
+                        <li>Constructor que inicialice nombre y salario mensual, llamando al constructor de la base.</li>
+                        <li>Sobreescribe `calcularSalario()` para retornar `salarioMensual`.</li>
+                        <li>Sobreescribe `mostrarDetalles()` para imprimir el nombre y " (Tiempo Completo)".</li>
+                    </ul>
+                </li>
+                <li>Define otra clase derivada `Consultor` que herede públicamente de `Empleado` con:
+                    <ul>
+                        <li>Atributos privados: `horasTrabajadas` (int) y `tarifaPorHora` (double).</li>
+                        <li>Constructor que inicialice nombre, horas trabajadas y tarifa, llamando al constructor de la base.</li>
+                        <li>Sobreescribe `calcularSalario()` para retornar `horasTrabajadas * tarifaPorHora`.</li>
+                        <li>Sobreescribe `mostrarDetalles()` para imprimir el nombre y " (Consultor)".</li>
+                    </ul>
+                </li>
+            </ol>
+            <p>En la función `main`:</p>
+            <ol>
+                <li>Crea punteros a `Empleado`.</li>
+                <li>Crea dinámicamente un `EmpleadoTiempoCompleto` y un `Consultor`, y asigna sus direcciones a los punteros de `Empleado`.</li>
+                <li>Recorre un array (o `std::vector`) de punteros `Empleado*`. Para cada puntero, llama a `calcularSalario()` y `mostrarDetalles()`.</li>
+                <li>Observa cómo se invoca la implementación correcta de la función basándose en el tipo real del objeto.</li>
+                <li>Asegúrate de liberar la memoria asignada con `delete`.</li>
+            </ol>
+            <details>
+                <summary>Pista (si necesitas ayuda)</summary>
+                <p>El uso de `override` es opcional pero ayuda al compilador a verificar que estás sobreescribiendo una función virtual.</p>
+            </details>
+        </section>
+
+        <section class="ejercicio">
+            <h3>Ejercicio 3: Clases Abstractas y Funciones Virtuales Puras</h3>
+            <p>Crea una jerarquía de clases para modelar diferentes `Forma`s geométricas, utilizando una clase abstracta:</p>
+            <ol>
+                <li>Define una clase abstracta `Forma` con:
+                    <ul>
+                        <li>Atributo protegido: `color` (string).</li>
+                        <li>Constructor que inicialice el color.</li>
+                        <li>Un método virtual puro `calcularArea()` que retorne `double`.</li>
+                        <li>Un método virtual puro `dibujar()` que no retorne nada.</li>
+                        <li>Un método público no virtual `getColor()` que retorne el color.</li>
+                    </ul>
+                </li>
+                <li>Define una clase `Circulo` que herede públicamente de `Forma` con:
+                    <ul>
+                        <li>Atributo privado: `radio` (double).</li>
+                        <li>Constructor que inicialice radio y color.</li>
+                        <li>Implementa `calcularArea()`.</li>
+                        <li>Implementa `dibujar()` para imprimir "Dibujando un círculo de color [Color]".</li>
+                    </ul>
+                </li>
+                <li>Define una clase `Rectangulo` que herede públicamente de `Forma` con:
+                    <ul>
+                        <li>Atributos privados: `ancho` (double) y `alto` (double).</li>
+                        <li>Constructor que inicialice ancho, alto y color.</li>
+                        <li>Implementa `calcularArea()`.</li>
+                        <li>Implementa `dibujar()` para imprimir "Dibujando un rectángulo de color [Color]".</li>
+                    </ul>
+                </li>
+            </ol>
+            <p>En la función `main`:</p>
+            <ol>
+                <li>Intenta crear un objeto de la clase `Forma` directamente (ej. `Forma miForma;`). ¿Qué error obtienes?</li>
+                <li>Crea dinámicamente un `Circulo` y un `Rectangulo`.</li>
+                <li>Almacena los punteros de estos objetos en un `std::vector<Forma*>`.</li>
+                <li>Recorre el vector y para cada `Forma*`, llama a `calcularArea()` y `dibujar()`.</li>
+                <li>Asegúrate de liberar la memoria asignada con `delete`.</li>
+            </ol>
+            <details>
+                <summary>Pista (si necesitas ayuda)</summary>
+                <p>Recuerda que no se pueden instanciar clases abstractas. Las clases derivadas deben implementar *todas* las funciones virtuales puras para no ser abstractas también.</p>
+            </details>
+        </section>
+
+        <section class="ejercicio">
+            <h3>Ejercicio 4: Destructores Virtuales</h3>
+            <p>Considera el siguiente código:</p>
+            <pre><code class="language-cpp">
+#include &lt;iostream&gt;
+
+class Base {
+public:
+    Base() { std::cout << "Constructor Base" << std::endl; }
+    ~Base() { std::cout << "Destructor Base" << std::endl; }
+};
+
+class Derivada : public Base {
+public:
+    Derivada() { std::cout << "Constructor Derivada" << std::endl; }
+    ~Derivada() { std::cout << "Destructor Derivada" << std::endl; }
+};
+
+int main() {
+    Base* obj = new Derivada();
+    delete obj;
+    return 0;
+}
+            </code></pre>
+            <ol>
+                <li>Predice la salida del programa al ejecutarlo.</li>
+                <li>Compila y ejecuta el código. ¿Coincide tu predicción?</li>
+                <li>Modifica la clase `Base` para que tenga un destructor <strong>virtual</strong>.</li>
+                <li>Vuelve a predecir y luego ejecuta el código. ¿Cuál es la diferencia en la salida y por qué es importante tener destructores virtuales en clases base polimórficas?</li>
+            </ol>
+            <details>
+                <summary>Pista (si necesitas ayuda)</summary>
+                <p>Si el destructor de la clase base no es virtual, al eliminar un objeto derivado a través de un puntero a la clase base, solo se llama al destructor de la clase base, lo que puede provocar fugas de memoria o comportamiento indefinido.</p>
+            </details>
+        </section>
+
+        <section class="navegacion-modulo">
+            <p>¡Dominando el polimorfismo!</p>
+            <a href="teoria.html" class="boton-practica">Volver a la Teoría del Módulo 5</a>
+            <a href="../index.html" class="boton-practica" style="background-color: #007bff;">Volver al Índice Principal</a>
+        </section>
+    </main>
+
+    <footer>
+        <p>Fin del Módulo 5</p>
+    </footer>
+</body>
+</html>

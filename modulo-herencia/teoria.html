@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Módulo 3: Herencia - Teoría</title>
+    <link rel="stylesheet" href="../css/style.css">
+</head>
+<body>
+    <header>
+        <h1>Módulo 3: Herencia</h1>
+        <nav>
+            <a href="../index.html">Volver al Índice Principal</a>
+        </nav>
+    </header>
+
+    <main>
+        <section>
+            <h2>Introducción a la Herencia</h2>
+            <p>La herencia es uno de los pilares fundamentales de la Programación Orientada a Objetos (POO) que permite crear nuevas clases (subclases) a partir de clases existentes (superclases), heredando sus atributos y métodos. Este mecanismo promueve la reutilización de código y la creación de jerarquías lógicas de clases.</p>
+            <p>Se dice que la herencia representa una relación "es-un" (ej. un "Perro" <em>es un</em> "Animal").</p>
+        </section>
+
+        <section>
+            <h2>Superclase y Subclase</h2>
+            <ul>
+                <li><strong>Superclase (Clase Base o Clase Padre):</strong> Es la clase de la cual se heredan las propiedades y comportamientos.</li>
+                <li><strong>Subclase (Clase Derivada o Clase Hija):</strong> Es la nueva clase que se crea, y que hereda de una superclase. Una subclase puede añadir nuevos atributos y métodos, o redefinir (sobreescribir) los métodos heredados.</li>
+            </ul>
+            <p>La herencia favorece la <strong>reutilización de código</strong>, ya que las funcionalidades comunes se definen una vez en la clase base y son compartidas por todas las clases derivadas.</p>
+        </section>
+
+        <section>
+            <h2>Modos de Herencia en C++</h2>
+            <p>En C++, la herencia puede ser de tres tipos, definidos por el especificador de acceso al heredar. Esto afecta cómo los miembros de la clase base (públicos, protegidos, privados) son accesibles en la clase derivada.</p>
+            <table border="1" style="width:100%; border-collapse: collapse;">
+                <thead>
+                    <tr>
+                        <th>Miembro de Clase Base</th>
+                        <th>Herencia Pública (`public`)</th>
+                        <th>Herencia Protegida (`protected`)</th>
+                        <th>Herencia Privada (`private`)</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><code>public</code></td>
+                        <td><code>public</code></td>
+                        <td><code>protected</code></td>
+                        <td><code>private</code></td>
+                    </tr>
+                    <tr>
+                        <td><code>protected</code></td>
+                        <td><code>protected</code></td>
+                        <td><code>protected</code></td>
+                        <td><code>private</code></td>
+                    </tr>
+                    <tr>
+                        <td><code>private</code></td>
+                        <td colspan="3">No heredado (no accesible directamente en la derivada)</td>
+                    </tr>
+                </tbody>
+            </table>
+            <p><strong>Explicación de los modos:</strong></p>
+            <ul>
+                <li>
+                    <strong>Herencia Pública (`public`):</strong> Es el tipo más común. Los miembros públicos de la base se hacen públicos en la derivada, y los protegidos se mantienen protegidos. Mantiene la relación "es-un".
+                    <pre><code class="language-cpp">
+class ClaseBase {
+public:
+    int pub_var;
+protected:
+    int prot_var;
+private:
+    int priv_var;
+};
+
+class ClaseDerivada : public ClaseBase {
+    // pub_var es public
+    // prot_var es protected
+    // priv_var no es accesible directamente
+};
+                    </code></pre>
+                </li>
+                <li>
+                    <strong>Herencia Protegida (`protected`):</strong> Los miembros públicos y protegidos de la clase base se convierten en protegidos en la clase derivada. Esto significa que solo la clase derivada y sus propias clases derivadas pueden acceder a ellos, pero no desde fuera de la jerarquía.
+                    <pre><code class="language-cpp">
+class ClaseDerivada : protected ClaseBase {
+    // pub_var es protected
+    // prot_var es protected
+    // priv_var no es accesible directamente
+};
+                    </code></pre>
+                </li>
+                <li>
+                    <strong>Herencia Privada (`private`):</strong> Los miembros públicos y protegidos de la clase base se convierten en privados en la clase derivada. Esto significa que solo la propia clase derivada puede acceder a ellos, y no son accesibles para clases que hereden de ella ni desde fuera de la jerarquía. Este tipo de herencia suele utilizarse para implementar una relación "implementado-como" más que "es-un". Es el modo de herencia predeterminado si no se especifica.
+                    <pre><code class="language-cpp">
+class ClaseDerivada : private ClaseBase { // 'private' es el default
+    // pub_var es private
+    // prot_var es private
+    // priv_var no es accesible directamente
+};
+                    </code></pre>
+                </li>
+            </ul>
+        </section>
+
+        <section>
+            <h2>Tipos de Herencia</h2>
+            <p>Además de los modos de acceso, la herencia se clasifica por la estructura de las relaciones entre clases:</p>
+            <ul>
+                <li>
+                    <strong>Herencia Simple:</strong>
+                    <p>Una clase hereda de una única clase base. Es el tipo de herencia más común y sencillo.</p>
+                    <pre><code class="language-cpp">
+// Clase A
+//   |
+// Clase B (hereda de A)
+                    </code></pre>
+                </li>
+                <li>
+                    <strong>Herencia Múltiple:</strong>
+                    <p>Una clase hereda de dos o más clases base directamente. Permite combinar funcionalidades de varias fuentes, pero puede llevar a complejidades como el "problema del diamante" si hay herencia de la misma clase base a través de múltiples rutas.</p>
+                    <pre><code class="language-cpp">
+// Clase A   Clase B
+//   \       /
+//    Clase C (hereda de A y B)
+                    </code></pre>
+                </li>
+                <li>
+                    <strong>Herencia Multinivel:</strong>
+                    <p>Una clase deriva de otra clase, que a su vez deriva de una tercera clase, formando una cadena de herencia.</p>
+                    <pre><code class="language-cpp">
+// Clase A
+//   |
+// Clase B (hereda de A)
+//   |
+// Clase C (hereda de B)
+                    </code></pre>
+                </li>
+                <li>
+                    <strong>Herencia Jerárquica:</strong>
+                    <p>Una clase base es heredada por múltiples clases derivadas, formando una estructura de árbol.</p>
+                    <pre><code class="language-cpp">
+//     Clase A
+//    /   |   \
+// Clase B Clase C Clase D (B, C, D heredan de A)
+                    </code></pre>
+                </li>
+                <li>
+                    <strong>Herencia Híbrida (o Mixta):</strong>
+                    <p>Es una combinación de dos o más de los tipos de herencia anteriores (ej. una combinación de jerárquica y múltiple).</p>
+                </li>
+            </ul>
+        </section>
+        
+        <section class="navegacion-modulo">
+            <p>¿Listo para construir jerarquías de clases?</p>
+            <a href="practica.html" class="boton-practica">Ir a la Práctica del Módulo 3</a>
+        </section>
+    </main>
+
+    <footer>
+        <p>Volver al <a href="../index.html">Índice Principal</a></p>
+    </footer>
+</body>
+</html>

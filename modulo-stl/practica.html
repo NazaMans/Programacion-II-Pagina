@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Módulo 6: STL - Práctica</title>
+    <link rel="stylesheet" href="../css/style.css">
+</head>
+<body>
+    <header>
+        <h1>Módulo 6: Biblioteca de Plantillas Estándar (STL)</h1>
+        <nav>
+            <a href="../index.html">Volver al Índice Principal</a>
+        </nav>
+    </header>
+
+    <main>
+        <section>
+            <h2>Práctica: Ejercicios de la Biblioteca de Plantillas Estándar (STL)</h2>
+            <p>Es hora de sumergirse en la poderosa STL de C++. Estos ejercicios te permitirán trabajar con diferentes contenedores, algoritmos e iteradores, facilitando la gestión de datos en tus programas.</p>
+            <p>Implementa cada ejercicio en tu entorno de Qt Creator para probar el código.</p>
+        </section>
+
+        <section class="ejercicio">
+            <h3>Ejercicio 1: Uso Básico de `std::vector`</h3>
+            <p>Crea un programa en C++ que utilice `std::vector` para:</p>
+            <ol>
+                <li>Declarar un `std::vector` de enteros llamado `numeros`.</li>
+                <li>Añadir los números 10, 20, 30, 40, 50 al vector usando `push_back()`.</li>
+                <li>Imprimir todos los elementos del vector utilizando un bucle basado en rango (`for (int n : numeros)`).</li>
+                <li>Acceder e imprimir el tercer elemento (índice 2) usando `[]`.</li>
+                <li>Eliminar el último elemento del vector usando `pop_back()`.</li>
+                <li>Imprimir el tamaño actual del vector.</li>
+            </ol>
+            <details>
+                <summary>Pista (si necesitas ayuda)</summary>
+                <p>Recuerda incluir el encabezado `<vector>`.</p>
+            </details>
+        </section>
+
+        <section class="ejercicio">
+            <h3>Ejercicio 2: Uso de `std::map` (Diccionario)</h3>
+            <p>Crea un programa en C++ que utilice `std::map` para almacenar y gestionar información de estudiantes:</p>
+            <ol>
+                <li>Declara un `std::map` donde la clave sea el `std::string` (nombre del estudiante) y el valor sea un `int` (su edad).</li>
+                <li>Añade los siguientes pares clave-valor:
+                    <ul>
+                        <li>"Alice": 20</li>
+                        <li>"Bob": 22</li>
+                        <li>"Charlie": 21</li>
+                    </ul>
+                </li>
+                <li>Accede e imprime la edad de "Bob".</li>
+                <li>Modifica la edad de "Alice" a 21.</li>
+                <li>Intenta añadir un nuevo estudiante "Bob" con edad 23. ¿Qué sucede? (Observa, no es necesario justificar con código).</li>
+                <li>Itera sobre el `map` e imprime todos los nombres y edades de los estudiantes.</li>
+                <li>Elimina al estudiante "Charlie".</li>
+            </ol>
+            <details>
+                <summary>Pista (si necesitas ayuda)</summary>
+                <p>Recuerda incluir el encabezado `<map>`. Para iterar, puedes usar `for (const auto& par : miMapa)`.</p>
+            </details>
+        </section>
+
+        <section class="ejercicio">
+            <h3>Ejercicio 3: Uso de `std::list` e Iteradores</h3>
+            <p>Crea un programa que gestione una lista de nombres usando `std::list`:</p>
+            <ol>
+                <li>Declara un `std::list` de `std::string` llamado `participantes`.</li>
+                <li>Añade nombres al principio (`push_front`) y al final (`push_back`): "David", "Eve", "Frank" (al final); "Grace" (al principio).</li>
+                <li>Imprime todos los nombres en la lista usando un iterador (bucle `for` con `begin()` y `end()`).</li>
+                <li>Usa un iterador para encontrar y eliminar el nombre "Eve".</li>
+                <li>Imprime la lista nuevamente para verificar la eliminación.</li>
+            </ol>
+            <details>
+                <summary>Pista (si necesitas ayuda)</summary>
+                <p>Para eliminar con un iterador: `it = miLista.erase(it);` (esto actualiza `it` al siguiente elemento válido).</p>
+            </details>
+        </section>
+
+        <section class="ejercicio">
+            <h3>Ejercicio 4: Aplicación de Algoritmos STL</h3>
+            <p>Crea un `std::vector` de enteros con valores aleatorios (ej. 10 números entre 1 y 100). Luego, utiliza algoritmos STL para:</p>
+            <ol>
+                <li>Ordenar el vector de forma ascendente.</li>
+                <li>Buscar si el número `50` está presente en el vector. Imprime un mensaje indicando si se encontró o no.</li>
+                <li>Contar cuántas veces aparece el número `25` en el vector (asegúrate de que aparezca algunas veces o no, para probar el conteo).</li>
+                <li>Utilizar `std::for_each` para imprimir cada elemento del vector multiplicado por 2.</li>
+            </ol>
+            <details>
+                <summary>Pista (si necesitas ayuda)</summary>
+                <p>Necesitarás incluir `<algorithm>` y `<numeric>` (para generar números aleatorios si lo deseas, o simplemente usar un `for` para rellenarlo). Para `std::for_each`, puedes usar una lambda como función.</p>
+            </details>
+        </section>
+
+        <section class="ejercicio">
+            <h3>Ejercicio 5: Contenedores Adaptadores (`std::stack` y `std::queue`)</h3>
+            <p>Crea un programa que demuestre el uso de una pila y una cola:</p>
+            <ol>
+                <li><strong>Pila (`std::stack`):</strong>
+                    <ul>
+                        <li>Crea un `std::stack` de caracteres.</li>
+                        <li>Añade los caracteres 'A', 'B', 'C' en ese orden.</li>
+                        <li>Mientras la pila no esté vacía, saca (`pop`) el elemento superior (`top`) e imprímelo. Observa el orden de salida.</li>
+                    </ul>
+                </li>
+                <li><strong>Cola (`std::queue`):</strong>
+                    <ul>
+                        <li>Crea un `std::queue` de enteros.</li>
+                        <li>Añade los números 10, 20, 30 en ese orden.</li>
+                        <li>Mientras la cola no esté vacía, saca (`pop`) el elemento del frente (`front`) e imprímelo. Observa el orden de salida.</li>
+                    </ul>
+                </li>
+            </ol>
+            <details>
+                <summary>Pista (si necesitas ayuda)</summary>
+                <p>Incluye `<stack>` y `<queue>`. Usa `empty()` para verificar si están vacíos antes de acceder a `top()`/`front()` o `pop()`.</p>
+            </details>
+        </section>
+
+        <section class="navegacion-modulo">
+            <p>¡Has explorado la vasta y útil STL!</p>
+            <a href="teoria.html" class="boton-practica">Volver a la Teoría del Módulo 6</a>
+            <a href="../index.html" class="boton-practica" style="background-color: #007bff;">Volver al Índice Principal</a>
+        </section>
+    </main>
+
+    <footer>
+        <p>Fin del Módulo 6</p>
+    </footer>
+</body>
+</html>

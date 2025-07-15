@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Módulo 7: Qt - Signals & Slots - Teoría</title>
+    <link rel="stylesheet" href="../css/style.css">
+</head>
+<body>
+    <header>
+        <h1>Módulo 7: Qt - Signals & Slots</h1>
+        <nav>
+            <a href="../index.html">Volver al Índice Principal</a>
+        </nav>
+    </header>
+
+    <main>
+        <section>
+            <h2>Introducción a la Programación con Qt y Signals & Slots</h2>
+            <p>Qt es un poderoso framework multiplataforma utilizado para desarrollar una amplia gama de aplicaciones, desde GUIs (Interfaces Gráficas de Usuario) hasta aplicaciones de consola y servidores. Su enfoque en la programación basada en eventos y la comunicación entre objetos se articula a través de un mecanismo distintivo: <strong>Signals & Slots</strong>.</p>
+            <p>Este patrón de diseño permite que los objetos se comuniquen entre sí de una manera altamente desacoplada y flexible. Para el desarrollador que utiliza **Qt Designer**, esto es aún más intuitivo, ya que los elementos visuales de la interfaz se diseñan gráficamente y Qt se encarga de gran parte de la configuración subyacente.</p>
+        </section>
+
+        <section>
+            <h2>El Patrón Signals & Slots</h2>
+            <p>El sistema de Signals & Slots de Qt es el corazón de su arquitectura de eventos. Sustituye los mecanismos tradicionales de callbacks por un sistema de comunicación más robusto y de bajo acoplamiento. Cualquier objeto que derive de <code>QObject</code> puede participar en este sistema.</p>
+            <h3>Conceptos Clave:</h3>
+            <ul>
+                <li>
+                    <strong><code>Signals</code> (Señales):</strong>
+                    <p>Una señal es una notificación que un objeto emite cuando su estado cambia o cuando ocurre un evento específico de interés. Las señales son declaradas pero no implementadas por el programador; Qt (específicamente el Meta-Object Compiler, MOC) se encarga de generar el código necesario para su emisión.</p>
+                    <p>Ejemplo: Un botón (<code>QPushButton</code>) emite una señal <code>clicked()</code> cuando el usuario lo presiona. Un deslizador (<code>QSlider</code>) emite una señal <code>valueChanged(int)</code> cuando su valor cambia.</p>
+                    <pre><code class="language-cpp">
+// Declaración de una señal personalizada en un .h (dentro de una clase Q_OBJECT)
+class MiWidget : public QWidget {
+    Q_OBJECT // Macro esencial
+public:
+    // ...
+signals: // Sección especial para señales
+    void valorCambiado(int nuevoValor); // Una señal que lleva un entero
+};
+
+// Emisión de una señal (normalmente en la implementación de un método)
+// void MiWidget::algunMetodoInterno() {
+//     // ... lógica que cambia un valor
+//     emit valorCambiado(miValorActual); // 'emit' es una palabra clave de Qt
+// }
+                    </code></pre>
+                </li>
+                <li>
+                    <strong><code>Slots</code> (Ranuras):</strong>
+                    <p>Un slot es una función miembro ordinaria de C++ que está diseñada para recibir y procesar señales. Cuando una señal se conecta a un slot y la señal es emitida, el código dentro del slot se ejecuta. Los slots deben ser implementados por el programador.</p>
+                    <p>Ejemplo: Un método en tu ventana principal que actualiza un <code>QLabel</code> en respuesta a un clic de botón.</p>
+                    <pre><code class="language-cpp">
+// Declaración de un slot en un .h (dentro de una clase Q_OBJECT)
+class MainWindow : public QMainWindow {
+    Q_OBJECT
+public:
+    // ...
+public slots: // Generalmente se declaran en public slots: o public:
+    void on_pushButton_clicked(); // Un slot común para botones
+    void actualizarEstado(int valor); // Un slot que recibe un entero
+};
+
+// Implementación de un slot en un .cpp
+// void MainWindow::on_pushButton_clicked() {
+//     ui->label->setText("¡Botón presionado!");
+// }
+                    </code></code class="language-cpp"></pre>
+                </li>
+            </ul>
+        </section>
+
+        <section>
+            <h2>Conectando Signals y Slots con Qt Designer</h2>
+            <p>Al diseñar tu interfaz en **Qt Designer**, arrastras y sueltas widgets, y Qt genera un archivo `.ui` que describe su disposición. Este archivo se compila y se hace accesible en tu código C++ a través de un objeto llamado `ui` (por ejemplo, en `MainWindow` tendrás un miembro `Ui::MainWindow *ui;`).</p>
+            <p>Las señales de estos widgets de la UI se conectan a los slots de tus propios objetos (a menudo, tu clase `MainWindow` o `QWidget`). La conexión se realiza utilizando la función estática `QObject::connect()`. Qt ofrece verificación de tipo en tiempo de compilación para garantizar que las señales y los slots sean compatibles.</p>
+            <h3>Sintaxis de <code>QObject::connect()</code> (preferida en C++11 y posteriores):</h3>
+            <pre><code class="language-cpp">
+// Conexión de un botón de la UI a un slot en la ventana principal
+// Asumiendo que 'ui->miBoton' es un QPushButton de tu diseño de Qt Designer
+// y 'this' es la instancia de tu clase MainWindow
+QObject::connect(ui->miBoton, &QPushButton::clicked, this, &MainWindow::miSlotDeBoton);
+
+// Ejemplo de conectar un deslizador a un campo de texto
+// Asumiendo 'ui->miDeslizador' es un QSlider y 'ui->miLineEdit' es un QLineEdit
+QObject::connect(ui->miDeslizador, &QSlider::valueChanged, ui->miLineEdit, QOverload<int>::of(&QLineEdit::setNum));
+// ^ Nótese el QOverload<int>::of si el slot está sobrecargado
+            </code></pre>
+            <p><strong>Notas importantes sobre las conexiones:</strong></p>
+            <ul>
+                <li>Una señal puede conectarse a muchos slots.</li>
+                <li>Muchos signals pueden conectarse al mismo slot.</li>
+                <li>Una señal puede conectarse directamente a otra señal.</li>
+                <li>Los argumentos de una señal deben ser compatibles (mismo tipo y orden) con los argumentos del slot. El slot puede tener *menos* argumentos que la señal, pero los tipos que coinciden deben ser los correctos.</li>
+                <li>Qt también soporta conexiones automáticas si nombras tus slots de la forma <code>on_nombreDelObjeto_nombreDeLaSenal()</code> (ej. <code>on_pushButton_clicked()</code>). Aunque la conexión explícita con <code>QObject::connect</code> es más flexible y a menudo preferida para claridad.</li>
+            </ul>
+        </section>
+
+        <section>
+            <h2>Ventajas de Signals & Slots</h2>
+            <ul>
+                <li><strong>Bajo Acoplamiento:</strong> El emisor de una señal no necesita tener conocimiento alguno sobre sus receptores (slots). Esto permite una arquitectura modular donde los componentes pueden ser fácilmente reemplazados o reutilizados.</li>
+                <li><strong>Seguridad de Tipos:</strong> Con la sintaxis moderna de punteros a miembros, el compilador verifica la compatibilidad de los argumentos entre señales y slots en tiempo de compilación, previniendo errores.</li>
+                <li><strong>Flexibilidad en Tiempo de Ejecución:</strong> Las conexiones pueden establecerse o romperse dinámicamente, lo que permite un comportamiento adaptativo en la aplicación.</li>
+                <li><strong>Soporte Multi-hilo:</strong> Qt maneja la comunicación entre objetos que residen en diferentes hilos de forma segura y transparente, sincronizando las llamadas a slots.</li>
+            </ul>
+        </section>
+
+        <section>
+            <h2>La Macro <code>Q_OBJECT</code> y el MOC</h2>
+            <p>La macro <code>Q_OBJECT</code> es fundamental. Debe incluirse en la declaración de cualquier clase que utilice Signals & Slots, el sistema de propiedades de Qt, o el sistema de introspección de objetos. Esta macro es procesada por el <strong>Meta-Object Compiler (MOC)</strong> de Qt.</p>
+            <p>El MOC es una herramienta que preprocesa el código fuente de Qt antes de que sea compilado por el compilador estándar de C++. Genera un código C++ adicional que implementa la infraestructura necesaria para Signals & Slots y otras características de meta-objetos. Si olvidas esta macro, tu compilación fallará o tu programa se comportará de manera inesperada al intentar usar Signals & Slots.</p>
+        </section>
+        
+        <section class="navegacion-modulo">
+            <p>¡Prepárate para construir interfaces interactivas!</p>
+            <a href="practica.html" class="boton-practica">Ir a la Práctica del Módulo 7</a>
+        </section>
+    </main>
+
+    <footer>
+        <p>Volver al <a href="../index.html">Índice Principal</a></p>
+    </footer>
+</body>
+</html>

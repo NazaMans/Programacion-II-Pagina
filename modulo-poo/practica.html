@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Módulo 2: POO - Fundamentos - Práctica</title>
+    <link rel="stylesheet" href="../css/style.css">
+</head>
+<body>
+    <header>
+        <h1>Módulo 2: Programación Orientada a Objetos (POO) - Fundamentos</h1>
+        <nav>
+            <a href="../index.html">Volver al Índice Principal</a>
+        </nav>
+    </header>
+
+    <main>
+        <section>
+            <h2>Práctica: Ejercicios de Fundamentos de POO</h2>
+            <p>Es el momento de poner en práctica los principios básicos de la Programación Orientada a Objetos. Los siguientes ejercicios te ayudarán a diseñar e implementar clases, trabajar con objetos y entender el encapsulamiento, constructores y destructores.</p>
+            <p>Asegúrate de compilar y ejecutar tus soluciones en Qt Creator.</p>
+        </section>
+
+        <section class="ejercicio">
+            <h3>Ejercicio 1: Diseño de Clases Simples</h3>
+            <p>Para cada uno de los siguientes conceptos, identifica posibles atributos y métodos. No necesitas escribir código, solo el diseño (nombre de la clase, atributos y métodos, con su posible visibilidad):</p>
+            <ol>
+                <li><strong>Libro:</strong> Piensa en las características de un libro y qué acciones se pueden realizar con él.</li>
+                <li><strong>Estudiante:</strong> Qué información describiría a un estudiante y qué acciones podría realizar.</li>
+                <li><strong>Producto:</strong> Cómo describirías un producto en un inventario y qué operaciones se podrían hacer con él.</li>
+            </ol>
+            <details>
+                <summary>Ejemplo de diseño para una clase "Coche"</summary>
+                <pre><code class="language-cpp">
+class Coche {
+private:
+    std::string marca;
+    std::string modelo;
+    int anio;
+    int velocidadActual; // km/h
+
+public:
+    // Constructor
+    Coche(std::string _marca, std::string _modelo, int _anio);
+
+    // Métodos (comportamiento)
+    void acelerar(int incremento);
+    void frenar(int decremento);
+    void mostrarInfo();
+
+    // Getters
+    std::string getMarca();
+    std::string getModelo();
+    int getAnio();
+    int getVelocidadActual();
+
+    // Setters (si es necesario)
+    void setVelocidadActual(int velocidad);
+};
+                </code></pre>
+            </details>
+        </section>
+
+        <section class="ejercicio">
+            <h3>Ejercicio 2: Implementación de una Clase "Círculo"</h3>
+            <p>Crea un programa en C++ que defina e implemente una clase `Circulo` con las siguientes características:</p>
+            <ol>
+                <li><strong>Atributos privados:</strong>
+                    <ul>
+                        <li>`radio` (tipo `double`)</li>
+                    </ul>
+                </li>
+                <li><strong>Métodos públicos:</strong>
+                    <ul>
+                        <li>Un <strong>constructor</strong> que reciba el radio como parámetro y lo inicialice.</li>
+                        <li>Un método `calcularArea()` que retorne el área del círculo (`pi * radio * radio`).</li>
+                        <li>Un método `calcularPerimetro()` que retorne el perímetro del círculo (`2 * pi * radio`).</li>
+                        <li>Un método `getRadio()` para obtener el valor actual del radio.</li>
+                        <li>Un método `setRadio(double nuevoRadio)` para modificar el radio, asegurándose de que `nuevoRadio` sea un valor positivo.</li>
+                    </ul>
+                </li>
+            </ol>
+            <p>En la función `main`:</p>
+            <ol>
+                <li>Crea un objeto de la clase `Circulo` con un radio inicial de `5.0`.</li>
+                <li>Imprime el área y el perímetro de este círculo.</li>
+                <li>Modifica el radio del círculo a `7.5` usando el método `setRadio`.</li>
+                <li>Imprime el nuevo área y perímetro.</li>
+                <li>Intenta establecer un radio negativo y verifica que el método `setRadio` lo maneje correctamente (ej. no lo acepte o muestre un mensaje de error).</li>
+            </ol>
+            <details>
+                <summary>Pista (si necesitas ayuda)</summary>
+                <p>Usa `const double PI = 3.14159;` para el valor de Pi. Para el setter, puedes usar un `if` para validar el `nuevoRadio`.</p>
+            </details>
+        </section>
+
+        <section class="ejercicio">
+            <h3>Ejercicio 3: Clases con Múltiples Constructores</h3>
+            <p>Crea una clase llamada `Punto` que represente un punto en un plano 2D. La clase debe tener:</p>
+            <ol>
+                <li><strong>Atributos privados:</strong> `x` y `y` (ambos de tipo `double`).</li>
+                <li><strong>Constructores públicos:</strong>
+                    <ul>
+                        <li>Un constructor por defecto que inicialice `x` y `y` a `0.0`.</li>
+                        <li>Un constructor que reciba dos parámetros (`double x_val, double y_val`) e inicialice `x` y `y` con esos valores.</li>
+                    </ul>
+                </li>
+                <li><strong>Métodos públicos:</strong>
+                    <ul>
+                        <li>`mostrarCoordenadas()` que imprima las coordenadas del punto en formato `(x, y)`.</li>
+                    </ul>
+                </li>
+            </ol>
+            <p>En la función `main`:</p>
+            <ol>
+                <li>Crea un objeto `Punto` usando el constructor por defecto y muestra sus coordenadas.</li>
+                <li>Crea otro objeto `Punto` con coordenadas `(3.0, 4.0)` y muestra sus coordenadas.</li>
+            </ol>
+        </section>
+
+        <section class="ejercicio">
+            <h3>Ejercicio 4: Uso de Destructores y Memoria Dinámica con Objetos</h3>
+            <p>Revisa el concepto de destructor del módulo de teoría. Luego, modifica el Ejercicio 2 (clase `Circulo`) para que el `radio` sea un puntero (`double*`) y se asigne memoria dinámicamente en el constructor y se libere en el destructor.</p>
+            <ol>
+                <li>Modifica la clase `Circulo` del Ejercicio 2 para que el atributo `radio` sea de tipo `double*`.</li>
+                <li>En el <strong>constructor</strong> de `Circulo`, usa `new double` para asignar memoria para el radio e inicialízalo con el valor recibido.</li>
+                <li>Implementa el <strong>destructor</strong> de `Circulo` para que use `delete` y libere la memoria asignada al radio. Añade un mensaje en el destructor que indique cuando se está llamando (ej. `std::cout << "Destructor de Circulo llamado." << std::endl;`).</li>
+                <li>Asegúrate de que `getRadio()` y `setRadio()` manejen correctamente el puntero.</li>
+            </ol>
+            <p>En la función `main`:</p>
+            <ol>
+                <li>Crea un objeto `Circulo` en el Stack y observa cuándo se llama a su destructor.</li>
+                <li>Crea otro objeto `Circulo` en el Heap usando `new` y asegúrate de usar `delete` para liberarlo y ver el mensaje del destructor.</li>
+            </ol>
+            <details>
+                <summary>Pista (si necesitas ayuda)</summary>
+                <p>Recuerda el uso de `*puntero` para acceder al valor. Para liberar memoria de un objeto creado con `new`, debes llamar `delete nombre_del_puntero;`.</p>
+            </details>
+        </section>
+
+        <section class="navegacion-modulo">
+            <p>¡Has completado la práctica de POO - Fundamentos!</p>
+            <a href="teoria.html" class="boton-practica">Volver a la Teoría del Módulo 2</a>
+            <a href="../index.html" class="boton-practica" style="background-color: #007bff;">Volver al Índice Principal</a>
+        </section>
+    </main>
+
+    <footer>
+        <p>Fin del Módulo 2</p>
+    </footer>
+</body>
+</html>

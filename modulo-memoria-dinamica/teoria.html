@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Módulo 1: Memoria Dinámica - Teoría</title>
+    <link rel="stylesheet" href="../css/style.css">
+</head>
+<body>
+    <header>
+        <h1>Módulo 1: Memoria Dinámica</h1>
+        <nav>
+            <a href="../index.html">Volver al Índice Principal</a>
+        </nav>
+    </header>
+
+    <main>
+        <section>
+            <h2>Introducción a la Memoria Dinámica</h2>
+            [cite_start]<p>Cuando ejecutamos un programa, el sistema operativo le asigna un proceso con una porción de memoria, conocida como memoria virtual[cite: 3]. Esta memoria se divide en diferentes segmentos, cada uno con un propósito específico para el almacenamiento de datos e instrucciones del programa.</p>
+        </section>
+
+        <section>
+            <h2>Mapa de Memoria de un Programa</h2>
+            [cite_start]<p>Un programa en ejecución utiliza varios segmentos de memoria[cite: 4]:</p>
+            <ul>
+                [cite_start]<li><strong>Segmento de Texto (o Código):</strong> Contiene las instrucciones del programa y es de solo lectura[cite: 4].</li>
+                [cite_start]<li><strong>Segmento de Datos Inicializados:</strong> Almacena las variables globales y estáticas que han sido inicializadas por el programador[cite: 4].</li>
+                <li><strong>Segmento de Datos sin Inicializar (BSS):</strong> Contiene las variables globales y locales que no han sido inicializadas explícitamente por el programador. [cite_start]También se conoce como Segmento BSS[cite: 4].</li>
+                [cite_start]<li><strong>Segmento Stack (Pila):</strong> Generalmente ubicado en la parte superior de la memoria, se utiliza para almacenar argumentos de funciones, variables de entorno, variables locales no inicializadas, y para gestionar el registro de llamadas y retornos de funciones[cite: 4, 5].</li>
+                [cite_start]<li><strong>Segmento Heap (Montón):</strong> También llamado montón, contiene la memoria reservada dinámicamente por el programador para almacenar variables temporales[cite: 4, 6].</li>
+            </ul>
+            </section>
+
+        <section>
+            <h2>Stack (Pila)</h2>
+            [cite_start]<p>La pila es una estructura de datos de tipo <strong>LIFO</strong> (Last-In, First-Out - Último en Entrar, Primero en Salir)[cite: 5]. [cite_start]Se utiliza para almacenar los argumentos pasados al programa, las variables de entorno, argumentos de las funciones, variables locales no inicializadas, además de almacenar el registro de llamada de funciones y el retorno[cite: 5].</p>
+        </section>
+
+        <section>
+            <h2>Heap (Montón)</h2>
+            [cite_start]<p>El Heap es la memoria reservada dinámicamente por el programador para almacenar variables temporales[cite: 6]. A diferencia del Stack, la gestión de memoria en el Heap es manual y es responsabilidad del programador.</p>
+            <ul>
+                [cite_start]<li>En C, se gestiona con funciones como <code>malloc()</code>, <code>calloc()</code>, <code>realloc()</code> y <code>free()</code>[cite: 6].</li>
+                <li>En C++, se gestiona con los operadores <code>new</code> y <code>delete</code>.</li>
+            </ul>
+            <p>El segmento Heap es compartido por subprocesos, bibliotecas y módulos.</p>
+        </section>
+
+        <section>
+            <h2>Operadores <code>new</code> y <code>delete</code> en C++</h2>
+            <p>En C++, los operadores <code>new</code> y <code>delete</code> son utilizados para la asignación y liberación dinámica de memoria en el Heap, respectivamente.</p>
+            <h3><code>new</code></h3>
+            <p>El operador <code>new</code> se utiliza para asignar memoria para un objeto o un array de objetos en el heap. Devuelve un puntero al inicio del bloque de memoria asignado.</p>
+            <pre><code class="language-cpp">
+// Asignar memoria para un entero
+int* ptrEntero = new int;
+
+// Asignar memoria para un array de 10 enteros
+int* ptrArray = new int[10];
+
+// Asignar memoria para un objeto de una clase 'MiClase'
+MiClase* objeto = new MiClase();
+            </code></pre>
+            <p>Si la asignación de memoria falla (por ejemplo, si no hay suficiente memoria disponible), <code>new</code> lanza una excepción <code>std::bad_alloc</code>.</p>
+
+            <h3><code>delete</code></h3>
+            <p>El operador <code>delete</code> se utiliza para liberar la memoria que fue previamente asignada con <code>new</code>. Es crucial usar <code>delete</code> para evitar fugas de memoria (memory leaks), que ocurren cuando la memoria asignada no se libera y permanece ocupada aunque ya no se utilice.</p>
+            <pre><code class="language-cpp">
+// Liberar la memoria de un entero
+delete ptrEntero;
+ptrEntero = nullptr; // Buena práctica para evitar "dangling pointers"
+
+// Liberar la memoria de un array de enteros
+delete[] ptrArray;
+ptrArray = nullptr; // Importante usar 'delete[]' para arrays
+
+// Liberar la memoria de un objeto
+delete objeto;
+objeto = nullptr;
+            </code></pre>
+            <p>Es importante recordar que:
+                <ul>
+                    <li>Por cada <code>new</code>, debe haber un <code>delete</code> correspondiente.</li>
+                    <li>Por cada <code>new[]</code> (para arrays), debe haber un <code>delete[]</code> correspondiente.</li>
+                    <li>Intentar borrar memoria que no fue asignada con <code>new</code>, o borrar la misma memoria dos veces, puede llevar a un comportamiento indefinido.</li>
+                </ul>
+            </p>
+        </section>
+        
+        <section class="navegacion-modulo">
+            <p>¿Listo para aplicar lo aprendido?</p>
+            <a href="practica.html" class="boton-practica">Ir a la Práctica del Módulo 1</a>
+        </section>
+    </main>
+
+    <footer>
+        <p>Volver al <a href="../index.html">Índice Principal</a></p>
+    </footer>
+</body>
+</html>

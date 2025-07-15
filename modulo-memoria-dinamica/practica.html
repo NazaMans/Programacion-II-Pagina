@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Módulo 1: Memoria Dinámica - Práctica</title>
+    <link rel="stylesheet" href="../css/style.css">
+</head>
+<body>
+    <header>
+        <h1>Módulo 1: Memoria Dinámica</h1>
+        <nav>
+            <a href="../index.html">Volver al Índice Principal</a>
+        </nav>
+    </header>
+
+    <main>
+        <section>
+            <h2>Práctica: Ejercicios de Memoria Dinámica</h2>
+            <p>¡Es hora de aplicar los conceptos de memoria dinámica en C++! Resuelve los siguientes ejercicios para consolidar tu comprensión sobre el Stack, el Heap, y el uso correcto de <code>new</code> y <code>delete</code>.</p>
+            <p>Se recomienda escribir y ejecutar el código en un entorno de desarrollo como Qt Creator para verificar tus soluciones.</p>
+        </section>
+
+        <section class="ejercicio">
+            <h3>Ejercicio 1: Preguntas Conceptuales</h3>
+            <p>Responde las siguientes preguntas, justificando tus respuestas:</p>
+            <ol>
+                <li>¿Cuál es la principal diferencia entre el Stack (Pila) y el Heap (Montón) en términos de gestión de memoria y cuándo usarías uno u otro?</li>
+                <li>Explica el concepto de "fuga de memoria" (memory leak) y cómo el uso incorrecto de <code>new</code> y <code>delete</code> puede llevar a ellas.</li>
+                <li>¿Qué sucede si intentas liberar memoria con <code>delete</code> que no fue asignada con <code>new</code>?</li>
+                <li>¿Por qué es importante usar <code>delete[]</code> en lugar de <code>delete</code> cuando se libera un array asignado dinámicamente?</li>
+            </ol>
+        </section>
+
+        <section class="ejercicio">
+            <h3>Ejercicio 2: Uso Básico de <code>new</code> y <code>delete</code></h3>
+            <p>Crea un programa en C++ que realice lo siguiente:</p>
+            <ol>
+                <li>Declara un puntero a un entero llamado `miEntero`.</li>
+                <li>Asigna memoria dinámicamente para `miEntero` en el Heap utilizando `new`.</li>
+                <li>Asigna el valor `42` a la posición de memoria a la que apunta `miEntero`.</li>
+                <li>Imprime el valor de `miEntero` por consola.</li>
+                <li>Libera la memoria asignada a `miEntero` utilizando `delete`.</li>
+                <li>Después de liberar la memoria, intenta imprimir el valor de `miEntero` nuevamente. ¿Qué observas? (No es necesario justificar, solo observar el comportamiento).</li>
+            </ol>
+            <details>
+                <summary>Pista (si necesitas ayuda)</summary>
+                <p>Recuerda inicializar el puntero a `nullptr` después de liberarlo para evitar punteros colgantes.</p>
+            </details>
+        </section>
+
+        <section class="ejercicio">
+            <h3>Ejercicio 3: Manejo de Arrays Dinámicos</h3>
+            <p>Desarrolla un programa en C++ que:</p>
+            <ol>
+                <li>Pregunte al usuario por el tamaño de un array de números flotantes.</li>
+                <li>Cree un array dinámico de ese tamaño en el Heap.</li>
+                <li>Pida al usuario que ingrese los valores para cada elemento del array.</li>
+                <li>Imprima todos los elementos del array.</li>
+                <li>Calcule y muestre el promedio de los elementos del array.</li>
+                <li>Libere la memoria del array dinámico. Asegúrate de usar el operador de eliminación correcto para arrays.</li>
+            </ol>
+            <details>
+                <summary>Pista (si necesitas ayuda)</summary>
+                <p>Usa un bucle `for` para rellenar e imprimir el array. Para liberar un array dinámico, usa `delete[]`.</p>
+            </details>
+        </section>
+
+        <section class="ejercicio">
+            <h3>Ejercicio 4: Identificación y Corrección de Fugas de Memoria</h3>
+            <p>Analiza el siguiente fragmento de código. Identifica las fugas de memoria o usos incorrectos de `new`/`delete` y reescribe el código para corregirlos.</p>
+            <pre><code class="language-cpp">
+#include &lt;iostream&gt;
+
+void funcionConFuga() {
+    int* data = new int;
+    *data = 100;
+    // ¿Qué pasa con 'data' aquí?
+}
+
+void otraFuncion() {
+    int* arr = new int[5];
+    for (int i = 0; i < 5; ++i) {
+        arr[i] = i * 10;
+    }
+    // ¿Cómo se libera 'arr'?
+    delete arr; // ¿Esto es correcto para un array?
+}
+
+int main() {
+    int* valor = new int;
+    *valor = 50;
+    delete valor;
+    delete valor; // ¿Qué sucede aquí?
+
+    funcionConFuga();
+    otraFuncion();
+
+    // ¿Podría haber una fuga aquí si 'valor' no se usara más?
+    // int* temp = new int;
+    // temp = nullptr;
+
+    return 0;
+}
+            </code></pre>
+            <p><strong>Tarea:</strong> Reescribe la función `main`, `funcionConFuga` y `otraFuncion` para que no haya fugas de memoria y el uso de `new`/`delete` sea correcto.</p>
+            <details>
+                <summary>Pista (si necesitas ayuda)</summary>
+                <p>Asegúrate de que cada `new` tenga su `delete` correspondiente, y cada `new[]` tenga su `delete[]`. Evita borrar la misma memoria dos veces.</p>
+            </details>
+        </section>
+
+        <section class="ejercicio">
+            <h3>Ejercicio 5: Clase Simple con Memoria Dinámica</h3>
+            <p>Crea una clase llamada `NumeroDinamico` que contenga un puntero a un entero (`int*`) como atributo privado. La clase debe tener:</p>
+            <ol>
+                <li>Un <strong>constructor</strong> que reciba un entero, asigne memoria dinámicamente para ese entero y almacene el valor.</li>
+                <li>Un <strong>destructor</strong> que libere la memoria asignada.</li>
+                <li>Un método `getValor()` que retorne el valor almacenado.</li>
+                <li>Un método `setValor(int nuevoValor)` para cambiar el valor.</li>
+            </ol>
+            <p>En la función `main` (o en una función de prueba), crea instancias de `NumeroDinamico`, usa sus métodos, y observa cómo se llaman los destructores cuando los objetos salen de ámbito o son eliminados explícitamente.</p>
+            <details>
+                <summary>Pista (si necesitas ayuda)</summary>
+                <p>El destructor se llama automáticamente cuando el objeto se destruye (ej. al salir de ámbito o al usar `delete` en un objeto creado con `new`).</p>
+            </details>
+        </section>
+
+        <section class="navegacion-modulo">
+            <p>¿Listo para continuar?</p>
+            <a href="teoria.html" class="boton-practica">Volver a la Teoría del Módulo 1</a>
+            <a href="../index.html" class="boton-practica" style="background-color: #007bff;">Volver al Índice Principal</a>
+        </section>
+    </main>
+
+    <footer>
+        <p>Fin del Módulo 1</p>
+    </footer>
+</body>
+</html>

@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Módulo 7: Qt - Signals & Slots - Práctica</title>
+    <link rel="stylesheet" href="../css/style.css">
+</head>
+<body>
+    <header>
+        <h1>Módulo 7: Qt - Signals & Slots</h1>
+        <nav>
+            <a href="../index.html">Volver al Índice Principal</a>
+        </nav>
+    </header>
+
+    <main>
+        <section>
+            <h2>Práctica: Ejercicios de Qt Signals & Slots</h2>
+            <p>Estos ejercicios te guiarán en la creación de aplicaciones interactivas utilizando el sistema de Signals & Slots de Qt, con especial énfasis en el flujo de trabajo que usarías al diseñar tu interfaz en **Qt Designer**.</p>
+            <p>Para cada ejercicio, asume que has creado un proyecto "Qt Widgets Application" en Qt Creator y que estás trabajando en la ventana principal (<code>MainWindow</code>). Los widgets mencionados ya están arrastrados y soltados desde Qt Designer, y se acceden a través del puntero <code>ui->nombreDelWidget</code>.</p>
+            <p>Recuerda siempre añadir el código de conexión en el constructor de tu clase <code>MainWindow</code> (o donde sea apropiado para tu diseño) y definir los slots en el archivo <code>.h</code> de tu clase (por ejemplo, en <code>mainwindow.h</code>).</p>
+        </section>
+
+        <section class="ejercicio">
+            <h3>Ejercicio 1: Botón Simple y Etiqueta</h3>
+            <p>Crea una aplicación donde al hacer clic en un botón, se actualice el texto de una etiqueta.</p>
+            <ol>
+                <li>En Qt Designer, añade un <code>QPushButton</code> (nómbralo <code>pushButtonMensaje</code>) y un <code>QLabel</code> (nómbralo <code>labelEstado</code>) a tu <code>MainWindow.ui</code>.</li>
+                <li>En <code>mainwindow.h</code>, declara un slot personalizado para manejar el clic del botón:
+                    <pre><code class="language-cpp">
+// ... dentro de class MainWindow : public QMainWindow
+private slots:
+    void on_pushButtonMensaje_clicked(); // Puedes usar este nombre para auto-conexion o conectar manualmente
+                    </code></pre>
+                </li>
+                <li>En <code>mainwindow.cpp</code>, implementa el slot para que cambie el texto de <code>labelEstado</code>:
+                    <pre><code class="language-cpp">
+// ...
+void MainWindow::on_pushButtonMensaje_clicked()
+{
+    ui->labelEstado->setText("¡Botón presionado!");
+}
+                    </code></pre>
+                </li>
+                <li>**Opcional (si no usas auto-conexión):** En el constructor de <code>MainWindow</code> (<code>mainwindow.cpp</code>), conecta la señal y el slot:
+                    <pre><code class="language-cpp">
+MainWindow::MainWindow(QWidget *parent)
+    : QMainWindow(parent)
+    , ui(new Ui::MainWindow)
+{
+    ui->setupUi(this);
+    // Conexión manual si el slot no es on_nombre_clicked()
+    // QObject::connect(ui->pushButtonMensaje, &QPushButton::clicked, this, &MainWindow::on_pushButtonMensaje_clicked);
+}
+                    </code></pre>
+                </li>
+                <li>Compila y ejecuta. Verifica que el texto de la etiqueta cambie al hacer clic en el botón.</li>
+            </ol>
+            <details>
+                <summary>Pista (si necesitas ayuda)</summary>
+                <p>Asegúrate de que tus widgets tengan nombres de objeto significativos en Designer (<code>objectName</code> en el Property Editor).</p>
+            </details>
+        </section>
+
+        <section class="ejercicio">
+            <h3>Ejercicio 2: Deslizador (Slider) y Campo de Texto</h3>
+            <p>Crea una aplicación donde un deslizador controle el número mostrado en un campo de texto.</p>
+            <ol>
+                <li>En Qt Designer, añade un <code>QSlider</code> (nómbralo <code>sliderValor</code>, configúralo como horizontal) y un <code>QLineEdit</code> (nómbralo <code>lineEditNumero</code>) a tu <code>MainWindow.ui</code>.</li>
+                <li>En el constructor de <code>MainWindow</code> (<code>mainwindow.cpp</code>), realiza la conexión. La señal <code>valueChanged(int)</code> del <code>QSlider</code> se conectará al slot <code>setNum(int)</code> del <code>QLineEdit</code>.
+                    <pre><code class="language-cpp">
+// ... en MainWindow::MainWindow(QWidget *parent)
+QObject::connect(ui->sliderValor, &QSlider::valueChanged, ui->lineEditNumero, QOverload<int>::of(&QLineEdit::setNum));
+                    </code></pre>
+                    <p>La sintaxis <code>QOverload&lt;int&gt;::of(&QLineEdit::setNum)</code> es necesaria porque <code>QLineEdit::setNum</code> está sobrecargado (hay una versión para <code>int</code> y otra para <code>double</code>).</p>
+                </li>
+                <li>Compila y ejecuta. Al mover el deslizador, el número en el campo de texto debería actualizarse automáticamente.</li>
+            </ol>
+            <details>
+                <summary>Pista (si necesitas ayuda)</summary>
+                <p>Verifica que el rango del <code>QSlider</code> (min/max value en Designer) sea apropiado para los números que esperas.</p>
+            </details>
+        </section>
+
+        <section class="ejercicio">
+            <h3>Ejercicio 3: Señales y Slots Personalizados (Comunicación entre Objetos)</h3>
+            <p>Crea una clase auxiliar que emita una señal personalizada y un slot personalizado, y conecta esto con tu UI.</p>
+            <ol>
+                <li>Crea una nueva clase C++ en tu proyecto (ej. `GeneradorDeNumeros`), asegúrate de que herede de <code>QObject</code> y que incluya la macro <code>Q_OBJECT</code>.
+                    <pre><code class="language-cpp">
+// GeneradorDeNumeros.h
+#ifndef GENERADORDENUMEROS_H
+#define GENERADORDENUMEROS_H
+
+#include <QObject>
+#include <QTimer>
+
+class GeneradorDeNumeros : public QObject
+{
+    Q_OBJECT
+public:
+    explicit GeneradorDeNumeros(QObject *parent = nullptr);
+
+signals:
+    void numeroGenerado(int num); // Señal personalizada
+
+public slots:
+    void iniciarGeneracion(); // Slot personalizado
+    void detenerGeneracion();
+private:
+    QTimer *timer;
+    int contador;
+};
+
+#endif // GENERADORDENUMEROS_H
+                    </code></pre>
+                    <pre><code class="language-cpp">
+// GeneradorDeNumeros.cpp
+#include "GeneradorDeNumeros.h"
+#include <QDebug> // Para imprimir en la consola de depuración
+
+GeneradorDeNumeros::GeneradorDeNumeros(QObject *parent)
+    : QObject{parent}, contador(0)
+{
+    timer = new QTimer(this);
+    QObject::connect(timer, &QTimer::timeout, this, [this](){
+        contador++;
+        qDebug() << "Generando número: " << contador;
+        emit numeroGenerado(contador); // Emitir la señal
+    });
+}
+
+void GeneradorDeNumeros::iniciarGeneracion()
+{
+    timer->start(1000); // Generar cada 1 segundo
+    qDebug() << "Generación iniciada.";
+}
+
+void GeneradorDeNumeros::detenerGeneracion()
+{
+    timer->stop();
+    qDebug() << "Generación detenida.";
+}
+                    </code></pre>
+                </li>
+                <li>En Qt Designer, añade dos <code>QPushButton</code>s (<code>btnIniciar</code> y <code>btnDetener</code>) y un <code>QLabel</code> (<code>labelNumeroGenerado</code>) a tu <code>MainWindow.ui</code>.</li>
+                <li>En <code>mainwindow.h</code>, añade un miembro de tipo <code>GeneradorDeNumeros*</code> y un slot para recibir la señal del generador:
+                    <pre><code class="language-cpp">
+// ... dentro de class MainWindow : public QMainWindow
+private:
+    GeneradorDeNumeros *generador;
+
+private slots:
+    void actualizarNumeroEnUI(int num);
+    void on_btnIniciar_clicked(); // Para conectar con el botón Iniciar
+    void on_btnDetener_clicked(); // Para conectar con el botón Detener
+                    </code></pre>
+                </li>
+                <li>En <code>mainwindow.cpp</code>:
+                    <ul>
+                        <li>En el constructor de <code>MainWindow</code>:
+                            <ul>
+                                <li>Instancia <code>generador = new GeneradorDeNumeros(this);</code></li>
+                                <li>Conecta <code>btnIniciar</code> a <code>generador->iniciarGeneracion()</code>.</li>
+                                <li>Conecta <code>btnDetener</code> a <code>generador->detenerGeneracion()</code>.</li>
+                                <li>Conecta la señal personalizada <code>generador->numeroGenerado(int)</code> a tu slot <code>actualizarNumeroEnUI(int)</code>.</li>
+                            </ul>
+                            <pre><code class="language-cpp">
+// ... en MainWindow::MainWindow(QWidget *parent)
+generador = new GeneradorDeNumeros(this);
+
+QObject::connect(ui->btnIniciar, &QPushButton::clicked, generador, &GeneradorDeNumeros::iniciarGeneracion);
+QObject::connect(ui->btnDetener, &QPushButton::clicked, generador, &GeneradorDeNumeros::detenerGeneracion);
+QObject::connect(generador, &GeneradorDeNumeros::numeroGenerado, this, &MainWindow::actualizarNumeroEnUI);
+                            </code></pre>
+                        </li>
+                        <li>Implementa los slots <code>on_btnIniciar_clicked()</code>, <code>on_btnDetener_clicked()</code> (si no usas auto-conexión, estos pueden simplemente llamar a los métodos del generador) y <code>actualizarNumeroEnUI(int num)</code>:
+                            <pre><code class="language-cpp">
+// ...
+void MainWindow::actualizarNumeroEnUI(int num)
+{
+    ui->labelNumeroGenerado->setText(QString("Número: %1").arg(num));
+}
+
+void MainWindow::on_btnIniciar_clicked()
+{
+    // Puedes dejarlo vacío si usas auto-conexion o ya conectaste directamente en el constructor
+    // o puedes llamar generador->iniciarGeneracion(); aquí si la conexión es a este slot
+}
+
+void MainWindow::on_btnDetener_clicked()
+{
+    // Igual que el anterior
+}
+                            </code></pre>
+                        </li>
+                    </ul>
+                </li>
+                <li>Compila y ejecuta. Al presionar "Iniciar", el número en la etiqueta debería actualizarse cada segundo. "Detener" debería pausarlo.</li>
+            </ol>
+            <details>
+                <summary>Pista (si necesitas ayuda)</summary>
+                <p>Recuerda que <code>QTimer</code> también es un <code>QObject</code> y usa signals/slots. La macro <code>Q_OBJECT</code> es indispensable para tu clase <code>GeneradorDeNumeros</code>.</p>
+            </details>
+        </section>
+
+        <section class="ejercicio">
+            <h3>Ejercicio 4: Múltiples Conexiones</h3>
+            <p>Demuestra cómo una señal puede activar varios slots, o cómo varios signals pueden activar el mismo slot.</p>
+            <ol>
+                <li><strong>Un Signal a Múltiples Slots:</strong>
+                    <ul>
+                        <li>Añade un <code>QPushButton</code> (<code>pushButtonMulti</code>) y dos <code>QLabel</code>s (<code>labelA</code>, <code>labelB</code>) en Designer.</li>
+                        <li>En <code>mainwindow.h</code>, declara dos slots: <code>slotA()</code> y <code>slotB()</code>.</li>
+                        <li>En el constructor de <code>MainWindow</code>, conecta el clic de <code>pushButtonMulti</code> a <strong>ambos</strong> <code>slotA()</code> y <code>slotB()</code>.
+                            <pre><code class="language-cpp">
+// ... en MainWindow::MainWindow(QWidget *parent)
+QObject::connect(ui->pushButtonMulti, &QPushButton::clicked, this, &MainWindow::slotA);
+QObject::connect(ui->pushButtonMulti, &QPushButton::clicked, this, &MainWindow::slotB);
+                            </code></pre>
+                        </li>
+                        <li>Implementa <code>slotA()</code> para cambiar el texto de <code>labelA</code> y <code>slotB()</code> para cambiar el texto de <code>labelB</code>.</li>
+                        <li>Compila y ejecuta. Un solo clic debería actualizar ambas etiquetas.</li>
+                    </ul>
+                </li>
+                <li><strong>Múltiples Signals al Mismo Slot:</strong>
+                    <ul>
+                        <li>Añade dos <code>QPushButton</code>s (<code>btnAccion1</code>, <code>btnAccion2</code>) y un <code>QLabel</code> (<code>labelResultado</code>) en Designer.</li>
+                        <li>En <code>mainwindow.h</code>, declara un único slot: <code>actualizarResultado(const QString& mensaje)</code>.</li>
+                        <li>En el constructor de <code>MainWindow</code>, conecta el clic de <code>btnAccion1</code> para que emita un mensaje específico al slot, y el clic de <code>btnAccion2</code> para que emita otro mensaje. Puedes usar una lambda o el slot estándar <code>setText</code>.
+                            <pre><code class="language-cpp">
+// ... en MainWindow::MainWindow(QWidget *parent)
+QObject::connect(ui->btnAccion1, &QPushButton::clicked, this, [this](){
+    ui->labelResultado->setText("Acción 1 Realizada");
+});
+QObject::connect(ui->btnAccion2, &QPushButton::clicked, this, [this](){
+    ui->labelResultado->setText("Acción 2 Completada");
+});
+// Alternativa para un slot definido
+// QObject::connect(ui->btnAccion1, &QPushButton::clicked, this, [this](){ this->actualizarResultado("Acción 1"); });
+// QObject::connect(ui->btnAccion2, &QPushButton::clicked, this, [this](){ this->actualizarResultado("Acción 2"); });
+                            </code></pre>
+                        </li>
+                        <li>Compila y ejecuta. Al presionar cualquiera de los botones, la misma etiqueta debería mostrar el mensaje correspondiente.</li>
+                    </ul>
+                </li>
+            </ol>
+            <details>
+                <summary>Pista (si necesitas ayuda)</summary>
+                <p>Las expresiones lambda son muy útiles para conexiones rápidas donde necesitas pasar datos específicos o realizar una acción corta directamente en la conexión.</p>
+            </details>
+        </section>
+
+        <section class="navegacion-modulo">
+            <p>¡Dominando la comunicación en Qt!</p>
+            <a href="teoria.html" class="boton-practica">Volver a la Teoría del Módulo 7</a>
+            <a href="../index.html" class="boton-practica" style="background-color: #007bff;">Volver al Índice Principal</a>
+        </section>
+    </main>
+
+    <footer>
+        <p>Fin del Módulo 7</p>
+    </footer>
+</body>
+</html>

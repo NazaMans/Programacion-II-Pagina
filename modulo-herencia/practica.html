@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Módulo 3: Herencia - Práctica</title>
+    <link rel="stylesheet" href="../css/style.css">
+</head>
+<body>
+    <header>
+        <h1>Módulo 3: Herencia</h1>
+        <nav>
+            <a href="../index.html">Volver al Índice Principal</a>
+        </nav>
+    </header>
+
+    <main>
+        <section>
+            <h2>Práctica: Ejercicios de Herencia</h2>
+            <p>Es hora de aplicar el concepto de herencia en C++. Los siguientes ejercicios te ayudarán a diseñar jerarquías de clases y entender cómo se comportan los miembros con los diferentes modos de herencia.</p>
+            <p>Implementa cada ejercicio en tu entorno de Qt Creator para probar el código.</p>
+        </section>
+
+        <section class="ejercicio">
+            <h3>Ejercicio 1: Diseño de Jerarquías de Clases</h3>
+            <p>Identifica una clase base y al menos dos clases derivadas para cada uno de los siguientes escenarios. Para cada clase, lista algunos atributos y métodos clave (sin escribir código, solo el diseño):</p>
+            <ol>
+                <li><strong>Sistema de Figuras Geométricas:</strong> Piensa en formas generales y luego en formas específicas.</li>
+                <li><strong>Vehículos:</strong> Considera un vehículo general y luego tipos más concretos.</li>
+                <li><strong>Empleados de una Empresa:</strong> Un tipo general de empleado y luego roles más específicos.</li>
+            </ol>
+            <details>
+                <summary>Ejemplo de Diseño (Animales)</summary>
+                <pre><code class="language-cpp">
+// Clase Base: Animal
+// Atributos: string nombre, int edad
+// Métodos: void comer(), void dormir()
+
+// Clase Derivada: Perro (hereda de Animal)
+// Atributos: string raza
+// Métodos: void ladrar(), void jugar()
+
+// Clase Derivada: Gato (hereda de Animal)
+// Atributos: string colorPelaje
+// Métodos: void maullar(), void ronronear()
+                </code></pre>
+            </details>
+        </section>
+
+        <section class="ejercicio">
+            <h3>Ejercicio 2: Herencia Simple - Clase `Animal` y `Perro`</h3>
+            <p>Crea un programa en C++ que implemente la siguiente jerarquía de clases:</p>
+            <ol>
+                <li>Define una clase base `Animal` con:
+                    <ul>
+                        <li>Atributos protegidos: `nombre` (string) y `edad` (int).</li>
+                        <li>Un constructor que inicialice `nombre` y `edad`.</li>
+                        <li>Un método público `hacerSonido()` que imprima "Sonido genérico de animal.".</li>
+                        <li>Un método público `mostrarInfo()` que imprima el nombre y la edad del animal.</li>
+                    </ul>
+                </li>
+                <li>Define una clase derivada `Perro` que herede **públicamente** de `Animal` con:
+                    <ul>
+                        <li>Un atributo privado: `raza` (string).</li>
+                        <li>Un constructor que reciba nombre, edad y raza, y llame al constructor de la clase base para inicializar `nombre` y `edad`.</li>
+                        <li>Sobrescribe el método `hacerSonido()` para que imprima "Guau guau!".</li>
+                        <li>Añade un método `mostrarRaza()` que imprima la raza del perro.</li>
+                    </ul>
+                </li>
+            </ol>
+            <p>En la función `main`:</p>
+            <ol>
+                <li>Crea un objeto `Animal` y llama a sus métodos.</li>
+                <li>Crea un objeto `Perro` y llama a `hacerSonido()`, `mostrarInfo()` y `mostrarRaza()`. Observa cómo `mostrarInfo()` y `hacerSonido()` se comportan.</li>
+            </ol>
+            <details>
+                <summary>Pista (si necesitas ayuda)</summary>
+                <p>Para llamar al constructor de la clase base desde la derivada, usa la sintaxis `ClaseDerivada(params) : ClaseBase(base_params) { ... }`.</p>
+            </details>
+        </section>
+
+        <section class="ejercicio">
+            <h3>Ejercicio 3: Modos de Herencia - `public`, `protected`, `private`</h3>
+            <p>Crea un programa para demostrar los diferentes modos de herencia. Define una `ClaseBase` con miembros `public`, `protected` y `private`.</p>
+            <ol>
+                <li>Define `ClaseBase` con:
+                    <ul>
+                        <li>Atributo público: `publicVar` (int)</li>
+                        <li>Atributo protegido: `protectedVar` (int)</li>
+                        <li>Atributo privado: `privateVar` (int)</li>
+                        <li>Un método público `metodoPublicoBase()`</li>
+                        <li>Un método protegido `metodoProtegidoBase()`</li>
+                        <li>Un método privado `metodoPrivadoBase()`</li>
+                    </ul>
+                </li>
+                <li>Crea tres clases derivadas: `DerivadaPublica`, `DerivadaProtegida`, `DerivadaPrivada`, cada una heredando de `ClaseBase` con el modo de herencia correspondiente.</li>
+                <li>En cada clase derivada, intenta acceder (imprimir, modificar, llamar) a todos los miembros de la `ClaseBase` desde un método de la propia clase derivada (ej. `accederMiembrosBase()`).</li>
+                <li>En la función `main`, crea objetos de cada clase derivada y:
+                    <ul>
+                        <li>Intenta acceder a los miembros públicos de cada objeto.</li>
+                        <li>Observa qué miembros son accesibles y cuáles no, y por qué.</li>
+                    </ul>
+                </li>
+            </ol>
+            <p>Documenta tus observaciones sobre la accesibilidad en cada caso.</p>
+            <details>
+                <summary>Pista (si necesitas ayuda)</summary>
+                <p>Recuerda la tabla de accesibilidad en la teoría. Los miembros `private` de la base nunca son directamente accesibles en la derivada.</p>
+            </details>
+        </section>
+
+        <section class="ejercicio">
+            <h3>Ejercicio 4: Constructores y Destructores en Herencia</h3>
+            <p>Modifica el Ejercicio 2 (clases `Animal` y `Perro`) para que los constructores y destructores de ambas clases impriman un mensaje cuando son llamados.</p>
+            <ol>
+                <li>En el constructor de `Animal`, imprime "Constructor de Animal llamado.".</li>
+                <li>En el destructor de `Animal`, imprime "Destructor de Animal llamado.".</li>
+                <li>En el constructor de `Perro`, imprime "Constructor de Perro llamado.".</li>
+                <li>En el destructor de `Perro`, imprime "Destructor de Perro llamado.".</li>
+            </ol>
+            <p>En la función `main`, crea objetos de `Animal` y `Perro` (tanto en el Stack como en el Heap) y observa el orden en que se llaman los constructores y destructores. ¿Cuál se llama primero, el de la base o el de la derivada? ¿Y al destruir?</p>
+            <details>
+                <summary>Pista (si necesitas ayuda)</summary>
+                <p>Los constructores se llaman de la base a la derivada. Los destructores se llaman de la derivada a la base.</p>
+            </details>
+        </section>
+
+        <section class="navegacion-modulo">
+            <p>¡Excelente trabajo con el módulo de Herencia!</p>
+            <a href="teoria.html" class="boton-practica">Volver a la Teoría del Módulo 3</a>
+            <a href="../index.html" class="boton-practica" style="background-color: #007bff;">Volver al Índice Principal</a>
+        </section>
+    </main>
+
+    <footer>
+        <p>Fin del Módulo 3</p>
+    </footer>
+</body>
+</html>

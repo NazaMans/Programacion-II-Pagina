@@ -1,0 +1,196 @@
+/* Propuesta 2: Estilo Moderno y Oscuro */
+
+/* Colores */
+:root {
+    --primary-dark: #2c3e50; /* Azul oscuro casi negro */
+    --secondary-accent: #e74c3c; /* Rojo de acento */
+    --text-light: #ecf0f1; /* Texto gris claro */
+    --background-dark: #34495e; /* Fondo oscuro principal */
+    --card-dark: #2c3e50; /* Fondo de sección oscuro */
+    --border-dark: #4a6680; /* Borde más oscuro */
+    --code-bg-dark: #22303f; /* Fondo de código muy oscuro */
+    --code-text-accent: #f1c40f; /* Amarillo para código inline */
+}
+
+/* Estilos generales */
+body {
+    font-family: 'Open Sans', 'Helvetica Neue', Arial, sans-serif;
+    line-height: 1.7;
+    margin: 0;
+    padding: 0;
+    background-color: var(--background-dark);
+    color: var(--text-light);
+    font-size: 17px;
+}
+
+header {
+    background-color: var(--primary-dark);
+    color: #ffffff;
+    padding: 2em 0;
+    text-align: center;
+    box-shadow: 0 3px 6px rgba(0, 0, 0, 0.2);
+}
+
+header h1 {
+    margin: 0;
+    font-size: 2.8em;
+    font-weight: 600;
+}
+
+header p {
+    font-size: 1.2em;
+    opacity: 0.8;
+}
+
+nav a {
+    color: #ffffff;
+    text-decoration: none;
+    padding: 0.6em 1.2em;
+    transition: color 0.3s ease;
+}
+
+nav a:hover {
+    color: var(--secondary-accent);
+    text-decoration: none;
+}
+
+main {
+    padding: 40px;
+    max-width: 1000px;
+    margin: 40px auto;
+    background-color: var(--card-dark);
+    border-radius: 10px;
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);
+}
+
+section {
+    margin-bottom: 35px;
+    padding: 25px;
+    border-bottom: 1px solid var(--border-dark);
+}
+
+section:last-of-type {
+    border-bottom: none;
+}
+
+h2 {
+    color: var(--secondary-accent);
+    font-size: 2.2em;
+    margin-bottom: 20px;
+    border-bottom: 3px solid var(--secondary-accent);
+    padding-bottom: 12px;
+}
+
+h3 {
+    color: var(--text-light);
+    font-size: 1.6em;
+    margin-top: 30px;
+    margin-bottom: 15px;
+}
+
+ul {
+    list-style-type: square;
+    margin-left: 30px;
+    padding-left: 0;
+}
+
+li {
+    margin-bottom: 10px;
+}
+
+li ul {
+    margin-top: 8px;
+    margin-bottom: 8px;
+}
+
+a {
+    color: var(--secondary-accent);
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+
+a:hover {
+    color: #f39c12; /* Un naranja para hover */
+    text-decoration: underline;
+}
+
+pre {
+    background-color: var(--code-bg-dark);
+    padding: 1.5em;
+    border-radius: 8px;
+    overflow-x: auto;
+    margin-top: 1.2em;
+    margin-bottom: 1.2em;
+    border: 1px solid #3d5a7d;
+}
+
+code {
+    font-family: 'Ubuntu Mono', 'Consolas', monospace;
+    font-size: 1em;
+    color: var(--code-text-accent);
+}
+
+pre code {
+    color: #ffffff; /* Código blanco en bloques oscuros */
+}
+
+details {
+    background-color: #3b526b;
+    border: 1px solid #4a6680;
+    border-radius: 6px;
+    padding: 12px 18px;
+    margin-top: 20px;
+}
+
+summary {
+    font-weight: bold;
+    cursor: pointer;
+    color: var(--secondary-accent);
+    padding: 6px 0;
+}
+
+/* Estilos específicos para la navegación de módulo */
+.navegacion-modulo {
+    text-align: center;
+    margin-top: 50px;
+    padding-top: 30px;
+    border-top: 1px dashed var(--border-dark);
+}
+
+.boton-practica {
+    display: inline-block;
+    background-color: var(--secondary-accent);
+    color: white;
+    padding: 15px 30px;
+    text-decoration: none;
+    border-radius: 8px;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+    font-weight: bold;
+    font-size: 1.1em;
+    margin: 0 15px;
+}
+
+.boton-practica:hover {
+    background-color: #c0392b; /* Rojo más oscuro al pasar el ratón */
+    transform: translateY(-3px);
+    text-decoration: none;
+}
+
+/* Footer */
+footer {
+    text-align: center;
+    padding: 30px;
+    margin-top: 50px;
+    background-color: var(--primary-dark);
+    color: #ffffff;
+    box-shadow: 0 -3px 6px rgba(0, 0, 0, 0.2);
+}
+
+footer a {
+    color: var(--secondary-accent);
+    text-decoration: underline;
+}
+
+footer a:hover {
+    color: #f39c12;
+}

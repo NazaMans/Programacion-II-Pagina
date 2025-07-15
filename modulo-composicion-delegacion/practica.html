@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Módulo 4: Composición y Delegación - Práctica</title>
+    <link rel="stylesheet" href="../css/style.css">
+</head>
+<body>
+    <header>
+        <h1>Módulo 4: Composición y Delegación</h1>
+        <nav>
+            <a href="../index.html">Volver al Índice Principal</a>
+        </nav>
+    </header>
+
+    <main>
+        <section>
+            <h2>Práctica: Ejercicios de Composición y Delegación</h2>
+            <p>Es el momento de aplicar y diferenciar las relaciones de composición y delegación. Los siguientes ejercicios te ayudarán a modelar situaciones del mundo real usando estas poderosas herramientas de diseño de objetos.</p>
+            <p>Implementa cada ejercicio en tu entorno de Qt Creator para probar el código y entender su comportamiento.</p>
+        </section>
+
+        <section class="ejercicio">
+            <h3>Ejercicio 1: Identificación de Relaciones</h3>
+            <p>Para cada par de entidades, determina qué tipo de relación POO sería más apropiada (Herencia "es-un", Composición Fuerte "parte-esencial-de", Agregación Débil "tiene-un", o Delegación "usa-un-para-hacer-X"). Justifica brevemente tu elección:</p>
+            <ol>
+                <li>Un `Motor` y un `Coche`.</li>
+                <li>Un `Estudiante` y un `Curso`.</li>
+                <li>Un `Perro` y un `Animal`.</li>
+                <li>Una `Impresora` y un `Documento` (para la funcionalidad de imprimir).</li>
+                <li>Una `Universidad` y sus `Departamentos`.</li>
+                <li>Una `Biblioteca` y sus `Libros`.</li>
+            </ol>
+        </section>
+
+        <section class="ejercicio">
+            <h3>Ejercicio 2: Implementación de Composición (Agregación Fuerte)</h3>
+            <p>Crea un programa en C++ que modele un `Coche` y un `Motor` usando composición fuerte:</p>
+            <ol>
+                <li>Define una clase `Motor` con:
+                    <ul>
+                        <li>Atributo privado: `potencia` (int).</li>
+                        <li>Constructor que inicialice la potencia.</li>
+                        <li>Método público `arrancar()` que imprima "Motor de X CV arrancando." donde X es la potencia.</li>
+                    </ul>
+                </li>
+                <li>Define una clase `Coche` con:
+                    <ul>
+                        <li>Atributo privado: `marca` (string) y un objeto `Motor` (composición).</li>
+                        <li>Constructor que reciba la marca y la potencia del motor, e inicialice ambos.</li>
+                        <li>Método público `encender()` que imprima "Encendiendo el coche [Marca]: " y luego llame al método `arrancar()` del objeto `Motor` interno.</li>
+                        <li>Asegúrate de que el `Motor` se inicialice en la lista de inicialización del constructor de `Coche`.</li>
+                    </ul>
+                </li>
+            </ol>
+            <p>En la función `main`:</p>
+            <ol>
+                <li>Crea un objeto `Coche` (ej. "Ford", 150 CV).</li>
+                <li>Llama al método `encender()` del coche.</li>
+                <li>Observa cómo la vida del `Motor` está ligada a la del `Coche`.</li>
+            </ol>
+            <details>
+                <summary>Pista (si necesitas ayuda)</summary>
+                <p>En el constructor de `Coche`, inicializa el miembro `motor` así: `Coche(string m, int p) : marca(m), motor(p) {}`.</p>
+            </details>
+        </section>
+
+        <section class="ejercicio">
+            <h3>Ejercicio 3: Implementación de Agregación (Agregación Débil)</h3>
+            <p>Crea un programa en C++ que modele una `Facultad` y sus `Profesores` usando agregación débil:</p>
+            <ol>
+                <li>Define una clase `Profesor` con:
+                    <ul>
+                        <li>Atributo privado: `nombre` (string).</li>
+                        <li>Constructor que inicialice el nombre.</li>
+                        <li>Método público `getNombre()` que retorne el nombre.</li>
+                    </ul>
+                </li>
+                <li>Define una clase `Facultad` con:
+                    <ul>
+                        <li>Atributo privado: `nombre` (string) y un `std::vector<Profesor*>` para almacenar punteros a profesores.</li>
+                        <li>Constructor que inicialice el nombre de la facultad.</li>
+                        <li>Método público `agregarProfesor(Profesor* p)` para añadir un profesor a la facultad.</li>
+                        <li>Método público `listarProfesores()` que imprima los nombres de todos los profesores asociados.</li>
+                    </ul>
+                </li>
+            </ol>
+            <p>En la función `main`:</p>
+            <ol>
+                <li>Crea varios objetos `Profesor` (en el stack o heap, pero asegúrate de que existan fuera de la `Facultad`).</li>
+                <li>Crea un objeto `Facultad`.</li>
+                <li>Agrega los profesores a la facultad.</li>
+                <li>Lista los profesores de la facultad.</li>
+                <li>(Opcional) Demuestra que los profesores pueden existir incluso si la `Facultad` es destruida o sale de ámbito.</li>
+            </ol>
+            <details>
+                <summary>Pista (si necesitas ayuda)</summary>
+                <p>Al agregar profesores, pasarás punteros, no copias. La `Facultad` no es responsable de la vida de los objetos `Profesor`.</p>
+            </details>
+        </section>
+
+        <section class="ejercicio">
+            <h3>Ejercicio 4: Implementación de Delegación</h3>
+            <p>Crea un programa en C++ que demuestre el patrón de delegación para la funcionalidad de log/registro:</p>
+            <ol>
+                <li>Define una clase `Logger` con:
+                    <ul>
+                        <li>Método público `logMensaje(const std::string& mensaje)` que imprime el mensaje con un prefijo (ej. "[LOG]: Mensaje").</li>
+                        <li>Método público `logAdvertencia(const std::string& mensaje)` que imprime el mensaje con un prefijo (ej. "[ADVERTENCIA]: Mensaje").</li>
+                    </ul>
+                </li>
+                <li>Define una clase `ProcesadorDeDatos` con:
+                    <ul>
+                        <li>Atributo privado: un puntero a un objeto `Logger` (`Logger*`).</li>
+                        <li>Constructor que reciba un puntero a `Logger` e inicialice su atributo.</li>
+                        <li>Un método público `procesar(const std::string& datos)` que simule el procesamiento de datos. Dentro de este método, delega al `Logger` para registrar el inicio y fin del procesamiento, o cualquier error.</li>
+                    </ul>
+                </li>
+            </ol>
+            <p>En la función `main`:</p>
+            <ol>
+                <li>Crea un objeto `Logger`.</li>
+                <li>Crea un objeto `ProcesadorDeDatos`, pasándole el `Logger` creado.</li>
+                <li>Llama al método `procesar()` del `ProcesadorDeDatos` con algunos datos de ejemplo.</li>
+                <li>(Opcional) Intenta cambiar el `Logger` al `ProcesadorDeDatos` en tiempo de ejecución (si el diseño lo permite) o pasa un `nullptr` para ver qué sucede.</li>
+            </ol>
+            <details>
+                <summary>Pista (si necesitas ayuda)</summary>
+                <p>La clase `ProcesadorDeDatos` no necesita saber cómo `Logger` imprime el mensaje, solo llama a su interfaz (`logMensaje`).</p>
+            </details>
+        </section>
+
+        <section class="ejercicio">
+            <h3>Ejercicio 5: Composición vs. Herencia (Escenario)</h3>
+            <p>Considera el siguiente escenario: Quieres crear una clase `Pila` (Stack) de enteros. Podrías implementarla usando:</p>
+            <ol>
+                <li>**Herencia:** Heredando de `std::vector<int>`.</li>
+                <li>**Composición:** Conteniendo un objeto `std::vector<int>`.</li>
+            </ol>
+            <p><strong>Tarea:</strong></p>
+            <ol>
+                <li>Implementa la clase `Pila` utilizando **composición** (es decir, la clase `Pila` tendrá un `std::vector<int>` como miembro privado).</li>
+                <li>Implementa los métodos `push(int valor)`, `pop()`, `top()` y `estaVacia()`.</li>
+                <li>En tu código, comenta por qué la composición es generalmente preferible a la herencia en este caso (¿qué problemas podría traer la herencia de `std::vector`?).</li>
+            </ol>
+            <details>
+                <summary>Pista (si necesitas ayuda)</summary>
+                <p>Al heredar de `std::vector`, la clase `Pila` expondría todos los métodos de `std::vector` (como `insert`, `clear`, `operator[]`), lo cual podría violar el comportamiento de una pila (solo LIFO).</p>
+            </details>
+        </section>
+
+        <section class="navegacion-modulo">
+            <p>¡Felicidades, has practicado las relaciones clave entre objetos!</p>
+            <a href="teoria.html" class="boton-practica">Volver a la Teoría del Módulo 4</a>
+            <a href="../index.html" class="boton-practica" style="background-color: #007bff;">Volver al Índice Principal</a>
+        </section>
+    </main>
+
+    <footer>
+        <p>Fin del Módulo 4</p>
+    </footer>
+</body>
+</html>
