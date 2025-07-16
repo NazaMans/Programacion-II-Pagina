@@ -1,0 +1,541 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Proyectos Simples: Actividades Combinadas</title>
+    <link rel="stylesheet" href="../css/style.css">
+</head>
+<body>
+    <header>
+        <h1>Proyectos Simples: Actividades Combinadas</h1>
+        <nav>
+            <a href="../index.html">Volver al Índice Principal</a>
+        </nav>
+    </header>
+
+    <main>
+        <section>
+            <h2>Práctica: Proyectos Simples con Qt y C++</h2>
+            <p>Estos proyectos están diseñados para que combines y apliques los conocimientos adquiridos en los módulos anteriores, integrando la creación de interfaces de usuario con Qt Designer y la lógica de programación en C++ utilizando la Standard Template Library (STL).</p>
+            <p>Para cada actividad, asume que estás trabajando en un proyecto "Qt Widgets Application" en Qt Creator y que los widgets de la interfaz se acceden a través del puntero <code>ui->nombreDelWidget</code>.</p>
+        </section>
+
+        <!-- Parte 1: Proyectos Simples de Interfaz de Usuario (Qt UI Enfocado) -->
+        <section>
+            <h2>Parte 1: Proyectos Simples de Interfaz de Usuario (Qt UI Enfocado)</h2>
+            <p>Estas actividades se centran en la manipulación y la interacción con los widgets de Qt.</p>
+        </section>
+
+        <section class="ejercicio">
+            <h3>Ejercicio 1: Visor de Imagen con Botones de Control</h3>
+            <p>Crea una aplicación donde al hacer clic en un botón, se muestre una imagen, y al hacer clic en otro, la imagen se oculte.</p>
+            <p><strong>Elementos de Qt a utilizar:</strong> <code>QPushButton</code>, <code>QLabel</code>.</p>
+            <ol>
+                <li>En Qt Designer, añade dos <code>QPushButton</code>s (nómbralos <code>btnMostrar</code> y <code>btnOcultar</code>) y un <code>QLabel</code> (nómbralo <code>labelImagen</code>) a tu ventana principal.</li>
+                <li>Configura el <code>QLabel</code> para que inicialmente no sea visible (propiedad <code>visible</code> en Designer).</li>
+                <li>Añade una imagen a tu proyecto (puedes usar el sistema de recursos `.qrc` de Qt o una ruta relativa simple). En Designer, asigna esta imagen al <code>labelImagen</code>.</li>
+                <li>En <code>mainwindow.h</code>, declara los slots para los botones:
+                    <pre><code class="language-cpp">
+// ... dentro de class MainWindow : public QMainWindow
+private slots:
+    void on_btnMostrar_clicked();
+    void on_btnOcultar_clicked();
+                    </code></pre>
+                </li>
+                <li>En <code>mainwindow.cpp</code>, implementa los slots:
+                    <pre><code class="language-cpp">
+// ...
+void MainWindow::on_btnMostrar_clicked()
+{
+    ui->labelImagen->setVisible(true);
+}
+
+void MainWindow::on_btnOcultar_clicked()
+{
+    ui->labelImagen->setVisible(false);
+}
+                    </code></pre>
+                </li>
+                <li>Compila y ejecuta. Verifica que los botones controlen la visibilidad de la imagen.</li>
+            </ol>
+            <details>
+                <summary>Pista (si necesitas ayuda)</summary>
+                <p>Usa los métodos <code>setVisible(bool)</code> de <code>QWidget</code> para controlar la visibilidad. Para la imagen, puedes arrastrarla a un recurso `.qrc` y luego seleccionarla en la propiedad <code>pixmap</code> del <code>QLabel</code> en Designer.</p>
+            </details>
+        </section>
+
+        <section class="ejercicio">
+            <h3>Ejercicio 2: Selector de Texto y Estilo de Fuente</h3>
+            <p>El usuario introduce texto en un campo, selecciona un tamaño de fuente de una lista desplegable, y un botón aplica el estilo al texto mostrado en una etiqueta.</p>
+            <p><strong>Elementos de Qt a utilizar:</strong> <code>QLineEdit</code>, <code>QComboBox</code>, <code>QPushButton</code>, <code>QLabel</code>.</p>
+            <ol>
+                <li>En Qt Designer, añade un <code>QLineEdit</code> (<code>lineEditTexto</code>), un <code>QComboBox</code> (<code>comboBoxTamano</code>), un <code>QPushButton</code> (<code>btnAplicarEstilo</code>) y un <code>QLabel</code> (<code>labelResultado</code>).</li>
+                <li>En <code>comboBoxTamano</code>, añade ítems como "Pequeño" (valor 12), "Mediano" (valor 16), "Grande" (valor 20) usando el Property Editor (propiedad <code>items</code>).</li>
+                <li>En <code>mainwindow.h</code>, declara el slot para el botón:
+                    <pre><code class="language-cpp">
+// ...
+private slots:
+    void on_btnAplicarEstilo_clicked();
+                    </code></pre>
+                </li>
+                <li>En <code>mainwindow.cpp</code>, implementa el slot:
+                    <pre><code class="language-cpp">
+// ...
+void MainWindow::on_btnAplicarEstilo_clicked()
+{
+    QString texto = ui->lineEditTexto->text();
+    int tamanoFuente = 16; // Valor por defecto
+
+    // Determinar el tamaño de la fuente según la selección del QComboBox
+    if (ui->comboBoxTamano->currentText() == "Pequeño") {
+        tamanoFuente = 12;
+    } else if (ui->comboBoxTamano->currentText() == "Mediano") {
+        tamanoFuente = 16;
+    } else if (ui->comboBoxTamano->currentText() == "Grande") {
+        tamanoFuente = 20;
+    }
+
+    // Crear un objeto QFont y aplicarlo al QLabel
+    QFont font = ui->labelResultado->font(); // Obtener la fuente actual
+    font.setPointSize(tamanoFuente); // Establecer el nuevo tamaño
+    ui->labelResultado->setFont(font); // Aplicar la fuente
+
+    ui->labelResultado->setText(texto); // Mostrar el texto
+}
+                    </code></pre>
+                </li>
+                <li>Compila y ejecuta. Prueba diferentes textos y tamaños de fuente.</li>
+            </ol>
+            <details>
+                <summary>Pista (si necesitas ayuda)</summary>
+                <p>Usa <code>QComboBox::currentText()</code> para obtener el texto seleccionado. Para cambiar la fuente, necesitas la clase <code>QFont</code> y el método <code>setFont()</code> de <code>QLabel</code>.</p>
+            </details>
+        </section>
+
+        <section class="ejercicio">
+            <h3>Ejercicio 3: Generador de Notificaciones Variadas</h3>
+            <p>Diseña una ventana con tres botones. Cada botón, al ser presionado, debe abrir un tipo diferente de <code>QMessageBox</code>.</p>
+            <p><strong>Elementos de Qt a utilizar:</strong> <code>QPushButton</code> (varios), <code>QMessageBox</code> (diferentes tipos).</p>
+            <ol>
+                <li>En Qt Designer, añade tres <code>QPushButton</code>s (nómbralos <code>btnInfoMsg</code>, <code>btnWarningMsg</code>, <code>btnCriticalMsg</code>) a tu ventana.</li>
+                <li>En <code>mainwindow.h</code>, declara los slots para cada botón:
+                    <pre><code class="language-cpp">
+// ...
+private slots:
+    void on_btnInfoMsg_clicked();
+    void on_btnWarningMsg_clicked();
+    void on_btnCriticalMsg_clicked();
+                    </code></pre>
+                </li>
+                <li>En <code>mainwindow.cpp</code>, implementa los slots para mostrar los <code>QMessageBox</code> correspondientes:
+                    <pre><code class="language-cpp">
+// ...
+#include &lt;QMessageBox&gt; // Asegúrate de incluirlo
+
+void MainWindow::on_btnInfoMsg_clicked()
+{
+    QMessageBox::information(this, "Información", "Esta es una notificación informativa.");
+}
+
+void MainWindow::on_btnWarningMsg_clicked()
+{
+    QMessageBox::warning(this, "Advertencia", "¡Precaución! Algo inusual ha ocurrido.");
+}
+
+void MainWindow::on_btnCriticalMsg_clicked()
+{
+    QMessageBox::critical(this, "Error Crítico", "¡Error fatal! La aplicación podría cerrarse.");
+}
+                    </code></pre>
+                </li>
+                <li>Compila y ejecuta. Haz clic en cada botón para ver los diferentes tipos de mensajes.</li>
+            </ol>
+            <details>
+                <summary>Pista (si necesitas ayuda)</summary>
+                <p>Los métodos estáticos de <code>QMessageBox</code> son muy directos de usar. El primer parámetro es el padre (normalmente <code>this</code> para la ventana principal).</p>
+            </details>
+        </section>
+
+        <section class="ejercicio">
+            <h3>Ejercicio 4: Control Deslizante para Simular un Valor</h3>
+            <p>Implementa un <code>QSlider</code>. A medida que el usuario mueve el control, un <code>QLabel</code> adyacente debe mostrar el valor actual del slider.</p>
+            <p><strong>Elementos de Qt a utilizar:</strong> <code>QSlider</code>, <code>QLabel</code>.</p>
+            <ol>
+                <li>En Qt Designer, añade un <code>QSlider</code> (nómbralo <code>sliderControl</code>, configúralo como horizontal) y un <code>QLabel</code> (nómbralo <code>labelValor</code>) a tu ventana.</li>
+                <li>Configura el rango del <code>sliderControl</code> en Designer (ej. Mínimo: 0, Máximo: 100).</li>
+                <li>En <code>mainwindow.cpp</code>, en el constructor de <code>MainWindow</code>, conecta la señal <code>valueChanged(int)</code> del slider al slot <code>setText(const QString&)</code> del label. Necesitarás una lambda para convertir el entero a `QString`.
+                    <pre><code class="language-cpp">
+// ... en MainWindow::MainWindow(QWidget *parent)
+ui->setupUi(this);
+// ...
+QObject::connect(ui->sliderControl, &QSlider::valueChanged, this, [this](int value){
+    ui->labelValor->setText(QString::number(value));
+});
+// Opcional: Inicializa el label con el valor actual del slider
+ui->labelValor->setText(QString::number(ui->sliderControl->value()));
+                    </code></pre>
+                </li>
+                <li>Compila y ejecuta. Mueve el deslizador y observa cómo el número en la etiqueta se actualiza.</li>
+            </ol>
+            <details>
+                <summary>Pista (si necesitas ayuda)</summary>
+                <p>La señal <code>valueChanged(int)</code> de <code>QSlider</code> emite un entero. <code>QLabel::setText()</code> espera un <code>QString</code>, por lo que <code>QString::number(value)</code> es útil.</p>
+            </details>
+        </section>
+
+        <section class="ejercicio">
+            <h3>Ejercicio 5: Simulador de Estado de Reproducción</h3>
+            <p>Crea tres botones ("Play", "Pause", "Stop") y una etiqueta que muestre el estado actual de un reproductor ficticio.</p>
+            <p><strong>Elementos de Qt a utilizar:</strong> <code>QPushButton</code> (3), <code>QLabel</code>.</p>
+            <ol>
+                <li>En Qt Designer, añade tres <code>QPushButton</code>s (nómbralos <code>btnPlay</code>, <code>btnPause</code>, <code>btnStop</code>) y un <code>QLabel</code> (nómbralo <code>labelEstadoReproduccion</code>).</li>
+                <li>En <code>mainwindow.h</code>, declara los slots para cada botón:
+                    <pre><code class="language-cpp">
+// ...
+private slots:
+    void on_btnPlay_clicked();
+    void on_btnPause_clicked();
+    void on_btnStop_clicked();
+                    </code></pre>
+                </li>
+                <li>En <code>mainwindow.cpp</code>, implementa los slots para actualizar el texto de <code>labelEstadoReproduccion</code>:
+                    <pre><code class="language-cpp">
+// ...
+void MainWindow::on_btnPlay_clicked()
+{
+    ui->labelEstadoReproduccion->setText("Estado: Reproduciendo...");
+}
+
+void MainWindow::on_btnPause_clicked()
+{
+    ui->labelEstadoReproduccion->setText("Estado: Pausado.");
+}
+
+void MainWindow::on_btnStop_clicked()
+{
+    ui->labelEstadoReproduccion->setText("Estado: Detenido.");
+}
+                    </code></pre>
+                </li>
+                <li>Compila y ejecuta. Haz clic en los botones para cambiar el estado mostrado.</li>
+            </ol>
+            <details>
+                <summary>Pista (si necesitas ayuda)</summary>
+                <p>Este ejercicio es una buena oportunidad para practicar la auto-conexión de slots si nombras tus slots siguiendo la convención de Qt.</p>
+            </details>
+        </section>
+
+        <!-- Parte 2: Proyectos Combinados (Qt UI + Conceptos Simples de STL/C++) -->
+        <section>
+            <h2>Parte 2: Proyectos Combinados (Qt UI + Conceptos Simples de STL/C++)</h2>
+            <p>Estas actividades integran elementos de interfaz de usuario de Qt con el uso básico de contenedores o algoritmos de la Standard Template Library de C++.</p>
+        </section>
+
+        <section class="ejercicio">
+            <h3>Ejercicio 6: Lista de Compras Interactiva (`std::vector<std::string>`)</h3>
+            <p>Permite al usuario agregar y eliminar ítems de una lista de compras, mostrándolos en un <code>QListWidget</code>.</p>
+            <p><strong>Elementos de Qt a utilizar:</strong> <code>QLineEdit</code>, <code>QPushButton</code> (2), <code>QListWidget</code>.</p>
+            <p><strong>Concepto STL/C++:</strong> <code>std::vector&lt;std::string&gt;</code>.</p>
+            <ol>
+                <li>En Qt Designer, añade un <code>QLineEdit</code> (<code>lineEditItem</code>), un <code>QPushButton</code> (<code>btnAddItem</code>) y un <code>QPushButton</code> (<code>btnRemoveItem</code>), y un <code>QListWidget</code> (<code>listWidgetCompras</code>).</li>
+                <li>En <code>mainwindow.h</code>, declara un miembro privado <code>std::vector&lt;QString&gt; listaCompras;</code> y los slots para los botones:
+                    <pre><code class="language-cpp">
+// ...
+#include &lt;vector&gt; // Para std::vector
+#include &lt;QString&gt; // Para QString
+
+private:
+    std::vector&lt;QString&gt; listaCompras;
+
+private slots:
+    void on_btnAddItem_clicked();
+    void on_btnRemoveItem_clicked();
+                    </code></pre>
+                </li>
+                <li>En <code>mainwindow.cpp</code>, implementa los slots:
+                    <pre><code class="language-cpp">
+// ...
+void MainWindow::on_btnAddItem_clicked()
+{
+    QString item = ui->lineEditItem->text().trimmed();
+    if (!item.isEmpty()) {
+        listaCompras.push_back(item); // Añadir al vector STL
+        ui->listWidgetCompras->addItem(item); // Añadir al QListWidget
+        ui->lineEditItem->clear(); // Limpiar el QLineEdit
+    }
+}
+
+void MainWindow::on_btnRemoveItem_clicked()
+{
+    QListWidgetItem *selectedItem = ui->listWidgetCompras->currentItem();
+    if (selectedItem) {
+        // Eliminar del QListWidget
+        int row = ui->listWidgetCompras->row(selectedItem);
+        delete ui->listWidgetCompras->takeItem(row);
+
+        // Eliminar del vector STL
+        if (row >= 0 && row < listaCompras.size()) {
+            listaCompras.erase(listaCompras.begin() + row);
+        }
+    }
+}
+                    </code></pre>
+                </li>
+                <li>Compila y ejecuta. Agrega y elimina ítems, observando cómo se actualizan tanto el `QListWidget` como el `std::vector` internamente.</li>
+            </ol>
+            <details>
+                <summary>Pista (si necesitas ayuda)</summary>
+                <p><code>QString::trimmed()</code> elimina espacios en blanco al principio y al final. <code>QListWidget::currentItem()</code> obtiene el ítem seleccionado. <code>QListWidget::takeItem(row)</code> elimina el ítem y devuelve un puntero, que luego debes `delete`.</p>
+            </details>
+        </section>
+
+        <section class="ejercicio">
+            <h3>Ejercicio 7: Validador de Contraseña Básico (`std::string`)</h3>
+            <p>Un campo de texto para contraseña y un botón "Verificar" que valida si la contraseña cumple un criterio simple (ej. longitud mínima).</p>
+            <p><strong>Elementos de Qt a utilizar:</strong> <code>QLineEdit</code>, <code>QPushButton</code>, <code>QLabel</code>.</p>
+            <p><strong>Concepto STL/C++:</strong> Manipulación de `std::string` (ej. `length()`, `empty()`).</p>
+            <ol>
+                <li>En Qt Designer, añade un <code>QLineEdit</code> (<code>lineEditPassword</code>, configura su <code>echoMode</code> a <code>Password</code>), un <code>QPushButton</code> (<code>btnVerificar</code>) y un <code>QLabel</code> (<code>labelMensaje</code>).</li>
+                <li>En <code>mainwindow.h</code>, declara el slot para el botón:
+                    <pre><code class="language-cpp">
+// ...
+private slots:
+    void on_btnVerificar_clicked();
+                    </code></pre>
+                </li>
+                <li>En <code>mainwindow.cpp</code>, implementa el slot:
+                    <pre><code class="language-cpp">
+// ...
+void MainWindow::on_btnVerificar_clicked()
+{
+    QString qPassword = ui->lineEditPassword->text();
+    std::string password = qPassword.toStdString(); // Convertir a std::string
+
+    if (password.length() >= 6 && !password.empty()) {
+        ui->labelMensaje->setText("<span style='color: green;'>Contraseña Válida</span>");
+    } else {
+        ui->labelMensaje->setText("<span style='color: red;'>Contraseña Inválida (mín. 6 caracteres)</span>");
+    }
+}
+                    </code></pre>
+                </li>
+                <li>Compila y ejecuta. Prueba con contraseñas cortas y largas.</li>
+            </ol>
+            <details>
+                <summary>Pista (si necesitas ayuda)</summary>
+                <p>Puedes usar HTML básico en <code>QLabel::setText()</code> para cambiar el color del texto.</p>
+            </details>
+        </section>
+
+        <section class="ejercicio">
+            <h3>Ejercicio 8: Historial de Páginas Web Sencillo (`std::stack<std::string>`)</h3>
+            <p>Simula un historial de navegación con botones "Visitar" y "Atrás", mostrando la URL actual.</p>
+            <p><strong>Elementos de Qt a utilizar:</strong> <code>QLineEdit</code>, <code>QPushButton</code> (2), <code>QLabel</code>.</p>
+            <p><strong>Concepto STL/C++:</strong> `std::stack&lt;std::string&gt;`.</p>
+            <ol>
+                <li>En Qt Designer, añade un <code>QLineEdit</code> (<code>lineEditURL</code>), un <code>QPushButton</code> (<code>btnVisitar</code>), un <code>QPushButton</code> (<code>btnAtras</code>) y un <code>QLabel</code> (<code>labelURLActual</code>).</li>
+                <li>En <code>mainwindow.h</code>, declara un miembro privado <code>std::stack&lt;QString&gt; historial;</code> y los slots para los botones:
+                    <pre><code class="language-cpp">
+// ...
+#include &lt;stack&gt; // Para std::stack
+
+private:
+    std::stack&lt;QString&gt; historial;
+
+private slots:
+    void on_btnVisitar_clicked();
+    void on_btnAtras_clicked();
+    void actualizarUIHistorial(); // Slot auxiliar para actualizar el label
+                    </code></pre>
+                </li>
+                <li>En <code>mainwindow.cpp</code>, implementa los slots y la función auxiliar:
+                    <pre><code class="language-cpp">
+// ...
+void MainWindow::on_btnVisitar_clicked()
+{
+    QString url = ui->lineEditURL->text().trimmed();
+    if (!url.isEmpty()) {
+        historial.push(url);
+        ui->lineEditURL->clear();
+        actualizarUIHistorial();
+    }
+}
+
+void MainWindow::on_btnAtras_clicked()
+{
+    if (!historial.empty()) {
+        historial.pop(); // Eliminar la URL actual
+        actualizarUIHistorial();
+    }
+}
+
+void MainWindow::actualizarUIHistorial()
+{
+    if (!historial.empty()) {
+        ui->labelURLActual->setText("URL Actual: " + historial.top());
+    } else {
+        ui->labelURLActual->setText("Historial Vacío.");
+    }
+    // Deshabilitar/Habilitar botón "Atrás"
+    ui->btnAtras->setEnabled(!historial.empty());
+}
+
+// Llama a actualizarUIHistorial() en el constructor para el estado inicial
+MainWindow::MainWindow(QWidget *parent)
+    : QMainWindow(parent)
+    , ui(new Ui::MainWindow)
+{
+    ui->setupUi(this);
+    actualizarUIHistorial(); // Inicializa el estado del label y botón
+}
+                    </code></pre>
+                </li>
+                <li>Compila y ejecuta. Visita varias URLs y luego usa el botón "Atrás".</li>
+            </ol>
+            <details>
+                <summary>Pista (si necesitas ayuda)</summary>
+                <p>Usa <code>stack::push()</code>, <code>stack::pop()</code>, <code>stack::top()</code> y <code>stack::empty()</code>. La función auxiliar <code>actualizarUIHistorial()</code> es útil para mantener el código DRY (Don't Repeat Yourself).</p>
+            </details>
+        </section>
+
+        <section class="ejercicio">
+            <h3>Ejercicio 9: Mini Gestor de Contactos (`std::map<std::string, std::string>`)</h3>
+            <p>Permite guardar contactos (nombre y teléfono) y luego buscar un contacto por nombre.</p>
+            <p><strong>Elementos de Qt a utilizar:</strong> <code>QLineEdit</code> (para nombre), <code>QLineEdit</code> (para teléfono), <code>QPushButton</code> (2), <code>QLabel</code>.</p>
+            <p><strong>Concepto STL/C++:</strong> `std::map&lt;std::string, std::string&gt;`.</p>
+            <ol>
+                <li>En Qt Designer, añade dos <code>QLineEdit</code>s (<code>lineEditNombre</code>, <code>lineEditTelefono</code>), un <code>QPushButton</code> (<code>btnGuardarContacto</code>), otro <code>QLineEdit</code> (<code>lineEditBuscarNombre</code>), un <code>QPushButton</code> (<code>btnBuscarContacto</code>) y un <code>QLabel</code> (<code>labelResultadoBusqueda</code>).</li>
+                <li>En <code>mainwindow.h</code>, declara un miembro privado <code>std::map&lt;QString, QString&gt; contactos;</code> y los slots para los botones:
+                    <pre><code class="language-cpp">
+// ...
+#include &lt;map&gt; // Para std::map
+
+private:
+    std::map&lt;QString, QString&gt; contactos;
+
+private slots:
+    void on_btnGuardarContacto_clicked();
+    void on_btnBuscarContacto_clicked();
+                    </code></pre>
+                </li>
+                <li>En <code>mainwindow.cpp</code>, implementa los slots:
+                    <pre><code class="language-cpp">
+// ...
+void MainWindow::on_btnGuardarContacto_clicked()
+{
+    QString nombre = ui->lineEditNombre->text().trimmed();
+    QString telefono = ui->lineEditTelefono->text().trimmed();
+
+    if (!nombre.isEmpty() && !telefono.isEmpty()) {
+        contactos[nombre] = telefono; // Guardar en el mapa
+        ui->labelResultadoBusqueda->setText(QString("Contacto '%1' guardado.").arg(nombre));
+        ui->lineEditNombre->clear();
+        ui->lineEditTelefono->clear();
+    } else {
+        ui->labelResultadoBusqueda->setText("<span style='color: red;'>Nombre y Teléfono no pueden estar vacíos.</span>");
+    }
+}
+
+void MainWindow::on_btnBuscarContacto_clicked()
+{
+    QString nombreBuscar = ui->lineEditBuscarNombre->text().trimmed();
+    if (contactos.count(nombreBuscar)) { // Verificar si la clave existe
+        ui->labelResultadoBusqueda->setText(QString("Teléfono de %1: %2").arg(nombreBuscar).arg(contactos[nombreBuscar]));
+    } else {
+        ui->labelResultadoBusqueda->setText(QString("<span style='color: red;'>Contacto '%1' no encontrado.</span>").arg(nombreBuscar));
+    }
+    ui->lineEditBuscarNombre->clear();
+}
+                    </code></pre>
+                </li>
+                <li>Compila y ejecuta. Guarda algunos contactos y luego intenta buscarlos.</li>
+            </ol>
+            <details>
+                <summary>Pista (si necesitas ayuda)</summary>
+                <p><code>std::map::count(key)</code> devuelve 1 si la clave existe y 0 si no. <code>map[key]</code> accede al valor asociado a la clave.</p>
+            </details>
+        </section>
+
+        <section class="ejercicio">
+            <h3>Ejercicio 10: Calculadora de Promedio de Números (`std::vector<double>`)</h3>
+            <p>El usuario ingresa números, los agrega a una lista, y luego puede calcular su promedio.</p>
+            <p><strong>Elementos de Qt a utilizar:</strong> <code>QLineEdit</code>, <code>QPushButton</code> (2), <code>QLabel</code>, <code>QTextEdit</code>.</p>
+            <p><strong>Concepto STL/C++:</strong> `std::vector&lt;double&gt;`, suma de elementos (con bucle o `std::accumulate`).</p>
+            <ol>
+                <li>En Qt Designer, añade un <code>QLineEdit</code> (<code>lineEditNumero</code>), un <code>QPushButton</code> (<code>btnAddNumero</code>), un <code>QPushButton</code> (<code>btnCalcularPromedio</code>), un <code>QLabel</code> (<code>labelPromedio</code>) y un <code>QTextEdit</code> (<code>textEditNumeros</code>) para mostrar la lista de números.</li>
+                <li>En <code>mainwindow.h</code>, declara un miembro privado <code>std::vector&lt;double&gt; numeros;</code> y los slots para los botones:
+                    <pre><code class="language-cpp">
+// ...
+#include &lt;vector&gt; // Para std::vector
+#include &lt;numeric&gt; // Para std::accumulate (opcional)
+
+private:
+    std::vector&lt;double&gt; numeros;
+
+private slots:
+    void on_btnAddNumero_clicked();
+    void on_btnCalcularPromedio_clicked();
+    void actualizarListaNumeros(); // Slot auxiliar para actualizar QTextEdit
+                    </code></pre>
+                </li>
+                <li>En <code>mainwindow.cpp</code>, implementa los slots y la función auxiliar:
+                    <pre><code class="language-cpp">
+// ...
+void MainWindow::on_btnAddNumero_clicked()
+{
+    bool ok;
+    double num = ui->lineEditNumero->text().toDouble(&ok);
+    if (ok) {
+        numeros.push_back(num);
+        ui->lineEditNumero->clear();
+        actualizarListaNumeros();
+    } else {
+        ui->labelPromedio->setText("<span style='color: red;'>Entrada inválida.</span>");
+    }
+}
+
+void MainWindow::on_btnCalcularPromedio_clicked()
+{
+    if (numeros.empty()) {
+        ui->labelPromedio->setText("<span style='color: orange;'>No hay números para calcular.</span>");
+        return;
+    }
+
+    double suma = 0.0;
+    for (double n : numeros) { // O usar std::accumulate(numeros.begin(), numeros.end(), 0.0);
+        suma += n;
+    }
+    double promedio = suma / numeros.size();
+    ui->labelPromedio->setText(QString("Promedio: %1").arg(promedio, 0, 'f', 2)); // Formato con 2 decimales
+}
+
+void MainWindow::actualizarListaNumeros()
+{
+    QString listaTexto;
+    for (double n : numeros) {
+        listaTexto += QString::number(n) + "\n";
+    }
+    ui->textEditNumeros->setText(listaTexto);
+}
+                    </code></pre>
+                </li>
+                <li>Compila y ejecuta. Agrega números y calcula el promedio.</li>
+            </ol>
+            <details>
+                <summary>Pista (si necesitas ayuda)</summary>
+                <p>Usa <code>QString::toDouble(&ok)</code> para convertir el texto del <code>QLineEdit</code> a un número, verificando si la conversión fue exitosa. <code>QString::number(double, format, precision)</code> es útil para formatear la salida del promedio.</p>
+            </details>
+        </section>
+
+        <section class="navegacion-modulo">
+            <p>¡Has completado una serie de proyectos combinados!</p>
+            <a href="../index.html" class="boton-practica" style="background-color: #007bff;">Volver al Índice Principal</a>
+        </section>
+    </main>
+
+    <footer>
+        <p>Fin de los Proyectos Simples</p>
+    </footer>
+</body>
+</html>
