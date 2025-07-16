@@ -16,152 +16,671 @@
 
     <main>
         <section>
-            <h2>Práctica: Ejercicios de Polimorfismo</h2>
-            <p>Es el momento de poner a prueba tu comprensión del polimorfismo en C++, tanto estático (sobrecarga) como dinámico (funciones virtuales y clases abstractas). Estos ejercicios te ayudarán a ver cómo el mismo nombre puede tener "muchas formas" en tus programas.</p>
-            <p>Asegúrate de compilar y ejecutar tus soluciones en Qt Creator.</p>
-        </section>
-
-        <section class="ejercicio">
-            <h3>Ejercicio 1: Polimorfismo Estático (Sobrecarga de Funciones)</h3>
-            <p>Crea una clase llamada `Operaciones` que contenga métodos sobrecargados para realizar sumas y mostrar información:</p>
-            <ol>
-                <li>Define un método `sumar()` que acepte dos enteros (`int`) y retorne su suma.</li>
-                <li>Sobrecarga `sumar()` para que acepte dos números flotantes (`double`) y retorne su suma.</li>
-                <li>Define un método `mostrar()` que acepte un entero (`int`) e imprima "Valor entero: X".</li>
-                <li>Sobrecarga `mostrar()` para que acepte una cadena de texto (`std::string`) e imprima "Mensaje: Y".</li>
-            </ol>
-            <p>En la función `main`:</p>
-            <ol>
-                <li>Crea un objeto de la clase `Operaciones`.</li>
-                <li>Llama a ambas versiones de `sumar()` con argumentos apropiados (enteros y flotantes) e imprime los resultados.</li>
-                <li>Llama a ambas versiones de `mostrar()` con argumentos apropiados (un entero y una cadena de texto).</li>
-            </ol>
-            <details>
-                <summary>Pista (si necesitas ayuda)</summary>
-                <p>La sobrecarga se basa en la firma de la función (número y tipo de parámetros). El tipo de retorno no es suficiente para sobrecargar.</p>
-            </details>
-        </section>
-
-        <section class="ejercicio">
-            <h3>Ejercicio 2: Polimorfismo Dinámico (Funciones Virtuales)</h3>
-            <p>Crea una jerarquía de clases para modelar diferentes tipos de empleados y demostrar el polimorfismo dinámico:</p>
-            <ol>
-                <li>Define una clase base `Empleado` con:
-                    <ul>
-                        <li>Atributo protegido: `nombre` (string).</li>
-                        <li>Constructor que inicialice el nombre.</li>
-                        <li>Un método <strong>virtual</strong> público `calcularSalario()` que retorne un `double` (ej. un valor base `1000.0`). Imprime un mensaje si es llamado (ej. "Calculando salario base...").</li>
-                        <li>Un método <strong>virtual</strong> público `mostrarDetalles()` que imprima el nombre del empleado.</li>
-                    </ul>
-                </li>
-                <li>Define una clase derivada `EmpleadoTiempoCompleto` que herede públicamente de `Empleado` con:
-                    <ul>
-                        <li>Atributo privado: `salarioMensual` (double).</li>
-                        <li>Constructor que inicialice nombre y salario mensual, llamando al constructor de la base.</li>
-                        <li>Sobreescribe `calcularSalario()` para retornar `salarioMensual`.</li>
-                        <li>Sobreescribe `mostrarDetalles()` para imprimir el nombre y " (Tiempo Completo)".</li>
-                    </ul>
-                </li>
-                <li>Define otra clase derivada `Consultor` que herede públicamente de `Empleado` con:
-                    <ul>
-                        <li>Atributos privados: `horasTrabajadas` (int) y `tarifaPorHora` (double).</li>
-                        <li>Constructor que inicialice nombre, horas trabajadas y tarifa, llamando al constructor de la base.</li>
-                        <li>Sobreescribe `calcularSalario()` para retornar `horasTrabajadas * tarifaPorHora`.</li>
-                        <li>Sobreescribe `mostrarDetalles()` para imprimir el nombre y " (Consultor)".</li>
-                    </ul>
-                </li>
-            </ol>
-            <p>En la función `main`:</p>
-            <ol>
-                <li>Crea punteros a `Empleado`.</li>
-                <li>Crea dinámicamente un `EmpleadoTiempoCompleto` y un `Consultor`, y asigna sus direcciones a los punteros de `Empleado`.</li>
-                <li>Recorre un array (o `std::vector`) de punteros `Empleado*`. Para cada puntero, llama a `calcularSalario()` y `mostrarDetalles()`.</li>
-                <li>Observa cómo se invoca la implementación correcta de la función basándose en el tipo real del objeto.</li>
-                <li>Asegúrate de liberar la memoria asignada con `delete`.</li>
-            </ol>
-            <details>
-                <summary>Pista (si necesitas ayuda)</summary>
-                <p>El uso de `override` es opcional pero ayuda al compilador a verificar que estás sobreescribiendo una función virtual.</p>
-            </details>
-        </section>
-
-        <section class="ejercicio">
-            <h3>Ejercicio 3: Clases Abstractas y Funciones Virtuales Puras</h3>
-            <p>Crea una jerarquía de clases para modelar diferentes `Forma`s geométricas, utilizando una clase abstracta:</p>
-            <ol>
-                <li>Define una clase abstracta `Forma` con:
-                    <ul>
-                        <li>Atributo protegido: `color` (string).</li>
-                        <li>Constructor que inicialice el color.</li>
-                        <li>Un método virtual puro `calcularArea()` que retorne `double`.</li>
-                        <li>Un método virtual puro `dibujar()` que no retorne nada.</li>
-                        <li>Un método público no virtual `getColor()` que retorne el color.</li>
-                    </ul>
-                </li>
-                <li>Define una clase `Circulo` que herede públicamente de `Forma` con:
-                    <ul>
-                        <li>Atributo privado: `radio` (double).</li>
-                        <li>Constructor que inicialice radio y color.</li>
-                        <li>Implementa `calcularArea()`.</li>
-                        <li>Implementa `dibujar()` para imprimir "Dibujando un círculo de color [Color]".</li>
-                    </ul>
-                </li>
-                <li>Define una clase `Rectangulo` que herede públicamente de `Forma` con:
-                    <ul>
-                        <li>Atributos privados: `ancho` (double) y `alto` (double).</li>
-                        <li>Constructor que inicialice ancho, alto y color.</li>
-                        <li>Implementa `calcularArea()`.</li>
-                        <li>Implementa `dibujar()` para imprimir "Dibujando un rectángulo de color [Color]".</li>
-                    </ul>
-                </li>
-            </ol>
-            <p>En la función `main`:</p>
-            <ol>
-                <li>Intenta crear un objeto de la clase `Forma` directamente (ej. `Forma miForma;`). ¿Qué error obtienes?</li>
-                <li>Crea dinámicamente un `Circulo` y un `Rectangulo`.</li>
-                <li>Almacena los punteros de estos objetos en un `std::vector<Forma*>`.</li>
-                <li>Recorre el vector y para cada `Forma*`, llama a `calcularArea()` y `dibujar()`.</li>
-                <li>Asegúrate de liberar la memoria asignada con `delete`.</li>
-            </ol>
-            <details>
-                <summary>Pista (si necesitas ayuda)</summary>
-                <p>Recuerda que no se pueden instanciar clases abstractas. Las clases derivadas deben implementar *todas* las funciones virtuales puras para no ser abstractas también.</p>
-            </details>
-        </section>
-
-        <section class="ejercicio">
-            <h3>Ejercicio 4: Destructores Virtuales</h3>
-            <p>Considera el siguiente código:</p>
+            <h2>Práctica: Ejercicios de Polimorfismo con Interfaz Gráfica Qt</h2>
+            <p>Es el momento de poner a prueba tu comprensión del polimorfismo en C++, tanto estático (sobrecarga) como dinámico (funciones virtuales y clases abstractas). Estos ejercicios te ayudarán a ver cómo el mismo nombre puede tener "muchas formas" en tus programas, todo a través de una interfaz de usuario de Qt.</p>
+            <p>Implementa cada ejercicio en tu entorno de **Qt Creator** en un proyecto "Qt Widgets Application". Utilizaremos <code>qDebug()</code> ampliamente para observar el comportamiento de las funciones sobrecargadas, las llamadas a funciones virtuales y el ciclo de vida de los objetos.</p>
+            <p>Para capturar la salida de <code>qDebug()</code> directamente en tu UI, puedes reutilizar la configuración del manejador de mensajes de módulos anteriores en tu <code>main.cpp</code> o en el constructor de <code>MainWindow</code> (asegúrate de tener un <code>QTextEdit</code> llamado <code>textEditLog</code> en tu UI para el log):</p>
             <pre><code class="language-cpp">
-#include &lt;iostream&gt;
+// En mainwindow.h o en el .cpp
+#include &lt;QTextEdit&gt;
+#include &lt;QDebug&gt;
+#include &lt;QDateTime&gt; // Para añadir timestamps a los logs
+
+// Puntero estático para que el manejador de mensajes pueda acceder al QTextEdit
+static QTextEdit* s_logOutput = nullptr;
+
+// Función global que será el manejador de mensajes de Qt
+void customMessageHandler(QtMsgType type, const QMessageLogContext &context, const QString &msg)
+{
+    QString txt;
+    QString typeStr;
+    switch (type) {
+    case QtDebugMsg:    typeStr = "Debug"; break;
+    case QtInfoMsg:     typeStr = "Info"; break;
+    case QtWarningMsg:  typeStr = "Warning"; break;
+    case QtCriticalMsg: typeStr = "Critical"; break;
+    case QtFatalMsg:    typeStr = "Fatal"; abort();
+    }
+    txt = QString("[%1] %2: %3").arg(QDateTime::currentDateTime().toString("hh:mm:ss.zzz")).arg(typeStr).arg(msg);
+
+    if (s_logOutput) {
+        s_logOutput->append(txt); // Añadir al QTextEdit
+    }
+    // Opcional: También imprimir en la salida estándar (consola de Qt Creator)
+    QTextStream ts(stderr);
+    ts &lt;&lt; txt &lt;&lt; Qt::endl;
+}
+
+// En el constructor de MainWindow (ej. mainwindow.cpp)
+// Asegúrate de tener un QTextEdit llamado 'textEditLog' en tu UI
+MainWindow::MainWindow(QWidget *parent)
+    : QMainWindow(parent)
+    , ui(new Ui::MainWindow)
+{
+    ui->setupUi(this);
+    s_logOutput = ui->textEditLog; // Asigna tu QTextEdit para el log
+    qInstallMessageHandler(customMessageHandler); // Instala el manejador
+    qDebug() &lt;&lt; "Aplicación iniciada. Los mensajes de qDebug() se mostrarán aquí.";
+}
+
+// En el destructor de MainWindow para limpiar (mainwindow.cpp)
+MainWindow::~MainWindow()
+{
+    qInstallMessageHandler(0); // Desinstala el manejador
+    s_logOutput = nullptr;
+    delete ui;
+}
+            </code></pre>
+        </section>
+
+        <section class="ejercicio">
+            <h3>Ejercicio 1: Polimorfismo Estático (Sobrecarga de Funciones) con UI Qt</h3>
+            <p>Crea una clase llamada <code>Operaciones</code> que contenga métodos sobrecargados para realizar sumas y mostrar información. Utiliza la UI para introducir los valores y ver los resultados, y <code>qDebug()</code> para observar qué versión de la función se llama.</p>
+            <ol>
+                <li>Define una clase <code>Operaciones</code> (<code>operaciones.h/.cpp</code>) con:
+                    <ul>
+                        <li>Método público <code>sumar(int a, int b)</code> que retorne la suma y use <code>qDebug()</code> para indicar que se llamó a la versión entera.</li>
+                        <li>Método público <code>sumar(double a, double b)</code> que retorne la suma y use <code>qDebug()</code> para indicar que se llamó a la versión flotante.</li>
+                        <li>Método público <code>mostrar(int valor)</code> que imprima "Valor entero: X" usando <code>qDebug()</code>.</li>
+                        <li>Método público <code>mostrar(const QString& mensaje)</code> que imprima "Mensaje: Y" usando <code>qDebug()</code>.</li>
+                    </ul>
+                    <pre><code class="language-cpp">
+// operaciones.h
+#ifndef OPERACIONES_H
+#define OPERACIONES_H
+#include &lt;QString&gt;
+#include &lt;QDebug&gt;
+
+class Operaciones {
+public:
+    int sumar(int a, int b) {
+        qDebug() &lt;&lt; "Llamando a sumar(int, int)";
+        return a + b;
+    }
+    double sumar(double a, double b) {
+        qDebug() &lt;&lt; "Llamando a sumar(double, double)";
+        return a + b;
+    }
+    void mostrar(int valor) {
+        qDebug() &lt;&lt; "Llamando a mostrar(int): Valor entero:" &lt;&lt; valor;
+    }
+    void mostrar(const QString& mensaje) {
+        qDebug() &lt;&lt; "Llamando a mostrar(QString): Mensaje:" &lt;&lt; mensaje;
+    }
+};
+#endif // OPERACIONES_H
+                    </code></pre>
+                </li>
+                <li>En Qt Designer, añade:
+                    <ul>
+                        <li>Para <code>sumar</code>: Dos <code>QLineEdit</code>s para los números, un <code>QPushButton</code> para "Sumar Enteros", otro para "Sumar Flotantes", y un <code>QLabel</code> para mostrar el resultado.</li>
+                        <li>Para <code>mostrar</code>: Un <code>QLineEdit</code> para un entero, un <code>QPushButton</code> para "Mostrar Entero". Otro <code>QLineEdit</code> para una cadena, un <code>QPushButton</code> para "Mostrar Cadena".</li>
+                        <li>El <code>QTextEdit</code> (<code>textEditLog</code>) para ver la salida de <code>qDebug()</code>.</li>
+                    </ul>
+                </li>
+                <li>En <code>mainwindow.h</code> y <code>mainwindow.cpp</code>:
+                    <ul>
+                        <li>Declara un objeto <code>Operaciones</code>.</li>
+                        <li>Implementa slots para los botones, recuperando los valores de los <code>QLineEdit</code>s, llamando a las versiones sobrecargadas de <code>sumar()</code> y <code>mostrar()</code>, y mostrando los resultados en los <code>QLabel</code>s o a través de <code>qDebug()</code>.</li>
+                    </ul>
+                    <pre><code class="language-cpp">
+// mainwindow.h (fragmento)
+// ...
+#include "operaciones.h"
+class MainWindow : public QMainWindow
+{
+    Q_OBJECT
+// ...
+private:
+    Operaciones misOperaciones;
+private slots:
+    void on_btnSumarInt_clicked();
+    void on_btnSumarDouble_clicked();
+    void on_btnMostrarInt_clicked();
+    void on_btnMostrarString_clicked();
+// ...
+};
+
+// mainwindow.cpp (fragmento)
+// ...
+MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent), ui(new Ui::MainWindow) {
+    ui->setupUi(this);
+    s_logOutput = ui->textEditLog;
+    qInstallMessageHandler(customMessageHandler);
+    qDebug() &lt;&lt; "Aplicación iniciada.";
+}
+MainWindow::~MainWindow() {
+    qInstallMessageHandler(0);
+    s_logOutput = nullptr;
+    delete ui;
+}
+
+void MainWindow::on_btnSumarInt_clicked() {
+    int num1 = ui->lineEditInt1->text().toInt();
+    int num2 = ui->lineEditInt2->text().toInt();
+    int resultado = misOperaciones.sumar(num1, num2);
+    ui->labelResultadoSuma->setText(QString("Suma Entera: %1").arg(resultado));
+}
+
+void MainWindow::on_btnSumarDouble_clicked() {
+    double num1 = ui->lineEditDouble1->text().toDouble();
+    double num2 = ui->lineEditDouble2->text().toDouble();
+    double resultado = misOperaciones.sumar(num1, num2);
+    ui->labelResultadoSuma->setText(QString("Suma Flotante: %1").arg(resultado));
+}
+
+void MainWindow::on_btnMostrarInt_clicked() {
+    int valor = ui->lineEditMostrarInt->text().toInt();
+    misOperaciones.mostrar(valor); // La salida se verá en el textEditLog
+}
+
+void MainWindow::on_btnMostrarString_clicked() {
+    QString mensaje = ui->lineEditMostrarString->text();
+    misOperaciones.mostrar(mensaje); // La salida se verá en el textEditLog
+}
+                    </code></pre>
+                </li>
+                <li>Compila y ejecuta. Introduce diferentes valores y observa en el <code>textEditLog</code> cómo Qt selecciona automáticamente la versión correcta de la función sobrecargada basándose en los tipos de los argumentos.</li>
+            </ol>
+            <details>
+                <summary>Pista (si necesitas ayuda)</summary>
+                <p>La sobrecarga se basa en la firma de la función (número y tipo de parámetros). El tipo de retorno no es suficiente para sobrecargar. Qt infiere el tipo de `QLineEdit::text()` como `QString`, por lo que necesitarás conversiones (`.toInt()`, `.toDouble()`) para llamar a las versiones de `sumar` y `mostrar` con tipos numéricos.</p>
+            </details>
+        </section>
+
+        <section class="ejercicio">
+            <h3>Ejercicio 2: Polimorfismo Dinámico (Funciones Virtuales) con UI Qt</h3>
+            <p>Crea una jerarquía de clases para modelar diferentes tipos de empleados y demostrar el polimorfismo dinámico. Utiliza la UI para crear empleados y ver sus detalles y salarios calculados, observando el despacho dinámico a través de <code>qDebug()</code>.</p>
+            <ol>
+                <li>Define una clase base <code>Empleado</code> (<code>empleado.h/.cpp</code>) con:
+                    <ul>
+                        <li>Atributo protegido: <code>nombre</code> (<code>QString</code>).</li>
+                        <li>Constructor que inicialice el nombre. Utiliza <code>qDebug()</code>.</li>
+                        <li>Destructor <strong>virtual</strong> que imprima un mensaje.</li>
+                        <li>Un método <strong>virtual</strong> público <code>calcularSalario()</code> que retorne un <code>double</code> (ej. un valor base <code>1000.0</code>). Imprime un mensaje si es llamado (ej. "Calculando salario base...").</li>
+                        <li>Un método <strong>virtual</strong> público <code>mostrarDetalles()</code> que retorne un <code>QString</code> con el nombre del empleado.</li>
+                    </ul>
+                    <pre><code class="language-cpp">
+// empleado.h
+#ifndef EMPLEADO_H
+#define EMPLEADO_H
+#include &lt;QString&gt;
+#include &lt;QDebug&gt;
+
+class Empleado {
+protected:
+    QString nombre;
+public:
+    Empleado(const QString& n) : nombre(n) {
+        qDebug() &lt;&lt; "Constructor Empleado:" &lt;&lt; nombre;
+    }
+    virtual ~Empleado() { // Destructor virtual esencial para polimorfismo
+        qDebug() &lt;&lt; "Destructor Empleado:" &lt;&lt; nombre;
+    }
+    virtual double calcularSalario() const {
+        qDebug() &lt;&lt; "Calculando salario base para" &lt;&lt; nombre &lt;&lt; "...";
+        return 1000.0;
+    }
+    virtual QString mostrarDetalles() const {
+        qDebug() &lt;&lt; "Mostrando detalles de Empleado:" &lt;&lt; nombre;
+        return QString("Empleado: %1").arg(nombre);
+    }
+};
+#endif // EMPLEADO_H
+                    </code></pre>
+                </li>
+                <li>Define una clase derivada <code>EmpleadoTiempoCompleto</code> (<code>empleadotiempocompleto.h/.cpp</code>) que herede públicamente de <code>Empleado</code> con:
+                    <ul>
+                        <li>Atributo privado: <code>salarioMensual</code> (double).</li>
+                        <li>Constructor que inicialice nombre y salario mensual, llamando al constructor de la base. Utiliza <code>qDebug()</code>.</li>
+                        <li>Sobreescribe <code>calcularSalario()</code> para retornar <code>salarioMensual</code>.</li>
+                        <li>Sobreescribe <code>mostrarDetalles()</code> para retornar el nombre y " (Tiempo Completo)".</li>
+                    </ul>
+                    <pre><code class="language-cpp">
+// empleadotiempocompleto.h
+#ifndef EMPLEADOTIEMPOCOMPLETO_H
+#define EMPLEADOTIEMPOCOMPLETO_H
+#include "empleado.h"
+
+class EmpleadoTiempoCompleto : public Empleado {
+private:
+    double salarioMensual;
+public:
+    EmpleadoTiempoCompleto(const QString& n, double sm)
+        : Empleado(n), salarioMensual(sm) {
+        qDebug() &lt;&lt; "Constructor EmpleadoTiempoCompleto:" &lt;&lt; nombre;
+    }
+    ~EmpleadoTiempoCompleto() override {
+        qDebug() &lt;&lt; "Destructor EmpleadoTiempoCompleto:" &lt;&lt; nombre;
+    }
+    double calcularSalario() const override {
+        qDebug() &lt;&lt; "Calculando salario EmpleadoTiempoCompleto para" &lt;&lt; nombre;
+        return salarioMensual;
+    }
+    QString mostrarDetalles() const override {
+        qDebug() &lt;&lt; "Mostrando detalles de EmpleadoTiempoCompleto:" &lt;&lt; nombre;
+        return QString("Empleado de Tiempo Completo: %1").arg(nombre);
+    }
+};
+#endif // EMPLEADOTIEMPOCOMPLETO_H
+                    </code></pre>
+                </li>
+                <li>Define otra clase derivada <code>Consultor</code> (<code>consultor.h/.cpp</code>) que herede públicamente de <code>Empleado</code> con:
+                    <ul>
+                        <li>Atributos privados: <code>horasTrabajadas</code> (int) y <code>tarifaPorHora</code> (double).</li>
+                        <li>Constructor que inicialice nombre, horas trabajadas y tarifa, llamando al constructor de la base. Utiliza <code>qDebug()</code>.</li>
+                        <li>Sobreescribe <code>calcularSalario()</code> para retornar <code>horasTrabajadas * tarifaPorHora</code>.</li>
+                        <li>Sobreescribe <code>mostrarDetalles()</code> para retornar el nombre y " (Consultor)".</li>
+                    </ul>
+                    <pre><code class="language-cpp">
+// consultor.h
+#ifndef CONSULTOR_H
+#define CONSULTOR_H
+#include "empleado.h"
+
+class Consultor : public Empleado {
+private:
+    int horasTrabajadas;
+    double tarifaPorHora;
+public:
+    Consultor(const QString& n, int h, double t)
+        : Empleado(n), horasTrabajadas(h), tarifaPorHora(t) {
+        qDebug() &lt;&lt; "Constructor Consultor:" &lt;&lt; nombre;
+    }
+    ~Consultor() override {
+        qDebug() &lt;&lt; "Destructor Consultor:" &lt;&lt; nombre;
+    }
+    double calcularSalario() const override {
+        qDebug() &lt;&lt; "Calculando salario Consultor para" &lt;&lt; nombre;
+        return horasTrabajadas * tarifaPorHora;
+    }
+    QString mostrarDetalles() const override {
+        qDebug() &lt;&lt; "Mostrando detalles de Consultor:" &lt;&lt; nombre;
+        return QString("Consultor: %1").arg(nombre);
+    }
+};
+#endif // CONSULTOR_H
+                    </code></pre>
+                </li>
+                <li>En Qt Designer, añade:
+                    <ul>
+                        <li><code>QLineEdit</code>s para el nombre del empleado, salario, horas trabajadas, tarifa por hora.</li>
+                        <li><code>QPushButton</code>s para "Crear Empleado Tiempo Completo", "Crear Consultor".</li>
+                        <li>Un <code>QPushButton</code> "Listar Todos los Empleados".</li>
+                        <li>Un <code>QTextEdit</code> (ej. <code>textEditEmpleados</code>) para mostrar los detalles y salarios, además del <code>textEditLog</code>.</li>
+                    </ul>
+                </li>
+                <li>En <code>mainwindow.h</code> y <code>mainwindow.cpp</code>:
+                    <ul>
+                        <li>Declara un <code>QList&lt;Empleado*&gt;</code> para almacenar los punteros a los empleados creados dinámicamente.</li>
+                        <li>Implementa slots para los botones:
+                            <ul>
+                                <li>Los botones "Crear" instanciarán los objetos apropiados dinámicamente (`new EmpleadoTiempoCompleto(...)`, `new Consultor(...)`) y los añadirán a la lista.</li>
+                                <li>El botón "Listar Todos" recorrerá el <code>QList&lt;Empleado*&gt;</code>. Para cada puntero, llamará a <code>mostrarDetalles()</code> y <code>calcularSalario()</code> y mostrará los resultados en el <code>textEditEmpleados</code>.</li>
+                            </ul>
+                        </li>
+                        <li>Asegúrate de que en el destructor de <code>MainWindow</code>, se itere sobre la lista y se llame a <code>delete</code> para cada puntero de <code>Empleado*</code> para liberar la memoria.</li>
+                    </ul>
+                    <pre><code class="language-cpp">
+// mainwindow.h (fragmento)
+// ...
+#include "empleado.h"
+#include "empleadotiempocompleto.h"
+#include "consultor.h"
+// ...
+class MainWindow : public QMainWindow
+{
+    Q_OBJECT
+// ...
+private:
+    QList&lt;Empleado*&gt; listaEmpleados;
+private slots:
+    void on_btnCrearTiempoCompleto_clicked();
+    void on_btnCrearConsultor_clicked();
+    void on_btnListarEmpleados_clicked();
+// ...
+};
+
+// mainwindow.cpp (fragmento)
+// ...
+MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent), ui(new Ui::MainWindow) {
+    ui->setupUi(this);
+    s_logOutput = ui->textEditLog;
+    qInstallMessageHandler(customMessageHandler);
+    qDebug() &lt;&lt; "Aplicación iniciada.";
+}
+MainWindow::~MainWindow() {
+    qDebug() &lt;&lt; "Liberando memoria de empleados...";
+    for (Empleado* emp : listaEmpleados) {
+        delete emp; // Esto llamará al destructor virtual correcto
+    }
+    listaEmpleados.clear();
+    qInstallMessageHandler(0);
+    s_logOutput = nullptr;
+    delete ui;
+}
+
+void MainWindow::on_btnCrearTiempoCompleto_clicked() {
+    QString nombre = ui->lineEditNombreEmp->text();
+    double salario = ui->lineEditSalarioMensual->text().toDouble();
+    listaEmpleados.append(new EmpleadoTiempoCompleto(nombre, salario));
+    qDebug() &lt;&lt; "Empleado de Tiempo Completo creado:" &lt;&lt; nombre;
+    ui->lineEditNombreEmp->clear();
+    ui->lineEditSalarioMensual->clear();
+}
+
+void MainWindow::on_btnCrearConsultor_clicked() {
+    QString nombre = ui->lineEditNombreEmp->text();
+    int horas = ui->lineEditHorasTrabajadas->text().toInt();
+    double tarifa = ui->lineEditTarifaHora->text().toDouble();
+    listaEmpleados.append(new Consultor(nombre, horas, tarifa));
+    qDebug() &lt;&lt; "Consultor creado:" &lt;&lt; nombre;
+    ui->lineEditNombreEmp->clear();
+    ui->lineEditHorasTrabajadas->clear();
+    ui->lineEditTarifaHora->clear();
+}
+
+void MainWindow::on_btnListarEmpleados_clicked() {
+    ui->textEditEmpleados->clear();
+    qDebug() &lt;&lt; "\n--- Listando Empleados ---";
+    for (Empleado* emp : listaEmpleados) {
+        ui->textEditEmpleados->append(emp->mostrarDetalles() +
+                                      QString(" - Salario: %1").arg(emp->calcularSalario()));
+    }
+    qDebug() &lt;&lt; "--- Listado Finalizado ---\n";
+}
+                    </code></pre>
+                </li>
+                <li>Compila y ejecuta. Crea diferentes tipos de empleados y luego lístalos. Observa en el <code>textEditLog</code> cómo se llaman los constructores y destructores de cada clase, y cómo las llamadas a <code>calcularSalario()</code> y <code>mostrarDetalles()</code> invocan la implementación correcta de la función basándose en el tipo real del objeto (polimorfismo dinámico), incluso cuando se accede a través de un puntero a <code>Empleado</code>.</li>
+            </ol>
+            <details>
+                <summary>Pista (si necesitas ayuda)</summary>
+                <p>El uso de <code>override</code> es opcional pero ayuda al compilador a verificar que estás sobreescribiendo una función virtual. Recuerda que el destructor de la clase base debe ser <code>virtual</code> para asegurar la correcta liberación de memoria en escenarios polimórficos.</p>
+            </details>
+        </section>
+
+        <section class="ejercicio">
+            <h3>Ejercicio 3: Clases Abstractas y Funciones Virtuales Puras con UI Qt</h3>
+            <p>Crea una jerarquía de clases para modelar diferentes <code>Forma</code>s geométricas, utilizando una clase abstracta. Utiliza la UI para crear formas, dibujarlas y calcular sus áreas, notando que no puedes instanciar la clase abstracta directamente.</p>
+            <ol>
+                <li>Define una clase abstracta <code>Forma</code> (<code>forma.h/.cpp</code>) con:
+                    <ul>
+                        <li>Atributo protegido: <code>color</code> (<code>QString</code>).</li>
+                        <li>Constructor que inicialice el color. Utiliza <code>qDebug()</code>.</li>
+                        <li>Destructor <strong>virtual</strong> que imprima un mensaje.</li>
+                        <li>Un método virtual puro <code>calcularArea()</code> que retorne <code>double</code>. (<code>= 0</code>).</li>
+                        <li>Un método virtual puro <code>dibujar()</code> que no retorne nada. (<code>= 0</code>).</li>
+                        <li>Un método público no virtual <code>getColor()</code> que retorne el color.</li>
+                    </ul>
+                    <pre><code class="language-cpp">
+// forma.h
+#ifndef FORMA_H
+#define FORMA_H
+#include &lt;QString&gt;
+#include &lt;QDebug&gt;
+
+class Forma {
+protected:
+    QString color;
+public:
+    Forma(const QString& c) : color(c) {
+        qDebug() &lt;&lt; "Constructor Forma (" &lt;&lt; color &lt;&lt; ") llamado.";
+    }
+    virtual ~Forma() {
+        qDebug() &lt;&lt; "Destructor Forma (" &lt;&lt; color &lt;&lt; ") llamado.";
+    }
+    virtual double calcularArea() const = 0; // Funcion virtual pura
+    virtual void dibujar() const = 0;      // Funcion virtual pura
+    QString getColor() const { return color; }
+};
+#endif // FORMA_H
+                    </code></pre>
+                </li>
+                <li>Define una clase <code>Circulo</code> (<code>circulo.h/.cpp</code>) que herede públicamente de <code>Forma</code> con:
+                    <ul>
+                        <li>Atributo privado: <code>radio</code> (double).</li>
+                        <li>Constructor que inicialice radio y color. Utiliza <code>qDebug()</code>.</li>
+                        <li>Implementa <code>calcularArea()</code>.</li>
+                        <li>Implementa <code>dibujar()</code> para imprimir "Dibujando un círculo de color [Color] con radio [Radio]".</li>
+                    </ul>
+                    <pre><code class="language-cpp">
+// circulo.h
+#ifndef CIRCULO_H
+#define CIRCULO_H
+#include "forma.h"
+#include &lt;cmath&gt; // Para M_PI
+
+class Circulo : public Forma {
+private:
+    double radio;
+public:
+    Circulo(const QString& c, double r) : Forma(c), radio(r) {
+        qDebug() &lt;&lt; "Constructor Circulo (" &lt;&lt; color &lt;&lt; ", radio:" &lt;&lt; radio &lt;&lt; ") llamado.";
+    }
+    ~Circulo() override {
+        qDebug() &lt;&lt; "Destructor Circulo (" &lt;&lt; color &lt;&lt; ", radio:" &lt;&lt; radio &lt;&lt; ") llamado.";
+    }
+    double calcularArea() const override {
+        qDebug() &lt;&lt; "Calculando area de Circulo (" &lt;&lt; color &lt;&lt; ", radio:" &lt;&lt; radio &lt;&lt; ")";
+        return M_PI * radio * radio;
+    }
+    void dibujar() const override {
+        qDebug() &lt;&lt; "Dibujando un círculo de color" &lt;&lt; color &lt;&lt; "con radio" &lt;&lt; radio &lt;&lt; ".";
+    }
+};
+#endif // CIRCULO_H
+                    </code></pre>
+                </li>
+                <li>Define una clase <code>Rectangulo</code> (<code>rectangulo.h/.cpp</code>) que herede públicamente de <code>Forma</code> con:
+                    <ul>
+                        <li>Atributos privados: <code>ancho</code> (double) y <code>alto</code> (double).</li>
+                        <li>Constructor que inicialice ancho, alto y color. Utiliza <code>qDebug()</code>.</li>
+                        <li>Implementa <code>calcularArea()</code>.</li>
+                        <li>Implementa <code>dibujar()</code> para imprimir "Dibujando un rectángulo de color [Color]".</li>
+                    </ul>
+                    <pre><code class="language-cpp">
+// rectangulo.h
+#ifndef RECTANGULO_H
+#define RECTANGULO_H
+#include "forma.h"
+
+class Rectangulo : public Forma {
+private:
+    double ancho;
+    double alto;
+public:
+    Rectangulo(const QString& c, double a, double al)
+        : Forma(c), ancho(a), alto(al) {
+        qDebug() &lt;&lt; "Constructor Rectangulo (" &lt;&lt; color &lt;&lt; ", ancho:" &lt;&lt; ancho &lt;&lt; ", alto:" &lt;&lt; alto &lt;&lt; ") llamado.";
+    }
+    ~Rectangulo() override {
+        qDebug() &lt;&lt; "Destructor Rectangulo (" &lt;&lt; color &lt;&lt; ", ancho:" &lt;&lt; ancho &lt;&lt; ", alto:" &lt;&lt; alto &lt;&lt; ") llamado.";
+    }
+    double calcularArea() const override {
+        qDebug() &lt;&lt; "Calculando area de Rectangulo (" &lt;&lt; color &lt;&lt; ", ancho:" &lt;&lt; ancho &lt;&lt; ", alto:" &lt;&lt; alto &lt;&lt; ")";
+        return ancho * alto;
+    }
+    void dibujar() const override {
+        qDebug() &lt;&lt; "Dibujando un rectángulo de color" &lt;&lt; color &lt;&lt; "con ancho" &lt;&lt; ancho &lt;&lt; "y alto" &lt;&lt; alto &lt;&lt; ".";
+    }
+};
+#endif // RECTANGULO_H
+                    </code></pre>
+                </li>
+                <li>En Qt Designer, añade:
+                    <ul>
+                        <li><code>QLineEdit</code>s para el color, radio, ancho y alto.</li>
+                        <li><code>QPushButton</code>s para "Crear Círculo", "Crear Rectángulo".</li>
+                        <li>Un <code>QPushButton</code> "Dibujar Todas las Formas y Calcular Áreas".</li>
+                        <li>Un <code>QTextEdit</code> (ej. <code>textEditFormas</code>) para mostrar los resultados de las operaciones, además del <code>textEditLog</code>.</li>
+                    </ul>
+                </li>
+                <li>En <code>mainwindow.h</code> y <code>mainwindow.cpp</code>:
+                    <ul>
+                        <li>Declara un <code>QList&lt;Forma*&gt;</code> para almacenar los punteros a las formas creadas.</li>
+                        <li>Implementa slots para los botones:
+                            <ul>
+                                <li>Los botones "Crear" instanciarán los objetos apropiados dinámicamente y los añadirán a la lista.</li>
+                                <li>El botón "Dibujar y Calcular" recorrerá la lista. Para cada puntero, llamará a <code>dibujar()</code> y <code>calcularArea()</code> y mostrará los resultados en el <code>textEditFormas</code>.</li>
+                            </ul>
+                        </li>
+                        <li>Asegúrate de que en el destructor de <code>MainWindow</code>, se itere sobre la lista y se llame a <code>delete</code> para cada puntero de <code>Forma*</code> para liberar la memoria.</li>
+                        <li>**Intenta (y observa el error al compilar):** Si intentas crear un objeto de la clase <code>Forma</code> directamente (ej. <code>Forma miForma;</code> o <code>Forma* miForma = new Forma();</code>) en `main.cpp` o en un slot, Qt Creator te mostrará un error de compilación. Documenta este error en un comentario en tu código o en el log.</li>
+                    </ul>
+                    <pre><code class="language-cpp">
+// mainwindow.h (fragmento)
+// ...
+#include "forma.h"
+#include "circulo.h"
+#include "rectangulo.h"
+// ...
+class MainWindow : public QMainWindow
+{
+    Q_OBJECT
+// ...
+private:
+    QList&lt;Forma*&gt; listaFormas;
+private slots:
+    void on_btnCrearCirculo_clicked();
+    void on_btnCrearRectangulo_clicked();
+    void on_btnDibujarCalcular_clicked();
+// ...
+};
+
+// mainwindow.cpp (fragmento)
+// ...
+MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent), ui(new Ui::MainWindow) {
+    ui->setupUi(this);
+    s_logOutput = ui->textEditLog;
+    qInstallMessageHandler(customMessageHandler);
+    qDebug() &lt;&lt; "Aplicación iniciada.";
+
+    // Intento de crear una clase abstracta directamente (esto causará un error de compilacion):
+    // Forma* f = new Forma("rojo"); // Descomenta para ver el error "cannot instantiate abstract class"
+    // Forma f_stack("azul"); // Descomenta para ver el error
+}
+MainWindow::~MainWindow() {
+    qDebug() &lt;&lt; "Liberando memoria de formas...";
+    for (Forma* f : listaFormas) {
+        delete f; // Esto llamará al destructor virtual correcto
+    }
+    listaFormas.clear();
+    qInstallMessageHandler(0);
+    s_logOutput = nullptr;
+    delete ui;
+}
+
+void MainWindow::on_btnCrearCirculo_clicked() {
+    QString color = ui->lineEditColorForma->text();
+    double radio = ui->lineEditRadioCirculo->text().toDouble();
+    listaFormas.append(new Circulo(color, radio));
+    qDebug() &lt;&lt; "Círculo creado: Color" &lt;&lt; color &lt;&lt; ", Radio" &lt;&lt; radio;
+    ui->lineEditColorForma->clear();
+    ui->lineEditRadioCirculo->clear();
+}
+
+void MainWindow::on_btnCrearRectangulo_clicked() {
+    QString color = ui->lineEditColorForma->text();
+    double ancho = ui->lineEditAnchoRectangulo->text().toDouble();
+    double alto = ui->lineEditAltoRectangulo->text().toDouble();
+    listaFormas.append(new Rectangulo(color, ancho, alto));
+    qDebug() &lt;&lt; "Rectángulo creado: Color" &lt;&lt; color &lt;&lt; ", Ancho" &lt;&lt; ancho &lt;&lt; ", Alto" &lt;&lt; alto;
+    ui->lineEditColorForma->clear();
+    ui->lineEditAnchoRectangulo->clear();
+    ui->lineEditAltoRectangulo->clear();
+}
+
+void MainWindow::on_btnDibujarCalcular_clicked() {
+    ui->textEditFormas->clear();
+    qDebug() &lt;&lt; "\n--- Dibujando y Calculando Áreas de Formas ---";
+    for (Forma* f : listaFormas) {
+        f->dibujar(); // La salida de dibujar se verá en el textEditLog
+        ui->textEditFormas->append(QString("Área de forma %1: %2").arg(f->getColor()).arg(f->calcularArea()));
+    }
+    qDebug() &lt;&lt; "--- Operación Finalizada ---\n";
+}
+                    </code></pre>
+                </li>
+                <li>Compila y ejecuta. Intenta compilar el código con el intento de crear un objeto <code>Forma</code> (verás el error). Luego, crea círculos y rectángulos, y usa el botón para dibujarlos y calcular sus áreas. Observa en el <code>textEditLog</code> cómo se llaman las implementaciones específicas de <code>dibujar()</code> y <code>calcularArea()</code> para cada tipo de forma.</li>
+            </ol>
+            <details>
+                <summary>Pista (si necesitas ayuda)</summary>
+                <p>Recuerda que no se pueden instanciar clases abstractas directamente si tienen al menos una función virtual pura. Las clases derivadas deben implementar *todas* las funciones virtuales puras de la clase base para no ser abstractas también.</p>
+            </details>
+        </section>
+
+        <section class="ejercicio">
+            <h3>Ejercicio 4: Destructores Virtuales con Qt (Observación)</h3>
+            <p>Este ejercicio es de observación para entender la importancia de los destructores virtuales en clases base polimórficas. Utiliza el <code>textEditLog</code> para ver la secuencia de llamadas a destructores.</p>
+            <ol>
+                <li>Considera el siguiente código (utilizando <code>qDebug()</code> para ver la salida):</li>
+            </ol>
+            <pre><code class="language-cpp">
+#include &lt;QDebug&gt;
 
 class Base {
 public:
-    Base() { std::cout << "Constructor Base" << std::endl; }
-    ~Base() { std::cout << "Destructor Base" << std::endl; }
+    Base() { qDebug() &lt;&lt; "Constructor Base"; }
+    ~Base() { qDebug() &lt;&lt; "Destructor Base"; }
 };
 
 class Derivada : public Base {
 public:
-    Derivada() { std::cout << "Constructor Derivada" << std::endl; }
-    ~Derivada() { std::cout << "Destructor Derivada" << std::endl; }
+    Derivada() { qDebug() &lt;&lt; "Constructor Derivada"; }
+    // Asignaremos un miembro que requiera liberacion para ver el efecto
+    int* data;
+    Derivada() : data(new int(10)) { qDebug() &lt;&lt; "Constructor Derivada, data asignado."; }
+    ~Derivada() {
+        qDebug() &lt;&lt; "Destructor Derivada";
+        if (data) {
+            delete data;
+            qDebug() &lt;&lt; "Data de Derivada liberado.";
+        }
+    }
 };
 
-int main() {
-    Base* obj = new Derivada();
-    delete obj;
-    return 0;
+// En tu mainwindow.cpp, puedes tener un slot para esto
+void MainWindow::on_btnDemostrarDestructorNoVirtual_clicked() {
+    qDebug() &lt;&lt; "\n--- Demostración de Destructor NO Virtual ---";
+    Base* obj = new Derivada(); // Se crea Derivada, pero el puntero es a Base
+    qDebug() &lt;&lt; "Llamando delete obj...";
+    delete obj; // Aqui es donde el problema ocurre si el destructor de Base no es virtual
+    obj = nullptr; // Buena practica
+    qDebug() &lt;&lt; "--- Demostración Finalizada ---\n";
 }
             </code></pre>
-            <ol>
-                <li>Predice la salida del programa al ejecutarlo.</li>
-                <li>Compila y ejecuta el código. ¿Coincide tu predicción?</li>
-                <li>Modifica la clase `Base` para que tenga un destructor <strong>virtual</strong>.</li>
-                <li>Vuelve a predecir y luego ejecuta el código. ¿Cuál es la diferencia en la salida y por qué es importante tener destructores virtuales en clases base polimórficas?</li>
+            <ol start="1">
+                <li>Predice la salida del programa al ejecutar el slot <code>on_btnDemostrarDestructorNoVirtual_clicked()</code> (o una función similar en <code>main</code>). ¿Qué destructores esperas que se llamen?</li>
+                <li>Implementa las clases <code>Base</code> y <code>Derivada</code> en archivos separados o directamente en <code>mainwindow.h</code>/<code>.cpp</code> (para el ejercicio de demostración) y añade un <code>QPushButton</code> en tu UI para disparar este código. Compila y ejecuta. ¿Coincide tu predicción? Observa el <code>textEditLog</code>. ¿Se llamó al destructor de <code>Derivada</code>?</li>
+                <li>Modifica la clase <code>Base</code> para que tenga un destructor <strong>virtual</strong>:</li>
             </ol>
+            <pre><code class="language-cpp">
+class Base {
+public:
+    Base() { qDebug() &lt;&lt; "Constructor Base"; }
+    virtual ~Base() { qDebug() &lt;&lt; "Destructor Base"; } // &lt;-- MODIFICADO
+};
+
+// ... la clase Derivada se mantiene igual, aunque ahora su destructor implicitamente es override
+// En tu mainwindow.cpp, puedes tener otro slot para esto
+void MainWindow::on_btnDemostrarDestructorVirtual_clicked() {
+    qDebug() &lt;&lt; "\n--- Demostración de Destructor VIRTUAL ---";
+    Base* obj = new Derivada();
+    qDebug() &lt;&lt; "Llamando delete obj...";
+    delete obj; // Ahora se llamara al destructor virtual correcto
+    obj = nullptr;
+    qDebug() &lt;&lt; "--- Demostración Finalizada ---\n";
+}
+            </code></pre>
+            <ol start="4">
+                <li>Vuelve a predecir y luego ejecuta el código con el destructor virtual. ¿Cuál es la diferencia en la salida y por qué es importante tener destructores virtuales en clases base polimórficas?</li>
+            </ol>
+            <p><strong>Explicación:</strong></p>
+            <p>Cuando el destructor de la clase base no es virtual y se elimina un objeto derivado a través de un puntero a la clase base (ej. <code>Base* obj = new Derivada(); delete obj;</code>), el comportamiento es indefinido (lo más común es que solo se llame al destructor de la clase base, provocando una fuga de memoria si la clase derivada tiene recursos asignados dinámicamente que su destructor debía liberar).</p>
+            <p>Al declarar el destructor de la clase base como <strong>virtual</strong>, se habilita el polimorfismo en la destrucción. Esto significa que cuando se llama a <code>delete obj;</code>, el compilador utiliza la tabla de funciones virtuales (vtable) para determinar el tipo real del objeto y llamar primero al destructor de la clase más derivada, y luego a los destructores de las clases base en orden ascendente (derivada a base). Esto garantiza que todos los recursos asignados en la jerarquía de herencia se liberen correctamente.</p>
             <details>
                 <summary>Pista (si necesitas ayuda)</summary>
-                <p>Si el destructor de la clase base no es virtual, al eliminar un objeto derivado a través de un puntero a la clase base, solo se llama al destructor de la clase base, lo que puede provocar fugas de memoria o comportamiento indefinido.</p>
+                <p>Si el destructor de la clase base no es virtual, al eliminar un objeto derivado a través de un puntero a la clase base, solo se llama al destructor de la clase base. Esto es un error común que lleva a fugas de memoria o comportamiento indefinido. Con <code>virtual ~Base()</code>, se asegura que la cadena de destructores se ejecute correctamente.</p>
             </details>
         </section>
 

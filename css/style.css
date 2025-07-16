@@ -1,196 +1,379 @@
-/* Propuesta 2: Estilo Moderno y Oscuro */
+/* Propuesta 3: Estilo Cálido y Acogedor (Versión Oscura) */
 
 /* Colores */
 :root {
-    --primary-dark: #2c3e50; /* Azul oscuro casi negro */
-    --secondary-accent: #e74c3c; /* Rojo de acento */
-    --text-light: #ecf0f1; /* Texto gris claro */
-    --background-dark: #34495e; /* Fondo oscuro principal */
-    --card-dark: #2c3e50; /* Fondo de sección oscuro */
-    --border-dark: #4a6680; /* Borde más oscuro */
-    --code-bg-dark: #22303f; /* Fondo de código muy oscuro */
-    --code-text-accent: #f1c40f; /* Amarillo para código inline */
+    --primary-warm: #4a2508; /* Marrón muy oscuro y rico */
+    --secondary-orange: #ff6b35; /* Naranja acogedor (mantiene el brillo para contraste) */
+    --secondary-orange-darker: #e55a2b; /* Naranja más oscuro para hover */
+    --accent-gold: #c98a00; /* Dorado más profundo */
+    --accent-cream: #7f5d3b; /* Tono cálido oscuro (anteriormente crema) */
+    --text-light: #e0d0c0; /* Texto claro para fondos oscuros */
+    --text-medium: #a38c75; /* Texto medio para contraste */
+    --background-dark-main: #2c2018; /* Fondo principal muy oscuro (casi negro) */
+    --background-dark-secondary: #3a2e24; /* Fondo secundario oscuro */
+    --card-dark: #3a2e24; /* Fondo de sección oscuro, similar al secundario */
+    --border-dark-warm: #5a4c40; /* Borde oscuro y cálido */
+    --code-bg-dark: #1a1512; /* Fondo de código casi negro */
+    --code-text-accent: #f1c40f; /* Amarillo brillante para código */
 }
 
 /* Estilos generales */
 body {
-    font-family: 'Open Sans', 'Helvetica Neue', Arial, sans-serif;
+    font-family: 'Georgia', 'Times New Roman', serif;
     line-height: 1.7;
     margin: 0;
     padding: 0;
-    background-color: var(--background-dark);
-    color: var(--text-light);
+    background-color: var(--background-dark-main); /* Fondo principal más oscuro */
+    color: var(--text-light); /* Texto claro sobre fondo oscuro */
     font-size: 17px;
+    background-image:
+        radial-gradient(circle at 1px 1px, rgba(139, 69, 19, 0.05) 1px, transparent 0); /* Patrón más sutil */
+    background-size: 20px 20px;
 }
 
 header {
-    background-color: var(--primary-dark);
-    color: #ffffff;
-    padding: 2em 0;
+    background: linear-gradient(135deg, var(--background-dark-secondary), var(--primary-warm)); /* Degradado oscuro en el header */
+    color: var(--text-light); /* Texto claro */
+    padding: 3em 0;
     text-align: center;
-    box-shadow: 0 3px 6px rgba(0, 0, 0, 0.2);
+    border-bottom: 3px solid var(--secondary-orange);
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3); /* Sombra más oscura */
 }
 
 header h1 {
     margin: 0;
     font-size: 2.8em;
-    font-weight: 600;
+    font-weight: normal;
+    color: var(--accent-gold); /* Título en dorado para resaltar */
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.4);
+    font-family: 'Georgia', serif;
+}
+
+header h1::before {
+    content: '📚 ';
+    font-size: 0.8em;
+    color: var(--secondary-orange); /* Ícono en color de acento */
 }
 
 header p {
     font-size: 1.2em;
-    opacity: 0.8;
+    color: var(--text-medium); /* Texto medio */
+    margin-top: 0.5em;
+    font-style: italic;
 }
 
 nav a {
-    color: #ffffff;
+    color: var(--text-light); /* Enlaces claros */
     text-decoration: none;
-    padding: 0.6em 1.2em;
-    transition: color 0.3s ease;
+    padding: 0.8em 1.5em;
+    transition: all 0.3s ease;
+    border-radius: 25px;
+    margin: 0 0.5em;
+    font-weight: 500;
+    background: rgba(255, 255, 255, 0.05); /* Fondo muy sutil */
 }
 
 nav a:hover {
-    color: var(--secondary-accent);
-    text-decoration: none;
+    color: var(--secondary-orange);
+    background: rgba(255, 107, 53, 0.1);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
 }
 
 main {
-    padding: 40px;
-    max-width: 1000px;
-    margin: 40px auto;
-    background-color: var(--card-dark);
-    border-radius: 10px;
-    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);
+    padding: 2.5em;
+    max-width: 850px;
+    margin: 2em auto;
+    background: linear-gradient(135deg, var(--card-dark), var(--background-dark-secondary)); /* Degradado oscuro para el main */
+    border-radius: 15px;
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.4); /* Sombra más pronunciada */
+    border: 2px solid var(--border-dark-warm); /* Borde más oscuro */
 }
 
 section {
-    margin-bottom: 35px;
-    padding: 25px;
-    border-bottom: 1px solid var(--border-dark);
-}
-
-section:last-of-type {
-    border-bottom: none;
+    margin-bottom: 3em;
+    padding: 2em;
+    background: var(--card-dark); /* Fondo de sección oscuro */
+    border-radius: 12px;
+    border-left: 5px solid var(--secondary-orange);
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
 }
 
 h2 {
-    color: var(--secondary-accent);
-    font-size: 2.2em;
-    margin-bottom: 20px;
-    border-bottom: 3px solid var(--secondary-accent);
-    padding-bottom: 12px;
+    color: var(--accent-gold); /* Títulos en dorado */
+    font-size: 2em;
+    margin-bottom: 1.2em;
+    font-weight: normal;
+    font-family: 'Georgia', serif;
+    position: relative;
+    padding-bottom: 0.8em;
+}
+
+h2::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 80px;
+    height: 3px;
+    background: linear-gradient(90deg, var(--secondary-orange), var(--accent-gold));
+    border-radius: 2px;
 }
 
 h3 {
-    color: var(--text-light);
-    font-size: 1.6em;
-    margin-top: 30px;
-    margin-bottom: 15px;
+    color: var(--text-light); /* Subtítulos claros */
+    font-size: 1.4em;
+    margin-top: 2em;
+    margin-bottom: 1em;
+    font-weight: 600;
+    font-family: 'Georgia', serif;
 }
 
 ul {
-    list-style-type: square;
-    margin-left: 30px;
+    list-style: none;
     padding-left: 0;
+    margin-left: 0;
 }
 
 li {
-    margin-bottom: 10px;
+    margin-bottom: 1em;
+    padding-left: 2em;
+    position: relative;
+    color: var(--text-light); /* Texto de lista claro */
+    line-height: 1.6;
+}
+
+li::before {
+    content: '✦';
+    position: absolute;
+    left: 0;
+    color: var(--secondary-orange); /* Viñetas en naranja */
+    font-size: 1.2em;
+    top: 0.1em;
 }
 
 li ul {
-    margin-top: 8px;
-    margin-bottom: 8px;
+    margin-top: 0.8em;
+    margin-bottom: 0.8em;
+    margin-left: 1.5em;
 }
 
 a {
-    color: var(--secondary-accent);
+    color: var(--secondary-orange);
     text-decoration: none;
-    transition: color 0.3s ease;
+    transition: all 0.3s ease;
+    border-bottom: 1px solid transparent;
+    font-weight: 500;
 }
 
 a:hover {
-    color: #f39c12; /* Un naranja para hover */
-    text-decoration: underline;
+    color: var(--secondary-orange-darker);
+    border-bottom-color: var(--secondary-orange-darker);
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
 }
 
 pre {
-    background-color: var(--code-bg-dark);
-    padding: 1.5em;
-    border-radius: 8px;
+    background: var(--code-bg-dark); /* Fondo de código muy oscuro */
+    padding: 1.8em;
+    border-radius: 10px;
     overflow-x: auto;
-    margin-top: 1.2em;
-    margin-bottom: 1.2em;
-    border: 1px solid #3d5a7d;
+    margin: 1.5em 0;
+    border: 2px solid var(--border-dark-warm);
+    box-shadow: inset 0 2px 5px rgba(0, 0, 0, 0.2);
+    position: relative;
+}
+
+pre::before {
+    content: 'Código';
+    position: absolute;
+    top: 0.8em;
+    right: 1.5em;
+    color: var(--text-medium); /* Texto en color medio */
+    font-size: 0.9em;
+    font-style: italic;
+    opacity: 0.7;
 }
 
 code {
-    font-family: 'Ubuntu Mono', 'Consolas', monospace;
-    font-size: 1em;
-    color: var(--code-text-accent);
+    font-family: 'Consolas', 'Monaco', monospace;
+    font-size: 0.95em;
+    color: var(--code-text-accent); /* Texto de código en amarillo brillante */
+    background-color: rgba(241, 196, 15, 0.1); /* Fondo sutil para código inline */
+    padding: 0.3em 0.5em;
+    border-radius: 4px;
+    font-weight: 500;
 }
 
 pre code {
-    color: #ffffff; /* Código blanco en bloques oscuros */
+    color: var(--text-light); /* Código blanco en bloques oscuros */
+    background-color: transparent;
+    padding: 0;
 }
 
 details {
-    background-color: #3b526b;
-    border: 1px solid #4a6680;
-    border-radius: 6px;
-    padding: 12px 18px;
-    margin-top: 20px;
+    background: linear-gradient(135deg, var(--background-dark-secondary), var(--card-dark)); /* Degradado oscuro para detalles */
+    border: 2px solid var(--border-dark-warm);
+    border-radius: 10px;
+    padding: 1.5em;
+    margin-top: 1.5em;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
 }
 
 summary {
-    font-weight: bold;
+    font-weight: 600;
     cursor: pointer;
-    color: var(--secondary-accent);
-    padding: 6px 0;
+    color: var(--accent-gold); /* Sumario en dorado */
+    padding: 0.5em 0;
+    outline: none;
+    font-size: 1.1em;
+    position: relative;
+}
+
+summary:hover {
+    color: var(--secondary-orange);
+}
+
+summary::before {
+    content: '💡 ';
+    margin-right: 0.5em;
+    color: var(--secondary-orange); /* Ícono en color de acento */
 }
 
 /* Estilos específicos para la navegación de módulo */
 .navegacion-modulo {
     text-align: center;
-    margin-top: 50px;
-    padding-top: 30px;
-    border-top: 1px dashed var(--border-dark);
+    margin-top: 3em;
+    padding-top: 2em;
+    border-top: 2px dashed var(--border-dark-warm);
 }
 
 .boton-practica {
     display: inline-block;
-    background-color: var(--secondary-accent);
+    background: linear-gradient(135deg, var(--secondary-orange), var(--accent-gold));
     color: white;
-    padding: 15px 30px;
+    padding: 1em 2.5em;
     text-decoration: none;
-    border-radius: 8px;
-    transition: background-color 0.3s ease, transform 0.2s ease;
-    font-weight: bold;
+    border-radius: 30px;
+    transition: all 0.3s ease;
+    font-weight: 600;
     font-size: 1.1em;
-    margin: 0 15px;
+    margin: 0 0.8em;
+    border: none;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
 }
 
 .boton-practica:hover {
-    background-color: #c0392b; /* Rojo más oscuro al pasar el ratón */
     transform: translateY(-3px);
-    text-decoration: none;
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.4);
+    background: linear-gradient(135deg, var(--accent-gold), var(--secondary-orange));
+    border-bottom: none;
+}
+
+/* Estilos del Temporizador (Integrados en tema oscuro y cálido) */
+.timer-container {
+    text-align: center;
+    margin-bottom: 2em;
+    padding: 2.5em;
+    background: linear-gradient(135deg, var(--background-dark-secondary), var(--card-dark)); /* Fondo oscuro y cálido */
+    border: 3px solid var(--border-dark-warm); /* Borde oscuro */
+    border-radius: 15px;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+    position: relative;
+    overflow: hidden; /* Para el pseudo-elemento */
+}
+
+.timer-container::before {
+    content: '';
+    position: absolute;
+    top: -5px;
+    left: -5px;
+    right: -5px;
+    bottom: -5px;
+    background: linear-gradient(45deg, var(--secondary-orange), var(--accent-gold));
+    border-radius: 15px;
+    z-index: -1;
+    opacity: 0.15; /* Sutil efecto de brillo alrededor */
+    filter: blur(8px); /* Efecto de desenfoque */
+}
+
+.timer-container h2 {
+    color: var(--accent-gold); /* Título en dorado */
+    margin-bottom: 1em;
+}
+
+.timer-container h2::before {
+    content: '⏰ ';
+    margin-right: 0.5em;
+    color: var(--secondary-orange); /* Ícono en color de acento */
+}
+
+.timer-container p {
+    color: var(--text-medium); /* Texto medio */
+    font-size: 1.1em;
+    margin-bottom: 1.5em;
+    font-style: italic;
+}
+
+#displayTemporizador {
+    font-family: 'Consolas', monospace; /* Fuente monoespaciada para el tiempo */
+    font-size: 3.5em; /* Tamaño grande */
+    font-weight: bold;
+    color: var(--code-text-accent); /* Color de código (amarillo brillante) para el tiempo */
+    margin: 1em 0;
+    display: block;
+    letter-spacing: 0.08em; /* Más espaciado */
+    text-shadow: 0 0 10px rgba(241, 196, 15, 0.5); /* Efecto de brillo sutil */
+}
+
+#iniciarTemporizador {
+    padding: 1.1em 2.2em; /* Padding ajustado */
+    font-size: 1.2em;
+    background: linear-gradient(135deg, var(--secondary-orange), var(--accent-gold));
+    color: white;
+    border: none;
+    border-radius: 30px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    font-weight: 600;
+    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.3); /* Sombra más fuerte */
+    font-family: 'Georgia', serif;
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
+}
+
+#iniciarTemporizador:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
+    background: linear-gradient(135deg, var(--accent-gold), var(--secondary-orange));
 }
 
 /* Footer */
 footer {
     text-align: center;
-    padding: 30px;
-    margin-top: 50px;
-    background-color: var(--primary-dark);
-    color: #ffffff;
-    box-shadow: 0 -3px 6px rgba(0, 0, 0, 0.2);
+    padding: 2.5em;
+    margin-top: 3em;
+    background: linear-gradient(135deg, var(--background-dark-secondary), var(--primary-warm)); /* Degradado oscuro */
+    color: var(--text-light); /* Texto claro */
+    border-top: 3px solid var(--border-dark-warm);
+    box-shadow: 0 -4px 15px rgba(0, 0, 0, 0.2);
 }
 
 footer a {
-    color: var(--secondary-accent);
-    text-decoration: underline;
+    color: var(--secondary-orange);
+    text-decoration: none;
+    font-weight: 500;
 }
 
 footer a:hover {
-    color: #f39c12;
+    color: var(--secondary-orange-darker);
+}
+
+/* Pequeño efecto de calidez */
+@keyframes warm-glow {
+    0%, 100% { box-shadow: 0 0 20px rgba(255, 107, 53, 0.1); } /* Sombra más sutil */
+    50% { box-shadow: 0 0 30px rgba(255, 107, 53, 0.2); }
+}
+
+.timer-container {
+    animation: warm-glow 4s ease-in-out infinite;
 }
