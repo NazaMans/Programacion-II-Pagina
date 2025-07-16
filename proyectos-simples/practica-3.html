@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ejercicios de Programación: Qt y C++</title>
+    <link rel="stylesheet" href="../css/style.css">
+</head>
+<body>
+    <header>
+        <h1>Ejercicios de Programación: Qt y C++</h1>
+        <nav>
+            <a href="../index.html">Volver al Índice Principal</a>
+        </nav>
+    </header>
+
+    <main>
+        <section class="timer-container">
+            <h2>Control de Tiempo para Actividades</h2>
+            <p>Usa el botón de abajo para iniciar y detener un temporizador que te ayude a medir el tiempo que dedicas a cada ejercicio.</p>
+            <button id="iniciarTemporizador">Iniciar Temporizador</button>
+            <span id="displayTemporizador">00:00:00</span>
+        </section>
+
+        <section>
+            <h2>Actividades N3</h2>
+            <p>Estas actividades integran elementos de lógica, validación y estructuras de datos STL junto a la interfaz gráfica de Qt.</p>
+        </section>
+
+        <section>
+            <h3>Ejercicio 1: Validador de Edad</h3>
+            <ul>
+                <li><strong>Consigna:</strong> El usuario introduce su edad. Un botón determina si es "Mayor de edad" o "Menor de edad".</li>
+                <li><strong>Elementos de Qt a utilizar:</strong> <code>QLineEdit</code>, <code>QPushButton</code>, <code>QLabel</code>.</li>
+                <li><strong>Objetivo:</strong> Practicar conversión de texto a número y condiciones lógicas.</li>
+            </ul>
+        </section>
+
+        <section>
+            <h3>Ejercicio 2: Calculadora de IVA Simple</h3>
+            <ul>
+                <li><strong>Consigna:</strong> El usuario introduce un precio base. Un botón calcula el IVA (21%) y el precio final.</li>
+                <li><strong>Elementos de Qt a utilizar:</strong> <code>QLineEdit</code>, <code>QPushButton</code>, <code>QLabel</code> (2).</li>
+                <li><strong>Objetivo:</strong> Realizar cálculos flotantes y mostrar múltiples resultados.</li>
+            </ul>
+        </section>
+
+        <section>
+            <h3>Ejercicio 3: Alternador de Texto</h3>
+            <ul>
+                <li><strong>Consigna:</strong> Un botón alterna el texto de una etiqueta entre dos frases (ej. "Modo ON" y "Modo OFF").</li>
+                <li><strong>Elementos de Qt a utilizar:</strong> <code>QPushButton</code>, <code>QLabel</code>.</li>
+                <li><strong>Objetivo:</strong> Implementar un estado booleano y alternar visualmente.</li>
+            </ul>
+        </section>
+
+        <section>
+            <h3>Ejercicio 4: Visor de Fecha y Hora Actual</h3>
+            <ul>
+                <li><strong>Consigna:</strong> Al hacer clic en un botón, se muestra la fecha y hora actual.</li>
+                <li><strong>Elementos de Qt a utilizar:</strong> <code>QPushButton</code>, <code>QLabel</code>.</li>
+                <li><strong>Concepto C++:</strong> Uso de <code>QDateTime</code> o <code>&lt;chrono&gt;</code>.</li>
+                <li><strong>Objetivo:</strong> Obtener y mostrar fecha y hora en tiempo real.</li>
+            </ul>
+        </section>
+
+        <section>
+            <h3>Ejercicio 5: Simulación de Interruptor (QCheckBox)</h3>
+            <ul>
+                <li><strong>Consigna:</strong> Al marcar o desmarcar una casilla, un QLabel indica si está "Activada" o "Desactivada".</li>
+                <li><strong>Elementos de Qt a utilizar:</strong> <code>QCheckBox</code>, <code>QLabel</code>.</li>
+                <li><strong>Objetivo:</strong> Responder a cambios de estado con QCheckBox.</li>
+            </ul>
+        </section>
+
+        <section>
+            <h3>Ejercicio 6: Sumador de Dos Números (con validación)</h3>
+            <ul>
+                <li><strong>Consigna:</strong> El usuario introduce dos números. Un botón suma y muestra el resultado. Si no son válidos, muestra error.</li>
+                <li><strong>Elementos de Qt a utilizar:</strong> <code>QLineEdit</code> (2), <code>QPushButton</code>, <code>QLabel</code>.</li>
+                <li><strong>Concepto C++:</strong> <code>std::stoi</code> o <code>QString::toInt</code>, validación básica.</li>
+                <li><strong>Objetivo:</strong> Validar entrada y sumar correctamente.</li>
+            </ul>
+        </section>
+
+        <section>
+            <h3>Ejercicio 7: Buscador Básico en Lista</h3>
+            <ul>
+                <li><strong>Consigna:</strong> El usuario introduce un número y la app indica si está en una lista predefinida.</li>
+                <li><strong>Elementos de Qt a utilizar:</strong> <code>QLineEdit</code>, <code>QPushButton</code>, <code>QLabel</code>.</li>
+                <li><strong>Concepto STL/C++:</strong> <code>std::vector</code>, búsqueda lineal o <code>std::find</code>.</li>
+                <li><strong>Objetivo:</strong> Buscar elementos dentro de contenedores STL.</li>
+            </ul>
+        </section>
+
+        <section>
+            <h3>Ejercicio 8: Generador de Números Aleatorios en Rango</h3>
+            <ul>
+                <li><strong>Consigna:</strong> El usuario define un mínimo y máximo. Un botón genera un número aleatorio en ese rango.</li>
+                <li><strong>Elementos de Qt a utilizar:</strong> <code>QLineEdit</code> (2), <code>QPushButton</code>, <code>QLabel</code>.</li>
+                <li><strong>Concepto C++:</strong> <code>&lt;random&gt;</code>, generación de números con distribución uniforme.</li>
+                <li><strong>Objetivo:</strong> Controlar y generar números aleatorios acotados.</li>
+            </ul>
+        </section>
+
+        <section>
+            <h3>Ejercicio 9: Inversor de Números (como texto)</h3>
+            <ul>
+                <li><strong>Consigna:</strong> El usuario introduce un número. La app lo invierte y lo muestra como texto.</li>
+                <li><strong>Elementos de Qt a utilizar:</strong> <code>QLineEdit</code>, <code>QPushButton</code>, <code>QLabel</code>.</li>
+                <li><strong>Concepto C++:</strong> Conversión a <code>std::string</code>, <code>std::reverse</code>.</li>
+                <li><strong>Objetivo:</strong> Manipular strings numéricos.</li>
+            </ul>
+        </section>
+
+        <section>
+            <h3>Ejercicio 10: Alternar Visibilidad de Elementos</h3>
+            <ul>
+                <li><strong>Consigna:</strong> Un botón "Alternar" cambia la visibilidad de varios <code>QLabel</code>.</li>
+                <li><strong>Elementos de Qt a utilizar:</strong> <code>QPushButton</code>, <code>QLabel</code> (varios).</li>
+                <li><strong>Objetivo:</strong> Controlar visibilidad dinámica de múltiples widgets.</li>
+            </ul>
+        </section>
+    </main>
+
+    <section class="navegacion-modulo">
+        <a href="../index.html" class="boton-practica" style="background-color: #007bff;">Volver al Índice Principal</a>
+    </section>
+
+    <footer>
+        <p>Fin de los Proyectos Simples</p>
+    </footer>
+
+    <script>
+        let startTime;
+        let timerInterval;
+        let isRunning = false;
+        const startButton = document.getElementById('iniciarTemporizador');
+        const display = document.getElementById('displayTemporizador');
+
+        function formatTime(totalSeconds) {
+            const h = String(Math.floor(totalSeconds / 3600)).padStart(2, '0');
+            const m = String(Math.floor((totalSeconds % 3600) / 60)).padStart(2, '0');
+            const s = String(totalSeconds % 60).padStart(2, '0');
+            return `${h}:${m}:${s}`;
+        }
+
+        function updateTimer() {
+            const elapsed = Math.floor((Date.now() - startTime) / 1000);
+            display.textContent = formatTime(elapsed);
+        }
+
+        startButton.addEventListener('click', () => {
+            if (!isRunning) {
+                startTime = Date.now();
+                timerInterval = setInterval(updateTimer, 1000);
+                startButton.textContent = 'Detener Temporizador';
+                startButton.style.backgroundColor = 'var(--secondary-accent-darker)';
+                isRunning = true;
+            } else {
+                clearInterval(timerInterval);
+                startButton.textContent = 'Iniciar Temporizador';
+                startButton.style.backgroundColor = 'var(--secondary-accent)';
+                isRunning = false;
+            }
+        });
+    </script>
+</body>
+</html>
