@@ -1,112 +1,108 @@
-/* Propuesta 3: Estilo Cálido y Acogedor (Versión Oscura) */
+/* Estilo Cálido y Acogedor (Versión Oscura y Responsive) */
 
 /* Colores */
 :root {
-    --primary-warm: #4a2508; /* Marrón muy oscuro y rico */
-    --secondary-orange: #ff6b35; /* Naranja acogedor (mantiene el brillo para contraste) */
-    --secondary-orange-darker: #e55a2b; /* Naranja más oscuro para hover */
-    --accent-gold: #c98a00; /* Dorado más profundo */
-    --accent-cream: #7f5d3b; /* Tono cálido oscuro (anteriormente crema) */
-    --text-light: #e0d0c0; /* Texto claro para fondos oscuros */
-    --text-medium: #a38c75; /* Texto medio para contraste */
-    --background-dark-main: #2c2018; /* Fondo principal muy oscuro (casi negro) */
-    --background-dark-secondary: #3a2e24; /* Fondo secundario oscuro */
-    --card-dark: #3a2e24; /* Fondo de sección oscuro, similar al secundario */
-    --border-dark-warm: #5a4c40; /* Borde oscuro y cálido */
-    --code-bg-dark: #1a1512; /* Fondo de código casi negro */
-    --code-text-accent: #f1c40f; /* Amarillo brillante para código */
+    --primary-warm: #4a2508;
+    --secondary-orange: #ff6b35;
+    --secondary-orange-darker: #e55a2b;
+    --accent-gold: #c98a00;
+    --accent-cream: #7f5d3b;
+    --text-light: #e0d0c0;
+    --text-medium: #a38c75;
+    --background-dark-main: #2c2018;
+    --background-dark-secondary: #3a2e24;
+    --card-dark: #3a2e24;
+    --border-dark-warm: #5a4c40;
+    --code-bg-dark: #1a1512;
+    --code-text-accent: #f1c40f;
 }
 
-/* Estilos generales */
 body {
     font-family: 'Georgia', 'Times New Roman', serif;
     line-height: 1.7;
     margin: 0;
     padding: 0;
-    background-color: var(--background-dark-main); /* Fondo principal más oscuro */
-    color: var(--text-light); /* Texto claro sobre fondo oscuro */
+    background-color: var(--background-dark-main);
+    color: var(--text-light);
     font-size: 17px;
-    background-image:
-        radial-gradient(circle at 1px 1px, rgba(139, 69, 19, 0.05) 1px, transparent 0); /* Patrón más sutil */
+    background-image: radial-gradient(circle at 1px 1px, rgba(139, 69, 19, 0.05) 1px, transparent 0);
     background-size: 20px 20px;
 }
 
 header {
-    background: linear-gradient(135deg, var(--background-dark-secondary), var(--primary-warm)); /* Degradado oscuro en el header */
-    color: var(--text-light); /* Texto claro */
-    padding: 3em 0;
+    background: linear-gradient(135deg, var(--background-dark-secondary), var(--primary-warm));
+    color: var(--text-light);
+    padding: 3em 1em;
     text-align: center;
     border-bottom: 3px solid var(--secondary-orange);
-    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3); /* Sombra más oscura */
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
 }
 
 header h1 {
     margin: 0;
-    font-size: 2.8em;
+    font-size: 2.5em;
     font-weight: normal;
-    color: var(--accent-gold); /* Título en dorado para resaltar */
+    color: var(--accent-gold);
     text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.4);
-    font-family: 'Georgia', serif;
-}
-
-header h1::before {
-    content: '📚 ';
-    font-size: 0.8em;
-    color: var(--secondary-orange); /* Ícono en color de acento */
 }
 
 header p {
-    font-size: 1.2em;
-    color: var(--text-medium); /* Texto medio */
+    font-size: 1.1em;
+    color: var(--text-medium);
     margin-top: 0.5em;
     font-style: italic;
 }
 
+nav {
+    text-align: center;
+    padding: 1em;
+    flex-wrap: wrap;
+}
+
 nav a {
-    color: var(--text-light); /* Enlaces claros */
+    display: inline-block;
+    color: var(--text-light);
     text-decoration: none;
-    padding: 0.8em 1.5em;
-    transition: all 0.3s ease;
+    padding: 0.6em 1.2em;
+    margin: 0.3em;
+    background: rgba(255, 255, 255, 0.05);
     border-radius: 25px;
-    margin: 0 0.5em;
+    transition: all 0.3s ease;
     font-weight: 500;
-    background: rgba(255, 255, 255, 0.05); /* Fondo muy sutil */
+    font-size: 1em;
 }
 
 nav a:hover {
-    color: var(--secondary-orange);
     background: rgba(255, 107, 53, 0.1);
-    transform: translateY(-2px);
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    color: var(--secondary-orange);
 }
 
 main {
-    padding: 2.5em;
+    padding: 2em 1em;
     max-width: 850px;
     margin: 2em auto;
-    background: linear-gradient(135deg, var(--card-dark), var(--background-dark-secondary)); /* Degradado oscuro para el main */
+    background: linear-gradient(135deg, var(--card-dark), var(--background-dark-secondary));
     border-radius: 15px;
-    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.4); /* Sombra más pronunciada */
-    border: 2px solid var(--border-dark-warm); /* Borde más oscuro */
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.4);
+    border: 2px solid var(--border-dark-warm);
 }
 
 section {
-    margin-bottom: 3em;
-    padding: 2em;
-    background: var(--card-dark); /* Fondo de sección oscuro */
+    margin-bottom: 2em;
+    padding: 1.5em 1em;
+    background: var(--card-dark);
     border-radius: 12px;
     border-left: 5px solid var(--secondary-orange);
     box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
 }
 
 h2 {
-    color: var(--accent-gold); /* Títulos en dorado */
-    font-size: 2em;
-    margin-bottom: 1.2em;
+    font-size: 1.8em;
+    color: var(--accent-gold);
+    margin-bottom: 1em;
     font-weight: normal;
-    font-family: 'Georgia', serif;
     position: relative;
-    padding-bottom: 0.8em;
+    padding-bottom: 0.5em;
 }
 
 h2::after {
@@ -114,48 +110,37 @@ h2::after {
     position: absolute;
     bottom: 0;
     left: 0;
-    width: 80px;
+    width: 60px;
     height: 3px;
     background: linear-gradient(90deg, var(--secondary-orange), var(--accent-gold));
     border-radius: 2px;
 }
 
 h3 {
-    color: var(--text-light); /* Subtítulos claros */
-    font-size: 1.4em;
-    margin-top: 2em;
-    margin-bottom: 1em;
+    font-size: 1.3em;
+    color: var(--text-light);
+    margin-top: 1.5em;
     font-weight: 600;
-    font-family: 'Georgia', serif;
 }
 
 ul {
     list-style: none;
-    padding-left: 0;
-    margin-left: 0;
+    padding: 0;
 }
 
 li {
     margin-bottom: 1em;
-    padding-left: 2em;
+    padding-left: 1.5em;
     position: relative;
-    color: var(--text-light); /* Texto de lista claro */
-    line-height: 1.6;
+    color: var(--text-light);
 }
 
 li::before {
     content: '✦';
     position: absolute;
     left: 0;
-    color: var(--secondary-orange); /* Viñetas en naranja */
-    font-size: 1.2em;
-    top: 0.1em;
-}
-
-li ul {
-    margin-top: 0.8em;
-    margin-bottom: 0.8em;
-    margin-left: 1.5em;
+    color: var(--secondary-orange);
+    font-size: 1.1em;
 }
 
 a {
@@ -167,51 +152,31 @@ a {
 }
 
 a:hover {
-    color: var(--secondary-orange-darker);
     border-bottom-color: var(--secondary-orange-darker);
     text-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
 }
 
 pre {
-    background: var(--code-bg-dark); /* Fondo de código muy oscuro */
-    padding: 1.8em;
+    background: var(--code-bg-dark);
+    padding: 1.5em;
     border-radius: 10px;
     overflow-x: auto;
-    margin: 1.5em 0;
     border: 2px solid var(--border-dark-warm);
     box-shadow: inset 0 2px 5px rgba(0, 0, 0, 0.2);
     position: relative;
 }
 
-pre::before {
-    content: 'Código';
-    position: absolute;
-    top: 0.8em;
-    right: 1.5em;
-    color: var(--text-medium); /* Texto en color medio */
-    font-size: 0.9em;
-    font-style: italic;
-    opacity: 0.7;
-}
-
 code {
     font-family: 'Consolas', 'Monaco', monospace;
     font-size: 0.95em;
-    color: var(--code-text-accent); /* Texto de código en amarillo brillante */
-    background-color: rgba(241, 196, 15, 0.1); /* Fondo sutil para código inline */
+    color: var(--code-text-accent);
+    background-color: rgba(241, 196, 15, 0.1);
     padding: 0.3em 0.5em;
     border-radius: 4px;
-    font-weight: 500;
-}
-
-pre code {
-    color: var(--text-light); /* Código blanco en bloques oscuros */
-    background-color: transparent;
-    padding: 0;
 }
 
 details {
-    background: linear-gradient(135deg, var(--background-dark-secondary), var(--card-dark)); /* Degradado oscuro para detalles */
+    background: linear-gradient(135deg, var(--background-dark-secondary), var(--card-dark));
     border: 2px solid var(--border-dark-warm);
     border-radius: 10px;
     padding: 1.5em;
@@ -222,65 +187,44 @@ details {
 summary {
     font-weight: 600;
     cursor: pointer;
-    color: var(--accent-gold); /* Sumario en dorado */
-    padding: 0.5em 0;
-    outline: none;
+    color: var(--accent-gold);
     font-size: 1.1em;
-    position: relative;
 }
 
-summary:hover {
-    color: var(--secondary-orange);
-}
-
-summary::before {
-    content: '💡 ';
-    margin-right: 0.5em;
-    color: var(--secondary-orange); /* Ícono en color de acento */
-}
-
-/* Estilos específicos para la navegación de módulo */
-.navegacion-modulo {
-    text-align: center;
-    margin-top: 3em;
-    padding-top: 2em;
-    border-top: 2px dashed var(--border-dark-warm);
-}
-
-.boton-practica {
+.boton-practica,
+#iniciarTemporizador {
     display: inline-block;
     background: linear-gradient(135deg, var(--secondary-orange), var(--accent-gold));
     color: white;
-    padding: 1em 2.5em;
-    text-decoration: none;
+    padding: 1em 2em;
     border-radius: 30px;
     transition: all 0.3s ease;
     font-weight: 600;
-    font-size: 1.1em;
-    margin: 0 0.8em;
+    font-size: 1em;
+    margin: 0.5em auto;
+    text-align: center;
     border: none;
     box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
     text-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
 }
 
-.boton-practica:hover {
-    transform: translateY(-3px);
-    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.4);
+.boton-practica:hover,
+#iniciarTemporizador:hover {
     background: linear-gradient(135deg, var(--accent-gold), var(--secondary-orange));
-    border-bottom: none;
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.4);
 }
 
-/* Estilos del Temporizador (Integrados en tema oscuro y cálido) */
 .timer-container {
     text-align: center;
     margin-bottom: 2em;
-    padding: 2.5em;
-    background: linear-gradient(135deg, var(--background-dark-secondary), var(--card-dark)); /* Fondo oscuro y cálido */
-    border: 3px solid var(--border-dark-warm); /* Borde oscuro */
+    padding: 2em 1em;
+    background: linear-gradient(135deg, var(--background-dark-secondary), var(--card-dark));
+    border: 3px solid var(--border-dark-warm);
     border-radius: 15px;
     box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
     position: relative;
-    overflow: hidden; /* Para el pseudo-elemento */
+    animation: warm-glow 4s ease-in-out infinite;
 }
 
 .timer-container::before {
@@ -293,67 +237,24 @@ summary::before {
     background: linear-gradient(45deg, var(--secondary-orange), var(--accent-gold));
     border-radius: 15px;
     z-index: -1;
-    opacity: 0.15; /* Sutil efecto de brillo alrededor */
-    filter: blur(8px); /* Efecto de desenfoque */
-}
-
-.timer-container h2 {
-    color: var(--accent-gold); /* Título en dorado */
-    margin-bottom: 1em;
-}
-
-.timer-container h2::before {
-    content: '⏰ ';
-    margin-right: 0.5em;
-    color: var(--secondary-orange); /* Ícono en color de acento */
-}
-
-.timer-container p {
-    color: var(--text-medium); /* Texto medio */
-    font-size: 1.1em;
-    margin-bottom: 1.5em;
-    font-style: italic;
+    opacity: 0.15;
+    filter: blur(8px);
 }
 
 #displayTemporizador {
-    font-family: 'Consolas', monospace; /* Fuente monoespaciada para el tiempo */
-    font-size: 3.5em; /* Tamaño grande */
+    font-size: 2.8em;
     font-weight: bold;
-    color: var(--code-text-accent); /* Color de código (amarillo brillante) para el tiempo */
+    color: var(--code-text-accent);
+    text-shadow: 0 0 10px rgba(241, 196, 15, 0.5);
     margin: 1em 0;
-    display: block;
-    letter-spacing: 0.08em; /* Más espaciado */
-    text-shadow: 0 0 10px rgba(241, 196, 15, 0.5); /* Efecto de brillo sutil */
 }
 
-#iniciarTemporizador {
-    padding: 1.1em 2.2em; /* Padding ajustado */
-    font-size: 1.2em;
-    background: linear-gradient(135deg, var(--secondary-orange), var(--accent-gold));
-    color: white;
-    border: none;
-    border-radius: 30px;
-    cursor: pointer;
-    transition: all 0.3s ease;
-    font-weight: 600;
-    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.3); /* Sombra más fuerte */
-    font-family: 'Georgia', serif;
-    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
-}
-
-#iniciarTemporizador:hover {
-    transform: translateY(-3px);
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
-    background: linear-gradient(135deg, var(--accent-gold), var(--secondary-orange));
-}
-
-/* Footer */
 footer {
     text-align: center;
-    padding: 2.5em;
+    padding: 2em 1em;
     margin-top: 3em;
-    background: linear-gradient(135deg, var(--background-dark-secondary), var(--primary-warm)); /* Degradado oscuro */
-    color: var(--text-light); /* Texto claro */
+    background: linear-gradient(135deg, var(--background-dark-secondary), var(--primary-warm));
+    color: var(--text-light);
     border-top: 3px solid var(--border-dark-warm);
     box-shadow: 0 -4px 15px rgba(0, 0, 0, 0.2);
 }
@@ -368,12 +269,35 @@ footer a:hover {
     color: var(--secondary-orange-darker);
 }
 
-/* Pequeño efecto de calidez */
 @keyframes warm-glow {
-    0%, 100% { box-shadow: 0 0 20px rgba(255, 107, 53, 0.1); } /* Sombra más sutil */
+    0%, 100% { box-shadow: 0 0 20px rgba(255, 107, 53, 0.1); }
     50% { box-shadow: 0 0 30px rgba(255, 107, 53, 0.2); }
 }
 
-.timer-container {
-    animation: warm-glow 4s ease-in-out infinite;
+/* Responsive */
+@media (max-width: 600px) {
+    header h1 {
+        font-size: 2em;
+    }
+    nav a {
+        font-size: 0.95em;
+        padding: 0.6em 1em;
+    }
+    .boton-practica,
+    #iniciarTemporizador {
+        font-size: 1em;
+        padding: 0.8em 1.5em;
+    }
+    #displayTemporizador {
+        font-size: 2.5em;
+    }
+    h2 {
+        font-size: 1.5em;
+    }
+    h3 {
+        font-size: 1.2em;
+    }
+    section, main, .timer-container {
+        padding: 1.2em 1em;
+    }
 }
