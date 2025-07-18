@@ -23,7 +23,7 @@
         </section>
 
         <section>
-            <h2>Actividades N2</h2>
+            <h2>Parte 1: Proyectos Simples de Interfaz de Usuario (Qt UI Enfocado)</h2>
             <p>Estas actividades se centran en la manipulación y la interacción con los widgets de Qt.</p>
         </section>
 
@@ -31,93 +31,133 @@
             <h3>Ejercicio 1: Conversor de Unidades Simple (Temperatura)</h3>
             <ul>
                 <li><strong>Consigna:</strong> Crea una aplicación que convierta una temperatura de Celsius a Fahrenheit y viceversa.</li>
-                <li><strong>Elementos de Qt a utilizar:</strong> <code>QLineEdit</code>, <code>QRadioButton</code> o <code>QComboBox</code>, <code>QPushButton</code>, <code>QLabel</code>.</li>
+                <li><strong>Elementos de Qt a utilizar:</strong> QLineEdit, QRadioButton (o QComboBox), QPushButton, QLabel.</li>
                 <li><strong>Objetivo:</strong> Implementar la lógica de conversión de unidades y actualizar dinámicamente la interfaz.</li>
+                <li><strong>Puntos que debe cumplir:</strong></li>
+                <li>Debe validar que la entrada sea numérica.</li>
+                <li>Debe cambiar la conversión dependiendo de la opción elegida.</li>
+                <li>Debe mostrar el resultado con al menos un decimal.</li>
             </ul>
         </section>
 
         <section>
             <h3>Ejercicio 2: Contador de Clics</h3>
             <ul>
-                <li><strong>Consigna:</strong> Cada vez que se hace clic en el botón, la etiqueta debe mostrar el número de veces que se ha presionado.</li>
-                <li><strong>Elementos de Qt a utilizar:</strong> <code>QPushButton</code>, <code>QLabel</code>.</li>
+                <li><strong>Consigna:</strong> Cada vez que se hace clic en el botón, la etiqueta debe mostrar el número acumulado de clics.</li>
+                <li><strong>Elementos de Qt a utilizar:</strong> QPushButton, QLabel.</li>
                 <li><strong>Objetivo:</strong> Manejar eventos de clic y actualizar un contador en la UI.</li>
+                <li><strong>Puntos que debe cumplir:</strong></li>
+                <li>El contador debe iniciar en cero.</li>
+                <li>Debe actualizarse correctamente en cada clic.</li>
+                <li>El QLabel debe estar visible siempre.</li>
             </ul>
         </section>
 
         <section>
             <h3>Ejercicio 3: Selector de Color (RGB Básico)</h3>
             <ul>
-                <li><strong>Consigna:</strong> Permite al usuario introducir valores R, G y B en campos de texto. Al presionar un botón, un QLabel debe cambiar su color de fondo al color resultante.</li>
-                <li><strong>Elementos de Qt a utilizar:</strong> <code>QLineEdit</code> (3), <code>QPushButton</code>, <code>QLabel</code>.</li>
-                <li><strong>Objetivo:</strong> Procesar entradas numéricas y aplicar propiedades visuales (colores) en Qt.</li>
+                <li><strong>Consigna:</strong> El usuario introduce valores R, G y B. Al presionar un botón, el QLabel cambia su fondo.</li>
+                <li><strong>Elementos de Qt a utilizar:</strong> QLineEdit (3), QPushButton, QLabel.</li>
+                <li><strong>Objetivo:</strong> Procesar entradas numéricas y aplicar propiedades visuales en Qt.</li>
+                <li><strong>Puntos que debe cumplir:</strong></li>
+                <li>Debe validar que los valores estén entre 0 y 255.</li>
+                <li>Debe mostrar un color distinto al cambiar los valores.</li>
+                <li>No debe aceptar campos vacíos.</li>
             </ul>
         </section>
 
         <section>
             <h3>Ejercicio 4: Verificador de Número Par/Impar</h3>
             <ul>
-                <li><strong>Consigna:</strong> El usuario introduce un número entero y un botón determina si el número es par o impar.</li>
-                <li><strong>Elementos de Qt a utilizar:</strong> <code>QLineEdit</code>, <code>QPushButton</code>, <code>QLabel</code>.</li>
-                <li><strong>Objetivo:</strong> Implementar una lógica condicional básica y mostrar el resultado en la interfaz.</li>
+                <li><strong>Consigna:</strong> Determina si un número ingresado es par o impar y muestra el resultado.</li>
+                <li><strong>Elementos de Qt a utilizar:</strong> QLineEdit, QPushButton, QLabel.</li>
+                <li><strong>Objetivo:</strong> Implementar lógica condicional básica y mostrar el resultado.</li>
+                <li><strong>Puntos que debe cumplir:</strong></li>
+                <li>Debe validar que la entrada sea entera.</li>
+                <li>El resultado debe mostrarse de forma clara.</li>
+                <li>Debe funcionar correctamente con números negativos.</li>
             </ul>
         </section>
 
         <section>
             <h3>Ejercicio 5: Calculadora de Área de Rectángulo</h3>
             <ul>
-                <li><strong>Consigna:</strong> El usuario introduce la base y la altura de un rectángulo. Un botón calcula el área y la muestra.</li>
-                <li><strong>Elementos de Qt a utilizar:</strong> <code>QLineEdit</code> (2), <code>QPushButton</code>, <code>QLabel</code>.</li>
-                <li><strong>Objetivo:</strong> Realizar operaciones aritméticas con valores de entrada y mostrar el resultado.</li>
+                <li><strong>Consigna:</strong> El usuario ingresa base y altura, y se calcula el área del rectángulo.</li>
+                <li><strong>Elementos de Qt a utilizar:</strong> QLineEdit (2), QPushButton, QLabel.</li>
+                <li><strong>Objetivo:</strong> Realizar operaciones aritméticas y mostrar el resultado.</li>
+                <li><strong>Puntos que debe cumplir:</strong></li>
+                <li>Ambos campos deben contener números válidos.</li>
+                <li>Debe mostrar el resultado con al menos 2 decimales.</li>
+                <li>Debe evitar errores si un campo está vacío.</li>
             </ul>
         </section>
 
         <section>
             <h3>Ejercicio 6: Generador de Saludos Personalizados</h3>
             <ul>
-                <li><strong>Consigna:</strong> El usuario introduce su nombre en un campo. Al hacer clic en un botón, un QLabel muestra un saludo personalizado.</li>
-                <li><strong>Elementos de Qt a utilizar:</strong> <code>QLineEdit</code>, <code>QPushButton</code>, <code>QLabel</code>.</li>
-                <li><strong>Concepto C++:</strong> Concatenación de <code>std::string</code>.</li>
+                <li><strong>Consigna:</strong> Al introducir un nombre, muestra un saludo personalizado.</li>
+                <li><strong>Elementos de Qt a utilizar:</strong> QLineEdit, QPushButton, QLabel.</li>
+                <li><strong>Concepto C++:</strong> Concatenación de std::string.</li>
                 <li><strong>Objetivo:</strong> Combinar cadenas de texto para crear mensajes dinámicos.</li>
+                <li><strong>Puntos que debe cumplir:</strong></li>
+                <li>No debe saludar si el campo está vacío.</li>
+                <li>El saludo debe contener el nombre tal como fue ingresado.</li>
+                <li>Debe respetar mayúsculas y minúsculas.</li>
             </ul>
         </section>
 
         <section>
             <h3>Ejercicio 7: Visor de Elementos Aleatorios de una Lista</h3>
             <ul>
-                <li><strong>Consigna:</strong> Predefine un <code>std::vector</code> de palabras. Un botón muestra una palabra aleatoria de la lista.</li>
-                <li><strong>Elementos de Qt a utilizar:</strong> <code>QPushButton</code>, <code>QLabel</code>.</li>
-                <li><strong>Concepto STL/C++:</strong> <code>std::vector</code>, generación aleatoria.</li>
-                <li><strong>Objetivo:</strong> Acceder a elementos aleatorios y mostrarlos en la interfaz.</li>
+                <li><strong>Consigna:</strong> Muestra un elemento aleatorio de una lista predefinida en un QLabel.</li>
+                <li><strong>Elementos de Qt a utilizar:</strong> QPushButton, QLabel.</li>
+                <li><strong>Concepto STL/C++:</strong> std::vector, random.</li>
+                <li><strong>Objetivo:</strong> Mostrar elementos aleatorios de un contenedor STL.</li>
+                <li><strong>Puntos que debe cumplir:</strong></li>
+                <li>Debe mostrar un nuevo valor cada vez que se presiona el botón.</li>
+                <li>No debe mostrar valores vacíos ni errores.</li>
+                <li>El QLabel debe actualizarse en tiempo real.</li>
             </ul>
         </section>
 
         <section>
             <h3>Ejercicio 8: Inversor de Cadena de Texto</h3>
             <ul>
-                <li><strong>Consigna:</strong> El usuario introduce una frase. Un botón invierte la cadena y muestra el resultado.</li>
-                <li><strong>Elementos de Qt a utilizar:</strong> <code>QLineEdit</code>, <code>QPushButton</code>, <code>QLabel</code>.</li>
-                <li><strong>Concepto C++:</strong> <code>std::reverse</code> o bucle de inversión.</li>
-                <li><strong>Objetivo:</strong> Manipular una cadena de texto para invertir su orden.</li>
+                <li><strong>Consigna:</strong> Invierte la cadena ingresada y la muestra en un QLabel.</li>
+                <li><strong>Elementos de Qt a utilizar:</strong> QLineEdit, QPushButton, QLabel.</li>
+                <li><strong>Concepto C++:</strong> std::reverse o bucle sobre std::string.</li>
+                <li><strong>Objetivo:</strong> Manipular texto para invertir su contenido.</li>
+                <li><strong>Puntos que debe cumplir:</strong></li>
+                <li>No debe permitir cadenas vacías.</li>
+                <li>Debe preservar espacios y signos.</li>
+                <li>El resultado debe verse claramente.</li>
             </ul>
         </section>
 
         <section>
-            <h3>Ejercicio 9: Contador de Vocales y Consonantes</h3>
+            <h3>Ejercicio 9: Contador de Vocales/Consonantes</h3>
             <ul>
-                <li><strong>Consigna:</strong> El usuario ingresa una palabra. Un botón cuenta vocales y consonantes y muestra el resultado.</li>
-                <li><strong>Elementos de Qt a utilizar:</strong> <code>QLineEdit</code>, <code>QPushButton</code>, <code>QLabel</code> (2).</li>
-                <li><strong>Concepto C++:</strong> Iteración sobre <code>std::string</code> y validación de caracteres.</li>
-                <li><strong>Objetivo:</strong> Analizar caracteres en una cadena y mostrar conteos.</li>
+                <li><strong>Consigna:</strong> Cuenta cuántas vocales y consonantes hay en una palabra ingresada.</li>
+                <li><strong>Elementos de Qt a utilizar:</strong> QLineEdit, QPushButton, QLabel (2).</li>
+                <li><strong>Concepto C++:</strong> std::string, condicionales, bucles.</li>
+                <li><strong>Objetivo:</strong> Analizar y clasificar caracteres de una cadena.</li>
+                <li><strong>Puntos que debe cumplir:</strong></li>
+                <li>Distinguir mayúsculas y minúsculas.</li>
+                <li>Ignorar espacios y signos de puntuación.</li>
+                <li>Mostrar el resultado en dos etiquetas separadas.</li>
             </ul>
         </section>
 
         <section>
             <h3>Ejercicio 10: Simulador de Semáforo</h3>
             <ul>
-                <li><strong>Consigna:</strong> Usa tres <code>QLabel</code> o <code>QPushButton</code> para representar un semáforo. Un botón cambia el estado en ciclo (rojo → verde → amarillo → rojo).</li>
-                <li><strong>Elementos de Qt a utilizar:</strong> <code>QPushButton</code>, <code>QLabel</code> (3).</li>
-                <li><strong>Objetivo:</strong> Simular un estado cíclico y cambiar colores o visibilidad de los widgets.</li>
+                <li><strong>Consigna:</strong> Simula un semáforo que cambia de estado con cada clic.</li>
+                <li><strong>Elementos de Qt a utilizar:</strong> QLabel (3) o QPushButton (3), QPushButton.</li>
+                <li><strong>Objetivo:</strong> Controlar visibilidad o color de luces según el estado del semáforo.</li>
+                <li><strong>Puntos que debe cumplir:</strong></li>
+                <li>El ciclo debe ser rojo → verde → amarillo → rojo.</li>
+                <li>Debe haber solo una luz activa por vez.</li>
+                <li>Debe usarse una sola función de control (slot central).</li>
             </ul>
         </section>
     </main>
