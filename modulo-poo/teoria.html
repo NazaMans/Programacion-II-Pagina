@@ -9,123 +9,59 @@
 </head>
 <body>
     <header>
-        <h1>Módulo 2: Programación Orientada a Objetos (POO) - Fundamentos</h1>
+        <h1>Módulo 2: Programación Orientada a Objetos (POO)</h1>
         <nav>
             <a href="../index.html">Volver al Índice Principal</a>
         </nav>
     </header>
+<main>
+    <h1>Al momento de programar en C++ usando clases hay cosas que tener en cuenta </h1>
 
-    <main>
-        <section>
-            <h2>Introducción a la Programación Orientada a Objetos (POO)</h2>
-            <p>La Programación Orientada a Objetos (POO) es un paradigma de programación que utiliza "objetos" para diseñar aplicaciones y sistemas informáticos. Un objeto es una entidad que combina datos (atributos) y funciones que operan sobre esos datos (métodos).</p>
-            <p>Este enfoque permite modelar el mundo real de una manera más intuitiva, representando entidades como objetos que interactúan entre sí.</p>
-        </section>
+   <h3>1: Incluir la clase en el .h de la ventana a usar</h3>
+   <p>Dada la clase "Persona" la incluiremos en el .h de widget</p>
+   <pre>
+    <code class="language-cpp">
+    // widget.h
+    #include <QWidget>
+<span>#include "persona.h"</span> //Incluimos la clase
 
-        <section>
-            <h2>Ventajas de la POO</h2>
-            <p>La POO ofrece múltiples beneficios en el desarrollo de software:</p>
-            <ul>
-                <li><strong>Reutilización de Código:</strong> Una vez que se define una clase, se puede instanciar varias veces o servir como base para otras clases.</li>
-                <li><strong>Modificabilidad:</strong> Los cambios en una parte del sistema tienen un impacto menor en otras partes debido al encapsulamiento.</li>
-                <li><strong>Facilidad para Detectar Errores:</strong> Los errores suelen estar confinados a los objetos individuales, facilitando su depuración.</li>
-                <li><strong>Modularidad:</strong> El sistema se divide en módulos autocontenidos (objetos), lo que simplifica la gestión de proyectos grandes.</li>
-                <li><strong>Flexibilidad (Polimorfismo):</strong> Permite que objetos de diferentes clases sean tratados de forma uniforme, lo que lleva a un código más adaptable.</li>
-            </ul>
-        </section>
+/*
+Resto de codigo de QT
+*/
 
-        <section>
-            <h2>¿Qué es un Objeto?</h2>
-            <p>Un objeto es una entidad fundamental en la POO, que representa una abstracción o "cosa" con significado y límites claros en el dominio del problema.</p>
-            <h3>Estructura de un Objeto:</h3>
-            <ul>
-                <li><strong>Atributos (Estado):</strong> Son las características o propiedades que describen al objeto. Representan "lo que el objeto sabe".</li>
-                <li><strong>Métodos (Comportamiento):</strong> Son las acciones que el objeto puede realizar o las operaciones que se pueden aplicar sobre él. Representan "lo que el objeto puede hacer".</li>
-            </ul>
-            <p>Todo objeto posee:</p>
-            <ul>
-                <li><strong>Estado:</strong> Las propiedades del objeto en un momento dado, definidas por sus atributos.</li>
-                <li><strong>Comportamiento:</strong> La forma en que un objeto actúa y reacciona, definido por sus métodos.</li>
-                <li><strong>Identidad:</strong> Cada objeto es único y distinguible de otros, incluso si tiene el mismo estado y comportamiento.</li>
-            </ul>
-        </section>
+private:
+    Ui::Widget *ui;
 
-        <section>
-            <h2>Clases</h2>
-            <p>Una <strong>clase</strong> es una descripción abstracta o un "molde" para un grupo de objetos con características y comportamientos similares. Define la estructura (atributos) y las funcionalidades (métodos) que tendrán todos los objetos creados a partir de ella.</p>
-            <p><strong>Clases vs. Objetos:</strong></p>
-            <ul>
-                <li>La <strong>clase</strong> es una definición abstracta, un plano o un modelo.</li>
-                <li>El <strong>objeto</strong> es una instancia concreta de una clase. Se dice que se "instancia" un objeto a partir de una clase.</li>
-            </ul>
-            <p>Por ejemplo, "Coche" sería una clase, mientras que "Mi coche rojo" o "El taxi de la esquina" serían objetos (instancias) de la clase Coche.</p>
-        </section>
+    <span>Persona persona;</span> //Creamos el objeto
 
-        <section>
-            <h2>Terminología Clave en POO</h2>
-            <p>Para comprender la POO, es esencial familiarizarse con los siguientes conceptos:</p>
-            <ul>
-                <li>
-                    <strong>Abstracción:</strong>
-                    <p>Proceso de identificar las características esenciales de una entidad y modelarlas en el software, ignorando los detalles no esenciales o irrelevantes para el problema en cuestión.</p>
-                </li>
-                <li>
-                    <strong>Encapsulamiento:</strong>
-                    <p>Principio de agrupar los datos (atributos) y los métodos que operan sobre esos datos en una única unidad (la clase), y de restringir el acceso directo a los atributos desde fuera de la clase. Esto protege la integridad de los datos y simplifica la interfaz del objeto.</p>
-                </li>
-                <li>
-                    <strong>Instanciación:</strong>
-                    <p>Es el proceso de crear un nuevo objeto (instancia) a partir de una clase. Cuando se instancia un objeto, se asigna memoria para él y se inicializa su estado.</p>
-                </li>
-                <li>
-                    <strong>Miembros Públicos, Privados y Protegidos:</strong>
-                    <p>Estos son modificadores de acceso que controlan la visibilidad y el acceso a los atributos y métodos de una clase:</p>
-                    <ul>
-                        <li><strong><code>public:</code></strong> Los miembros son accesibles desde cualquier parte del programa. Son la interfaz pública de la clase.</li>
-                        <li><strong><code>private:</code></strong> Los miembros solo son accesibles desde dentro de la propia clase. Este es el modificador preferido para los atributos, fomentando el encapsulamiento.</li>
-                        <li><strong><code>protected:</code></strong> Los miembros son accesibles desde dentro de la propia clase y desde las clases que heredan de ella.</li>
-                    </ul>
-                </li>
-                <li>
-                    <strong>Constructores:</strong>
-                    <p>Son métodos especiales de una clase que se invocan automáticamente cuando se crea un nuevo objeto (instancia) de esa clase. Se utilizan para inicializar los atributos del objeto. Un constructor tiene el mismo nombre que la clase y no tiene tipo de retorno.</p>
-                    <pre><code class="language-cpp">
-class MiClase {
+#endif // WIDGET_H
+   </code></pre>
+
+   <h1>Al momento de usar la clase hay que saber acceder a sus atributos y/o funciones</h1>
+   <p>Dada la siguiente conformacion de la clase Persona</p>
+   <pre><code class="language-cpp">
+#ifndef PERSONA_H
+#define PERSONA_H
+
+//Incluyo QString para poder usarlo en la clase
+#include "QString"
+
+class Persona
+{
 public:
-    // Constructor por defecto
-    MiClase() {
-        // Inicialización
-    }
-    // Constructor con parámetros
-    MiClase(int valor) {
-        // Inicialización con valor
-    }
-};
-                    </code></pre>
-                </li>
-                <li>
-                    <strong>Destructores:</strong>
-                    <p>Son métodos especiales de una clase que se invocan automáticamente cuando un objeto de esa clase está a punto de ser destruido (sale de ámbito, se usa <code>delete</code>). Su propósito principal es liberar los recursos que el objeto haya podido adquirir durante su vida (como memoria dinámica). Un destructor tiene el mismo nombre que la clase, precedido por una tilde (~), no tiene tipo de retorno ni recibe parámetros.</p>
-                    <pre><code class="language-cpp">
-class MiClase {
-public:
-    ~MiClase() {
-        // Liberar recursos
-    }
-};
-                    </code></pre>
-                </li>
-            </ul>
-        </section>
-        
-        <section class="navegacion-modulo">
-            <p>¿Listo para aplicar los fundamentos de la POO?</p>
-            <a href="practica.html" class="boton-practica">Ir a la Práctica del Módulo 2</a>
-        </section>
-    </main>
+    Persona();
 
-    <footer>
-        <p>Volver al <a href="../index.html">Índice Principal</a></p>
-    </footer>
+    //Estos atributos no tienen valor hasta que se los demos con los setters
+    QString nombre;
+    QString apellido;
+    int dni;
+
+};
+
+#endif // PERSONA_H
+   </code></pre>
+   
+</main>
+    
 </body>
 </html>

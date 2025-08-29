@@ -4,12 +4,12 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="icon" href="favicon.ico" type="image/x-icon">
-    <title>Módulo 6: STL - Teoría</title>
+    <title>Teoria de plantillas estandar</title>
     <link rel="stylesheet" href="../css/style.css">
 </head>
 <body>
     <header>
-        <h1>Módulo 6: Biblioteca de Plantillas Estándar (STL)</h1>
+        <h1>Plantillas estandar (Vector, lista, stack, etc)</h1>
         <nav>
             <a href="../index.html">Volver al Índice Principal</a>
         </nav>
@@ -44,20 +44,21 @@
                     <strong>`std::vector` (Vector Dinámico):</strong>
                     <p>Un array dinámico que puede crecer o encogerse según sea necesario. Ofrece acceso aleatorio a elementos (`O(1)`) y es muy eficiente para añadir elementos al final. Inserciones o eliminaciones en el medio pueden ser costosas (`O(n)`).</p>
                     <pre><code class="language-cpp">
-#include &lt;vector&gt;
+#include <vector>
 // ...
-std::vector&lt;int&gt; numeros = {1, 2, 3};
+std::vector<int> numeros = {1, 2, 3};
 numeros.push_back(4); // Añadir al final
-int primer = numeros[0]; // Acceso directo
+int primer = numeros[0];
+// Acceso directo
                     </code></pre>
                 </li>
                 <li>
                     <strong>`std::list` (Lista Doblemente Enlazada):</strong>
                     <p>Elementos no contiguos en memoria, enlazados bidireccionalmente. Eficiente para inserciones y eliminaciones en cualquier posición (`O(1)`), pero el acceso a elementos es secuencial (`O(n)`).</p>
                     <pre><code class="language-cpp">
-#include &lt;list&gt;
+#include <list>
 // ...
-std::list&lt;std::string&gt; nombres;
+std::list<std::string> nombres;
 nombres.push_back("Alice");
 nombres.push_front("Bob");
                     </code></pre>
@@ -66,9 +67,9 @@ nombres.push_front("Bob");
                     <strong>`std::deque` (Cola de Doble Extremo):</strong>
                     <p>Permite inserciones y eliminaciones eficientes tanto al principio como al final (`O(1)`), y acceso aleatorio. Utiliza un conjunto de bloques de memoria.</p>
                     <pre><code class="language-cpp">
-#include &lt;deque&gt;
+#include <deque>
 // ...
-std::deque&lt;char&gt; letras;
+std::deque<char> letras;
 letras.push_front('A');
 letras.push_back('Z');
                     </code></pre>
@@ -82,9 +83,9 @@ letras.push_back('Z');
                     <strong>`std::map` (Mapa Clave-Valor):</strong>
                     <p>Almacena pares clave-valor, donde las claves son únicas y están ordenadas. Cada clave mapea a un único valor. Similar a un diccionario.</p>
                     <pre><code class="language-cpp">
-#include &lt;map&gt;
+#include <map>
 // ...
-std::map&lt;std::string, int&gt; edades;
+std::map<std::string, int> edades;
 edades["Juan"] = 30;
 edades["Maria"] = 25;
 int edadJuan = edades["Juan"];
@@ -94,9 +95,9 @@ int edadJuan = edades["Juan"];
                     <strong>`std::set` (Conjunto Ordenado):</strong>
                     <p>Almacena un conjunto de elementos únicos, ordenados según un criterio. Útil para verificar la existencia de un elemento rápidamente.</p>
                     <pre><code class="language-cpp">
-#include &lt;set&gt;
+#include <set>
 // ...
-std::set&lt;int&gt; numerosUnicos;
+std::set<int> numerosUnicos;
 numerosUnicos.insert(10);
 numerosUnicos.insert(5);
 bool existe = numerosUnicos.count(10); // true
@@ -111,9 +112,9 @@ bool existe = numerosUnicos.count(10); // true
                     <strong>`std::stack` (Pila):</strong>
                     <p>Implementa la estructura de datos LIFO (Last-In, First-Out). Métodos: `push`, `pop`, `top`, `empty`.</p>
                     <pre><code class="language-cpp">
-#include &lt;stack&gt;
+#include <stack>
 // ...
-std::stack&lt;int&gt; miPila;
+std::stack<int> miPila;
 miPila.push(10);
 int cima = miPila.top(); // 10
 miPila.pop();
@@ -123,9 +124,9 @@ miPila.pop();
                     <strong>`std::queue` (Cola):</strong>
                     <p>Implementa la estructura de datos FIFO (First-In, First-Out). Métodos: `push`, `pop`, `front`, `back`, `empty`.</p>
                     <pre><code class="language-cpp">
-#include &lt;queue&gt;
+#include <queue>
 // ...
-std::queue&lt;std::string&gt; miCola;
+std::queue<std::string> miCola;
 miCola.push("Tarea1");
 std::string frente = miCola.front(); // Tarea1
 miCola.pop();
@@ -142,10 +143,10 @@ miCola.pop();
                     <strong>`std::sort` (Ordenar):</strong>
                     <p>Ordena los elementos en un rango especificado.</p>
                     <pre><code class="language-cpp">
-#include &lt;algorithm&gt;
-#include &lt;vector&gt;
+#include <algorithm>
+#include <vector>
 // ...
-std::vector&lt;int&gt; v = {5, 2, 8, 1};
+std::vector<int> v = {5, 2, 8, 1};
 std::sort(v.begin(), v.end()); // v será {1, 2, 5, 8}
                     </code></pre>
                 </li>
@@ -153,10 +154,10 @@ std::sort(v.begin(), v.end()); // v será {1, 2, 5, 8}
                     <strong>`std::find` (Buscar):</strong>
                     <p>Busca un valor específico en un rango y retorna un iterador al primer elemento encontrado (o `end()` si no se encuentra).</p>
                     <pre><code class="language-cpp">
-#include &lt;algorithm&gt;
-#include &lt;vector&gt;
+#include <algorithm>
+#include <vector>
 // ...
-std::vector&lt;int&gt; v = {10, 20, 30, 40};
+std::vector<int> v = {10, 20, 30, 40};
 auto it = std::find(v.begin(), v.end(), 30);
 if (it != v.end()) {
     // Se encontró el 30
@@ -167,23 +168,25 @@ if (it != v.end()) {
                     <strong>`std::for_each` (Para Cada Elemento):</strong>
                     <p>Aplica una función o un funtor a cada elemento en un rango.</p>
                     <pre><code class="language-cpp">
-#include &lt;algorithm&gt;
-#include &lt;vector&gt;
-#include &lt;iostream&gt;
+#include <algorithm>
+#include <vector>
+#include <iostream>
 // ...
-std::vector&lt;int&gt; v = {1, 2, 3};
-std::for_each(v.begin(), v.end(), [](int n){ std::cout << n * 2 << " "; }); // Imprime: 2 4 6
+std::vector<int> v = {1, 2, 3};
+std::for_each(v.begin(), v.end(), [](int n){ std::cout << n * 2 << " "; });
+// Imprime: 2 4 6
                     </code></pre>
                 </li>
                 <li>
                     <strong>`std::count` (Contar Ocurrencias):</strong>
                     <p>Cuenta el número de veces que un valor aparece en un rango.</p>
                     <pre><code class="language-cpp">
-#include &lt;algorithm&gt;
-#include &lt;vector&gt;
+#include <algorithm>
+#include <vector>
 // ...
-std::vector&lt;int&gt; v = {1, 2, 2, 3, 2};
-int conteo = std::count(v.begin(), v.end(), 2); // conteo será 3
+std::vector<int> v = {1, 2, 2, 3, 2};
+int conteo = std::count(v.begin(), v.end(), 2);
+// conteo será 3
                     </code></pre>
                 </li>
             </ul>
@@ -197,12 +200,13 @@ int conteo = std::count(v.begin(), v.end(), 2); // conteo será 3
                 <li>Los iteradores se pueden incrementar (`++`) para moverse al siguiente elemento y desreferenciar (`*`) para acceder al valor.</li>
             </ul>
             <pre><code class="language-cpp">
-#include &lt;vector&gt;
-#include &lt;iostream&gt;
+#include <vector>
+#include <iostream>
 // ...
-std::vector&lt;int&gt; nums = {10, 20, 30};
-for (std::vector&lt;int&gt;::iterator it = nums.begin(); it != nums.end(); ++it) {
-    std::cout << *it << " "; // Imprime: 10 20 30
+std::vector<int> nums = {10, 20, 30};
+for (std::vector<int>::iterator it = nums.begin(); it != nums.end(); ++it) {
+    std::cout << *it << " ";
+// Imprime: 10 20 30
 }
             </code></pre>
         </section>
@@ -212,26 +216,27 @@ for (std::vector&lt;int&gt;::iterator it = nums.begin(); it != nums.end(); ++it)
             <p>Un funtor es cualquier objeto que puede ser llamado o "invocado" como si fuera una función. Esto se logra sobrecargando el operador paréntesis `operator()`. Los functores son muy utilizados con los algoritmos STL para proporcionar comportamientos personalizados.</p>
             <p>La STL también proporciona una serie de functores predefinidos en el encabezado `<functional>` para operaciones aritméticas, relacionales y lógicas.</p>
             <pre><code class="language-cpp">
-#include &lt;iostream&gt;
-#include &lt;vector&gt;
-#include &lt;algorithm&gt;
-#include &lt;functional&gt; // Para functores predefinidos
+#include <iostream>
+#include <vector>
+#include <algorithm>
+#include <functional> // Para functores predefinidos
 
 // Funtor personalizado para duplicar
 struct Duplicar {
     void operator()(int& n) const {
         n *= 2;
-    }
+}
 };
 
 // ...
-std::vector&lt;int&gt; v = {1, 2, 3};
-std::for_each(v.begin(), v.end(), Duplicar()); // Usa el funtor Duplicar
+std::vector<int> v = {1, 2, 3};
+std::for_each(v.begin(), v.end(), Duplicar());
+// Usa el funtor Duplicar
 // v será {2, 4, 6}
 
 // Ejemplo con funtor predefinido
-std::vector&lt;int&gt; v2 = {10, 20, 30};
-std::sort(v2.begin(), v2.end(), std::greater&lt;int&gt;()); // Ordena de mayor a menor
+std::vector<int> v2 = {10, 20, 30};
+std::sort(v2.begin(), v2.end(), std::greater<int>()); // Ordena de mayor a menor
 // v2 será {30, 20, 10}
             </code></pre>
             <p>Los functores predefinidos más comunes incluyen:</p>
