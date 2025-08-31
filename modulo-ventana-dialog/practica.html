@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" href="favicon.ico" type="image/x-icon">
+    <title>Ejercicios de Programación: Qt y C++</title>
+    <link rel="stylesheet" href="../css/style.css">
+</head>
+<body>
+    <header>
+        <h1>Ejercicios de Programación: Qt y C++</h1>
+        <nav>
+            <a href="../index.html">Volver al Índice Principal</a>
+        </nav>
+    </header>
+
+    <main>
+        <section class="timer-container">
+            <h2>Control de Tiempo para Actividades</h2>
+            <p>Usa el botón de abajo para iniciar y detener un temporizador que te ayude a medir el tiempo que dedicas a cada ejercicio.</p>
+            <button id="iniciarTemporizador">Iniciar Temporizador</button>
+            <span id="displayTemporizador">00:00:00</span>
+        </section>
+
+        <section>
+            <h2>Simulación de Actividades</h2>
+            <p>Estas actividades se centran en la manipulación de estructuras de datos y la interacción con los widgets de Qt.</p>
+        </section>
+
+        <section>
+            <h3>Ejercicio 1: Formulario QDialog (Solo Front)</h3>
+            <ul>
+                <li><strong>Consigna:</strong> Crear el siguiente formulario en una ventana del tipo <code>QDialog</code>.</li>
+                <li><strong>Elementos de Qt a utilizar:</strong> <code>QMainWindow, QLabel, QListWidget, QWidget, QPushButton, QDialog, QLineEdit, QSpinBox, QDoubleSpinBox, QPlainTextEdit</code>.</li>
+                <li><strong>Puntos que debe cumplir:</strong></li>
+                <li>El programa principal (<code>QMainWindow</code>) debe contener:
+                    <ul>
+                        <li>Un <code>QLabel</code>.</li>
+                        <li>Un <code>QListWidget</code>.</li>
+                        <li>Un <code>QWidget</code> que contenga:
+                            <ul>
+                                <li>Botones: "Agregar", "Eliminar" y "SALIR".</li>
+                            </ul>
+                        </li>
+                    </ul>
+                </li>
+                <li>El formulario <code>QDialog</code> (al que se accede al presionar "Agregar") debe contener:
+                    <ul>
+                        <li>Siete (07) <code>QLabel</code>.</li>
+                        <li>Tres (03) <code>QLineEdit</code>.</li>
+                        <li>Un (01) <code>QSpinBox</code>.</li>
+                        <li>Dos (02) <code>QDoubleSpinBox</code>.</li>
+                        <li>Un (01) <code>QPlainTextEdit</code>.</li>
+                        <li>Dos (02) botones: "OK" y "CANCEL".</li>
+                    </ul>
+                </li>
+            </ul>
+            <img src="../fotos/ventanaWid.png" alt="Descripción" width="300" height="200" style="display: block; margin: auto;">
+            <br>
+            <img src="../fotos/ventanaForm.png" alt="Descripción" width="300" height="200" style="display: block; margin: auto;">
+
+            <ul>
+                <li><strong>Consigna:</strong> Lo que ingrese el usuario debe mostrarse como item de la listWindget (Debe concatenarse en un solo texto con toda la informacion para mostrarse)</li>
+            </ul>
+        </section>
+    </main>
+
+    <section class="navegacion-modulo">
+        <a href="../index.html" class="boton-practica" style="background-color: #007bff;">Volver al Índice Principal</a>
+    </section>
+
+    <footer>
+        <p>Fin de los Ejercicios</p>
+    </footer>
+
+    <script>
+        let startTime;
+        let timerInterval;
+        let isRunning = false;
+        const startButton = document.getElementById('iniciarTemporizador');
+        const display = document.getElementById('displayTemporizador');
+
+        function formatTime(totalSeconds) {
+            const h = String(Math.floor(totalSeconds / 3600)).padStart(2, '0');
+            const m = String(Math.floor((totalSeconds % 3600) / 60)).padStart(2, '0');
+            const s = String(totalSeconds % 60).padStart(2, '0');
+            return `${h}:${m}:${s}`;
+        }
+
+        function updateTimer() {
+            const elapsed = Math.floor((Date.now() - startTime) / 1000);
+            display.textContent = formatTime(elapsed);
+        }
+
+        startButton.addEventListener('click', () => {
+            if (!isRunning) {
+                startTime = Date.now();
+                timerInterval = setInterval(updateTimer, 1000);
+                startButton.textContent = 'Detener Temporizador';
+                startButton.style.backgroundColor = 'var(--secondary-accent-darker)';
+                isRunning = true;
+            } else {
+                clearInterval(timerInterval);
+                startButton.textContent = 'Iniciar Temporizador';
+                startButton.style.backgroundColor = 'var(--secondary-accent)';
+                isRunning = false;
+            }
+        });
+    </script>
+</body>
+</html>

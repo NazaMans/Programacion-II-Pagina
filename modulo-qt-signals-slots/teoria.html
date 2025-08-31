@@ -4,17 +4,88 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="icon" href="favicon.ico" type="image/x-icon">
-    <title>Módulo 7: Qt - Signals & Slots - Teoría</title>
+    <title>Signal y Slot en Qt con .ui</title>
     <link rel="stylesheet" href="../css/style.css">
 </head>
 <body>
     <header>
-        <h1>Módulo 7: Qt - Signals & Slots</h1>
+        <h1>Signal y Slot en Qt usando .ui</h1>
         <nav>
             <a href="../index.html">Volver al Índice Principal</a>
         </nav>
     </header>
 
-   <h1>En refacciones</h1>
+    <main>
+        <section>
+            <h2>Introducción</h2>
+            <p>En Qt, los <strong>Signals y Slots</strong> permiten conectar eventos de la interfaz con funciones que reaccionan a ellos. Cuando se usa Qt Designer y los archivos <code>.ui</code>, los widgets se definen visualmente y la conexión se realiza en el archivo <code>.cpp</code> del formulario correspondiente.</p>
+        </section>
+
+        <section>
+            <h2>Uso básico en widget.cpp</h2>
+            <p>Supongamos que tenemos un botón llamado <code>pushButton</code> en nuestro formulario <code>widget.ui</code>. La conexión se realiza dentro del constructor del widget:</p>
+            <pre><code class="language-cpp">
+#include "widget.h"
+#include "ui_widget.h"
+#include &lt;QDebug&gt;
+
+Widget::Widget(QWidget *parent)
+    : QWidget(parent)
+    , ui(new Ui::Widget)
+{
+    ui-&gt;setupUi(this);
+
+    // Conectar señal clicked del botón a un slot personalizado
+    connect(ui-&gt;pushButton, &QPushButton::clicked, this, &Widget::onPushButtonClicked);
+}
+
+// Slot definido en widget.h
+void Widget::onPushButtonClicked() {
+    qDebug() &lt;&lt; "Botón presionado";
+}
+            </code></pre>
+            <p>Nota: Qt Creator genera automáticamente la clase <code>Ui::Widget</code> desde el archivo <code>.ui</code>, permitiendo acceder a los widgets con <code>ui-&gt;nombreWidget</code>.</p>
+        </section>
+
+        <section>
+            <h2>Uso de Signals y Slots personalizados</h2>
+            <p>También podemos definir nuestros propios slots en la clase del widget:</p>
+            <pre><code class="language-cpp">
+class Widget : public QWidget {
+    Q_OBJECT
+
+public:
+    Widget(QWidget *parent = nullptr);
+    ~Widget();
+
+public slots:
+    void mostrarMensaje(const QString &texto); // slot personalizado
+};
+
+// Conexión en widget.cpp
+connect(this, &QPushBotton::Click, this, &Widget::mostrarMensaje);
+
+            </code></pre>
+        </section>
+
+
+        <section>
+            <h2>Resumen</h2>
+            <ul>
+                <li>Para widgets creados con <code>.ui</code>, usamos <code>ui-&gt;widgetName</code> para acceder a ellos.</li>
+                <li>Las señales se conectan a slots usando <code>connect()</code> dentro del constructor.</li>
+                <li>Se pueden crear slots personalizados dentro de la clase.</li>
+            </ul>
+        </section>
+
+        <section class="navegacion-modulo">
+            <p>Practica</p>
+            <a href="practica.html" class="boton-practica">Ir a la Práctica del modulo</a>
+        </section>
+    </main>
+
+    <footer>
+        <p>Volver al <a href="../index.html">Índice Principal</a></p>
+    </footer>
 </body>
 </html>

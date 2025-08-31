@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" href="favicon.ico" type="image/x-icon">
+    <title>Acceder a datos de un Formulario en Qt</title>
+    <link rel="stylesheet" href="../css/style.css">
+</head>
+<body>
+    <header>
+        <h1>Acceder a datos de un Formulario desde Widget en Qt</h1>
+        <nav>
+            <a href="../index.html">Volver al Índice Principal</a>
+        </nav>
+    </header>
+
+    <main>
+        <section>
+            <h2>Introducción</h2>
+            <p>En Qt, es común abrir un diálogo desde un widget principal y luego recuperar los datos ingresados por el usuario. Esto se hace creando un <strong>QDialog</strong> con su archivo <code>.ui</code>, y utilizando getters o métodos públicos para acceder a los valores desde el widget.</p>
+        </section>
+
+        <section>
+            <h2>Creación del Formulario (QDialog)</h2>
+            <p>Supongamos que tenemos un diálogo llamado <code>Formulario</code> con un <code>QLineEdit</code> para el nombre y un <code>QSpinBox</code> para la edad. Se definen getters en <code>formulario.h</code>:</p>
+            <pre><code class="language-cpp">
+class Formulario : public QDialog {
+    Q_OBJECT
+public:
+    explicit Formulario(QWidget *parent = nullptr);
+    ~Formulario();
+
+    QString getNombre() const; // Retorna el texto del QLineEdit
+    int getEdad() const;       // Retorna el valor del QSpinBox
+
+private:
+    Ui::Formulario *ui;
+};
+            </code></pre>
+            <p>En <code>formulario.cpp</code> se implementan los getters:</p>
+            <pre><code class="language-cpp">
+QString Formulario::getNombre() const {
+    return ui-&gt;lineEditNombre-&gt;text();
+}
+
+int Formulario::getEdad() const {
+    return ui-&gt;spinBoxEdad-&gt;value();
+}
+            </code></pre>
+        </section>
+
+        <section>
+            <h2>Incluimos en widget.h la clase</h2>
+            <p>Despues de eso generamos su objeto para llamarlo desde el cpp</p>
+            <pre><code class="language-cpp">
+                
+                //Agregamos esto en widget.h
+                #include "formulario.h"
+
+                //Luego en el mismo .h creamos el objeto Formulario
+                class Widget : public QWidget
+{
+    Q_OBJECT
+
+public:
+    Widget(QWidget *parent = nullptr);
+    ~Widget();
+
+private slots:
+
+private:
+    Ui::Widget *ui;
+
+    //Creamos el objeto
+    Formulario formulario;
+
+};
+            </code></pre>
+        </section>
+
+        <section>
+            <h2>Abrir el Formulario desde Widget</h2>
+            <p>En <code>widget.cpp</code>, conectamos un botón a un slot que abre el diálogo y luego recupera los datos:</p>
+            <pre><code class="language-cpp">
+void Widget::on_pushButtonAbrirFormulario_clicked() {
+    
+
+    // Mostrar el diálogo de manera modal
+    if(formulario.exec() == QDialog::Accepted) {
+        // Obtener los datos ingresados
+        QString nombre = dlg.getNombre();
+        int edad = dlg.getEdad();
+
+        qDebug() &lt;&lt; "Nombre:" &lt;&lt; nombre;
+        qDebug() &lt;&lt; "Edad:" &lt;&lt; edad;
+    } else {
+        qDebug() &lt;&lt; "Formulario cancelado";
+    }
+}
+            </code></pre>
+            <p>**Notas importantes:**</p>
+            <ul>
+                <li>Se usa <code>formulario.exec()</code> para mostrar el diálogo de manera modal.</li>
+                <li>Qt define <code>QDialog::Accepted</code> y <code>QDialog::Rejected</code> según si el usuario presionó OK o Cancel.</li>
+                <li>Los getters permiten acceder de forma segura a los valores ingresados.</li>
+            </ul>
+        </section>
+
+        <section>
+            <h2>Resumen</h2>
+            <ul>
+                <li>Crear un <code>QDialog</code> con su <code>.ui</code> para el formulario.</li>
+                <li>Definir getters públicos para acceder a los valores de los widgets internos.</li>
+                <li>Abrir el diálogo desde el widget principal con <code>exec()</code>.</li>
+                <li>Capturar los datos usando los getters si el diálogo fue aceptado.</li>
+            </ul>
+        </section>
+
+        <section class="navegacion-modulo">
+            <p>Practica</p>
+            <a href="practica.html" class="boton-practica">Ir a la Práctica del modulo</a>
+        </section>
+    </main>
+
+    <footer>
+        <p>Volver al <a href="../index.html">Índice Principal</a></p>
+    </footer>
+</body>
+</html>

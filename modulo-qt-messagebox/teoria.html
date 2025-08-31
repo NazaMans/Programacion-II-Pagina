@@ -3,18 +3,93 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-   <link rel="icon" href="favicon.ico" type="image/x-icon">
-    <title>Módulo 8: QMessageBox - Teoría</title>
+    <link rel="icon" href="favicon.ico" type="image/x-icon">
+    <title>QMessageBox en Qt</title>
     <link rel="stylesheet" href="../css/style.css">
 </head>
 <body>
     <header>
-        <h1>Módulo 8: QMessageBox</h1>
+        <h1>QMessageBox en Qt</h1>
         <nav>
             <a href="../index.html">Volver al Índice Principal</a>
         </nav>
     </header>
 
-    <h1>En refacciones</h1>
+    <main>
+        <section>
+            <h2>Introducción a QMessageBox</h2>
+            <p>En Qt, <strong>QMessageBox</strong> permite mostrar cuadros de diálogo estándar para informar al usuario, pedir confirmación o mostrar advertencias y errores. Son fáciles de usar y se integran con la interfaz creada en Qt Designer (.ui).</p>
+        </section>
+
+        <section>
+            <h2>Tipos de QMessageBox</h2>
+            <ul>
+                <li><strong>QMessageBox::Information:</strong> Para mostrar información general.</li>
+                <li><strong>QMessageBox::Warning:</strong> Para advertencias o alertas.</li>
+                <li><strong>QMessageBox::Critical:</strong> Para errores críticos.</li>
+                <li><strong>QMessageBox::Question:</strong> Para solicitar confirmación o decisiones del usuario.</li>
+            </ul>
+        </section>
+
+        <section>
+            <h2>Uso básico en widget.cpp</h2>
+            <p>Supongamos que tenemos un botón llamado <code>pushButtonInfo</code> en nuestro formulario <code>widget.ui</code>. La conexión y el uso de QMessageBox se hace así:</p>
+            <pre><code class="language-cpp">
+#include "widget.h"
+#include "ui_widget.h"
+#include &lt;QMessageBox&gt;
+
+Widget::Widget(QWidget *parent)
+    : QWidget(parent)
+    , ui(new Ui::Widget)
+{
+    ui-&gt;setupUi(this);
+
+    // Conectar el botón a un slot
+    connect(ui-&gt;pushButtonInfo, &QPushButton::clicked, this, &Widget::mostrarInformacion);
+}
+
+// Slot definido en widget.h
+void Widget::mostrarInformacion() {
+    QMessageBox::information(this, "Información", "Este es un mensaje informativo");
+}
+            </code></pre>
+        </section>
+
+        <section>
+            <h2>Ejemplo con diferentes tipos</h2>
+            <p>Podemos mostrar distintos tipos de mensajes usando QMessageBox:</p>
+            <pre><code class="language-cpp">
+void Widget::mostrarMensajes() {
+    // Información
+    QMessageBox::information(this, "Info", "Mensaje de información");
+
+    // Advertencia
+    QMessageBox::warning(this, "Advertencia", "Mensaje de advertencia");
+
+    // Error crítico
+    QMessageBox::critical(this, "Error", "Mensaje crítico");
+
+}
+            </code></pre>
+        </section>
+
+        <section>
+            <h2>Resumen</h2>
+            <ul>
+                <li>QMessageBox permite mostrar información, advertencias, errores o preguntas.</li>
+                <li>Se conecta a botones de la interfaz (.ui) mediante slots en widget.cpp.</li>
+            </ul>
+        </section>
+
+        <section class="navegacion-modulo">
+            <p>Practica</p>
+            <a href="practica.html" class="boton-practica">Ir a la Práctica del modulo</a>
+        </section>
+    </main>
+
+    <footer>
+        <p>Volver al <a href="../index.html">Índice Principal</a></p>
+    </footer>
 </body>
 </html>

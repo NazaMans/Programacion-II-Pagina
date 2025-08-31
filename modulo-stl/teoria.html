@@ -246,10 +246,57 @@ std::sort(v2.begin(), v2.end(), std::greater<int>()); // Ordena de mayor a menor
                 <li><strong>Lógicos:</strong> `std::logical_and`, `std::logical_or`, `std::logical_not`.</li>
             </ul>
         </section>
+
+        <section>
+    <h2>Algoritmos de la STL</h2>
+    <p>
+        Los algoritmos en la STL son funciones que operan sobre contenedores, proporcionando operaciones útiles como búsqueda, ordenación, modificación y más.
+    </p>
+    <ul>
+        <li><code>std::sort</code>: Ordena los elementos de un contenedor.</li>
+        <li><code>std::find</code>: Busca un elemento en un rango de un contenedor.</li>
+        <li><code>std::reverse</code>: Invierte el orden de los elementos en un rango.</li>
+        <li><code>std::count</code>: Cuenta el número de ocurrencias de un valor en un rango.</li>
+        <li><code>std::accumulate</code> (de la librería <code>&lt;numeric&gt;</code>): Suma los elementos de un rango.</li>
+        <li><code>std::for_each</code>: Aplica una función a cada elemento en un rango.</li>
+        <li><code>std::remove_if</code>: Elimina elementos que cumplen una condición específica.</li>
+        <li><code>std::transform</code>: Aplica una función a un rango y guarda el resultado en otro rango.</li>
+    </ul>
+
+    <h3>Ejemplos de uso</h3>
+    <pre><code>// Ordena el vector `vec` en orden ascendente
+std::sort(vec.begin(), vec.end());
+
+// Busca `valor` en el vector `vec`
+std::find(vec.begin(), vec.end(), valor);
+
+// Invierte la lista `list`
+std::reverse(list.begin(), list.end());
+
+// Cuenta las ocurrencias de `valor` en `vec`
+std::count(vec.begin(), vec.end(), valor);
+
+// Suma todos los elementos de `vec`, comenzando desde 0
+std::accumulate(vec.begin(), vec.end(), 0);
+
+// Multiplica cada elemento de `vec` por 2
+void multiplicarPorDos(int& n) { n *= 2; }
+std::for_each(vec.begin(), vec.end(), multiplicarPorDos);
+
+// Elimina números pares de `vec`
+bool esPar(int n) { return n % 2 == 0; }
+std::remove_if(vec.begin(), vec.end(), esPar);
+
+// Eleva al cuadrado cada elemento de `vec`
+int elevarAlCuadrado(int n) { return n * n; }
+std::transform(vec.begin(), vec.end(), vec.begin(), elevarAlCuadrado);
+    </code></pre>
+</section>
+
         
         <section class="navegacion-modulo">
-            <p>¡Prepárate para usar las herramientas más poderosas de C++!</p>
-            <a href="practica.html" class="boton-practica">Ir a la Práctica del Módulo 6</a>
+            <p>Practica</p>
+            <a href="practica.html" class="boton-practica">Ir a la Práctica del modulo</a>
         </section>
     </main>
 
