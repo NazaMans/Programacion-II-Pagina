@@ -17,6 +17,18 @@
     --shadow-sepia: rgba(0, 0, 0, 0.6);
 }
 
+/* Centra todos los iframes en la página */
+iframe {
+  display: block;
+  margin: 0 auto;
+}
+
+video {
+  display: block;
+  margin: 0 auto;
+  width: 55%;
+}
+
 body {
     font-family: 'Crimson Text', 'Georgia', serif;
     line-height: 1.8;
