@@ -31,7 +31,7 @@
                 <li><strong>Iteradores:</strong> Actúan como punteros, proporcionando una forma uniforme de acceder a los elementos de los contenedores.</li>
                 <li><strong>Functores (Objetos de Función):</strong> Objetos que pueden ser invocados como si fueran funciones.</li>
             </ul>
-            </section>
+        </section>
 
         <section>
             <h2>Contenedores</h2>
@@ -41,35 +41,35 @@
             <p>Almacenan elementos en un orden lineal, permitiendo acceso secuencial. El orden de los elementos depende del orden de inserción.</p>
             <ul>
                 <li>
-                    <strong>`std::vector` (Vector Dinámico):</strong>
-                    <p>Un array dinámico que puede crecer o encogerse según sea necesario. Ofrece acceso aleatorio a elementos (`O(1)`) y es muy eficiente para añadir elementos al final. Inserciones o eliminaciones en el medio pueden ser costosas (`O(n)`).</p>
+                    <strong><code>std::vector&lt;Tipo&gt;</code> (Vector Dinámico):</strong>
+                    <p>Un array dinámico que puede crecer o encogerse según sea necesario. Ofrece acceso aleatorio a elementos y es muy eficiente para añadir elementos al final. Inserciones o eliminaciones en el medio pueden ser costosas .</p>
                     <pre><code class="language-cpp">
-#include <vector>
+#include &lt;vector&gt;
 // ...
-std::vector<int> numeros = {1, 2, 3};
+std::vector&lt;int&gt; numeros = {1, 2, 3};
 numeros.push_back(4); // Añadir al final
 int primer = numeros[0];
 // Acceso directo
                     </code></pre>
                 </li>
                 <li>
-                    <strong>`std::list` (Lista Doblemente Enlazada):</strong>
-                    <p>Elementos no contiguos en memoria, enlazados bidireccionalmente. Eficiente para inserciones y eliminaciones en cualquier posición (`O(1)`), pero el acceso a elementos es secuencial (`O(n)`).</p>
+                    <strong><code>std::list&lt;Tipo&gt;</code> (Lista Doblemente Enlazada):</strong>
+                    <p>Elementos no contiguos en memoria, enlazados bidireccionalmente. Eficiente para inserciones y eliminaciones en cualquier posición , pero el acceso a elementos es secuencial.</p>
                     <pre><code class="language-cpp">
-#include <list>
+#include &lt;list&gt;
 // ...
-std::list<std::string> nombres;
+std::list&lt;std::string&gt; nombres;
 nombres.push_back("Alice");
 nombres.push_front("Bob");
                     </code></pre>
                 </li>
                 <li>
-                    <strong>`std::deque` (Cola de Doble Extremo):</strong>
-                    <p>Permite inserciones y eliminaciones eficientes tanto al principio como al final (`O(1)`), y acceso aleatorio. Utiliza un conjunto de bloques de memoria.</p>
+                    <strong><code>std::deque&lt;Tipo&gt;</code> (Cola de Doble Extremo):</strong>
+                    <p>Permite inserciones y eliminaciones eficientes tanto al principio como al final, y acceso aleatorio. Utiliza un conjunto de bloques de memoria.</p>
                     <pre><code class="language-cpp">
-#include <deque>
+#include &lt;deque&gt;
 // ...
-std::deque<char> letras;
+std::deque&lt;char&gt; letras;
 letras.push_front('A');
 letras.push_back('Z');
                     </code></pre>
@@ -77,56 +77,56 @@ letras.push_back('Z');
             </ul>
 
             <h3>Contenedores Asociativos:</h3>
-            <p>Almacenan elementos ordenados según un criterio de clave. Permiten búsquedas, inserciones y eliminaciones eficientes basándose en la clave (`O(log n)`).</p>
+            <p>Almacenan elementos ordenados según un criterio de clave. Permiten búsquedas, inserciones y eliminaciones eficientes basándose en la clave.</p>
             <ul>
                 <li>
-                    <strong>`std::map` (Mapa Clave-Valor):</strong>
+                    <strong><code>std::map&lt;Clave, Valor&gt;</code> (Mapa Clave-Valor):</strong>
                     <p>Almacena pares clave-valor, donde las claves son únicas y están ordenadas. Cada clave mapea a un único valor. Similar a un diccionario.</p>
                     <pre><code class="language-cpp">
-#include <map>
+#include &lt;map&gt;
 // ...
-std::map<std::string, int> edades;
+std::map&lt;std::string, int&gt; edades;
 edades["Juan"] = 30;
 edades["Maria"] = 25;
 int edadJuan = edades["Juan"];
                     </code></pre>
                 </li>
                 <li>
-                    <strong>`std::set` (Conjunto Ordenado):</strong>
+                    <strong><code>std::set&lt;Tipo&gt;</code> (Conjunto Ordenado):</strong>
                     <p>Almacena un conjunto de elementos únicos, ordenados según un criterio. Útil para verificar la existencia de un elemento rápidamente.</p>
                     <pre><code class="language-cpp">
-#include <set>
+#include &lt;set&gt;
 // ...
-std::set<int> numerosUnicos;
+std::set&lt;int&gt; numerosUnicos;
 numerosUnicos.insert(10);
 numerosUnicos.insert(5);
 bool existe = numerosUnicos.count(10); // true
                     </code></pre>
                 </li>
-                </ul>
+            </ul>
 
             <h3>Contenedores Adaptadores:</h3>
             <p>No son contenedores en sí mismos, sino que proporcionan interfaces específicas usando otros contenedores como base.</p>
             <ul>
                 <li>
-                    <strong>`std::stack` (Pila):</strong>
-                    <p>Implementa la estructura de datos LIFO (Last-In, First-Out). Métodos: `push`, `pop`, `top`, `empty`.</p>
+                    <strong><code>std::stack&lt;Tipo&gt;</code> (Pila):</strong>
+                    <p>Implementa la estructura de datos LIFO (Last-In, First-Out). Métodos: <code>push</code>, <code>pop</code>, <code>top</code>, <code>empty</code>.</p>
                     <pre><code class="language-cpp">
-#include <stack>
+#include &lt;stack&gt;
 // ...
-std::stack<int> miPila;
+std::stack&lt;int&gt; miPila;
 miPila.push(10);
 int cima = miPila.top(); // 10
 miPila.pop();
                     </code></pre>
                 </li>
                 <li>
-                    <strong>`std::queue` (Cola):</strong>
-                    <p>Implementa la estructura de datos FIFO (First-In, First-Out). Métodos: `push`, `pop`, `front`, `back`, `empty`.</p>
+                    <strong><code>std::queue&lt;Tipo&gt;</code> (Cola):</strong>
+                    <p>Implementa la estructura de datos FIFO (First-In, First-Out). Métodos: <code>push</code>, <code>pop</code>, <code>front</code>, <code>back</code>, <code>empty</code>.</p>
                     <pre><code class="language-cpp">
-#include <queue>
+#include &lt;queue&gt;
 // ...
-std::queue<std::string> miCola;
+std::queue&lt;std::string&gt; miCola;
 miCola.push("Tarea1");
 std::string frente = miCola.front(); // Tarea1
 miCola.pop();
@@ -137,27 +137,27 @@ miCola.pop();
 
         <section>
             <h2>Algoritmos</h2>
-            <p>Los algoritmos STL son funciones genéricas que operan sobre rangos de elementos definidos por iteradores. Se encuentran en el encabezado `<algorithm>`. Son independientes del tipo de contenedor, lo que los hace muy versátiles.</p>
+            <p>Los algoritmos STL son funciones genéricas que operan sobre rangos de elementos definidos por iteradores. Se encuentran en el encabezado <code>&lt;algorithm&gt;</code>. Son independientes del tipo de contenedor, lo que los hace muy versátiles.</p>
             <ul>
                 <li>
-                    <strong>`std::sort` (Ordenar):</strong>
+                    <strong><code>std::sort</code> (Ordenar):</strong>
                     <p>Ordena los elementos en un rango especificado.</p>
                     <pre><code class="language-cpp">
-#include <algorithm>
-#include <vector>
+#include &lt;algorithm&gt;
+#include &lt;vector&gt;
 // ...
-std::vector<int> v = {5, 2, 8, 1};
+std::vector&lt;int&gt; v = {5, 2, 8, 1};
 std::sort(v.begin(), v.end()); // v será {1, 2, 5, 8}
                     </code></pre>
                 </li>
                 <li>
-                    <strong>`std::find` (Buscar):</strong>
-                    <p>Busca un valor específico en un rango y retorna un iterador al primer elemento encontrado (o `end()` si no se encuentra).</p>
+                    <strong><code>std::find</code> (Buscar):</strong>
+                    <p>Busca un valor específico en un rango y retorna un iterador al primer elemento encontrado (o <code>end()</code> si no se encuentra).</p>
                     <pre><code class="language-cpp">
-#include <algorithm>
-#include <vector>
+#include &lt;algorithm&gt;
+#include &lt;vector&gt;
 // ...
-std::vector<int> v = {10, 20, 30, 40};
+std::vector&lt;int&gt; v = {10, 20, 30, 40};
 auto it = std::find(v.begin(), v.end(), 30);
 if (it != v.end()) {
     // Se encontró el 30
@@ -165,26 +165,26 @@ if (it != v.end()) {
                     </code></pre>
                 </li>
                 <li>
-                    <strong>`std::for_each` (Para Cada Elemento):</strong>
+                    <strong><code>std::for_each</code> (Para Cada Elemento):</strong>
                     <p>Aplica una función o un funtor a cada elemento en un rango.</p>
                     <pre><code class="language-cpp">
-#include <algorithm>
-#include <vector>
-#include <iostream>
+#include &lt;algorithm&gt;
+#include &lt;vector&gt;
+#include &lt;iostream&gt;
 // ...
-std::vector<int> v = {1, 2, 3};
-std::for_each(v.begin(), v.end(), [](int n){ std::cout << n * 2 << " "; });
+std::vector&lt;int&gt; v = {1, 2, 3};
+std::for_each(v.begin(), v.end(), [](int n){ std::cout &lt;&lt; n * 2 &lt;&lt; " "; });
 // Imprime: 2 4 6
                     </code></pre>
                 </li>
                 <li>
-                    <strong>`std::count` (Contar Ocurrencias):</strong>
+                    <strong><code>std::count</code> (Contar Ocurrencias):</strong>
                     <p>Cuenta el número de veces que un valor aparece en un rango.</p>
                     <pre><code class="language-cpp">
-#include <algorithm>
-#include <vector>
+#include &lt;algorithm&gt;
+#include &lt;vector&gt;
 // ...
-std::vector<int> v = {1, 2, 2, 3, 2};
+std::vector&lt;int&gt; v = {1, 2, 2, 3, 2};
 int conteo = std::count(v.begin(), v.end(), 2);
 // conteo será 3
                     </code></pre>
@@ -196,16 +196,16 @@ int conteo = std::count(v.begin(), v.end(), 2);
             <h2>Iteradores</h2>
             <p>Los iteradores son objetos que proporcionan una forma unificada de acceder a los elementos de cualquier contenedor STL. Actúan como punteros genéricos, permitiendo recorrer la colección y acceder a sus elementos.</p>
             <ul>
-                <li>Cada contenedor tiene métodos `begin()` (retorna un iterador al primer elemento) y `end()` (retorna un iterador al "pasado-el-último" elemento).</li>
-                <li>Los iteradores se pueden incrementar (`++`) para moverse al siguiente elemento y desreferenciar (`*`) para acceder al valor.</li>
+                <li>Cada contenedor tiene métodos <code>begin()</code> (retorna un iterador al primer elemento) y <code>end()</code> (retorna un iterador al "pasado-el-último" elemento).</li>
+                <li>Los iteradores se pueden incrementar (<code>++</code>) para moverse al siguiente elemento y desreferenciar (<code>*</code>) para acceder al valor.</li>
             </ul>
             <pre><code class="language-cpp">
-#include <vector>
-#include <iostream>
+#include &lt;vector&gt;
+#include &lt;iostream&gt;
 // ...
-std::vector<int> nums = {10, 20, 30};
-for (std::vector<int>::iterator it = nums.begin(); it != nums.end(); ++it) {
-    std::cout << *it << " ";
+std::vector&lt;int&gt; nums = {10, 20, 30};
+for (std::vector&lt;int&gt;::iterator it = nums.begin(); it != nums.end(); ++it) {
+    std::cout &lt;&lt; *it &lt;&lt; " ";
 // Imprime: 10 20 30
 }
             </code></pre>
@@ -213,13 +213,13 @@ for (std::vector<int>::iterator it = nums.begin(); it != nums.end(); ++it) {
 
         <section>
             <h2>Functores (Objetos de Función)</h2>
-            <p>Un funtor es cualquier objeto que puede ser llamado o "invocado" como si fuera una función. Esto se logra sobrecargando el operador paréntesis `operator()`. Los functores son muy utilizados con los algoritmos STL para proporcionar comportamientos personalizados.</p>
-            <p>La STL también proporciona una serie de functores predefinidos en el encabezado `<functional>` para operaciones aritméticas, relacionales y lógicas.</p>
+            <p>Un funtor es cualquier objeto que puede ser llamado o "invocado" como si fuera una función. Esto se logra sobrecargando el operador paréntesis <code>operator()</code>. Los functores son muy utilizados con los algoritmos STL para proporcionar comportamientos personalizados.</p>
+            <p>La STL también proporciona una serie de functores predefinidos en el encabezado <code>&lt;functional&gt;</code> para operaciones aritméticas, relacionales y lógicas.</p>
             <pre><code class="language-cpp">
-#include <iostream>
-#include <vector>
-#include <algorithm>
-#include <functional> // Para functores predefinidos
+#include &lt;iostream&gt;
+#include &lt;vector&gt;
+#include &lt;algorithm&gt;
+#include &lt;functional&gt; // Para functores predefinidos
 
 // Funtor personalizado para duplicar
 struct Duplicar {
@@ -229,42 +229,42 @@ struct Duplicar {
 };
 
 // ...
-std::vector<int> v = {1, 2, 3};
+std::vector&lt;int&gt; v = {1, 2, 3};
 std::for_each(v.begin(), v.end(), Duplicar());
 // Usa el funtor Duplicar
 // v será {2, 4, 6}
 
 // Ejemplo con funtor predefinido
-std::vector<int> v2 = {10, 20, 30};
-std::sort(v2.begin(), v2.end(), std::greater<int>()); // Ordena de mayor a menor
+std::vector&lt;int&gt; v2 = {10, 20, 30};
+std::sort(v2.begin(), v2.end(), std::greater&lt;int&gt;()); // Ordena de mayor a menor
 // v2 será {30, 20, 10}
             </code></pre>
             <p>Los functores predefinidos más comunes incluyen:</p>
             <ul>
-                <li><strong>Aritméticos:</strong> `std::plus`, `std::minus`, `std::multiplies`, etc.</li>
-                <li><strong>Relacionales:</strong> `std::equal_to`, `std::less`, `std::greater`, etc.</li>
-                <li><strong>Lógicos:</strong> `std::logical_and`, `std::logical_or`, `std::logical_not`.</li>
+                <li><strong>Aritméticos:</strong> <code>std::plus</code>, <code>std::minus</code>, <code>std::multiplies</code>, etc.</li>
+                <li><strong>Relacionales:</strong> <code>std::equal_to</code>, <code>std::less</code>, <code>std::greater</code>, etc.</li>
+                <li><strong>Lógicos:</strong> <code>std::logical_and</code>, <code>std::logical_or</code>, <code>std::logical_not</code>.</li>
             </ul>
         </section>
 
         <section>
-    <h2>Algoritmos de la STL</h2>
-    <p>
-        Los algoritmos en la STL son funciones que operan sobre contenedores, proporcionando operaciones útiles como búsqueda, ordenación, modificación y más.
-    </p>
-    <ul>
-        <li><code>std::sort</code>: Ordena los elementos de un contenedor.</li>
-        <li><code>std::find</code>: Busca un elemento en un rango de un contenedor.</li>
-        <li><code>std::reverse</code>: Invierte el orden de los elementos en un rango.</li>
-        <li><code>std::count</code>: Cuenta el número de ocurrencias de un valor en un rango.</li>
-        <li><code>std::accumulate</code> (de la librería <code>&lt;numeric&gt;</code>): Suma los elementos de un rango.</li>
-        <li><code>std::for_each</code>: Aplica una función a cada elemento en un rango.</li>
-        <li><code>std::remove_if</code>: Elimina elementos que cumplen una condición específica.</li>
-        <li><code>std::transform</code>: Aplica una función a un rango y guarda el resultado en otro rango.</li>
-    </ul>
+            <h2>Algoritmos de la STL</h2>
+            <p>
+                Los algoritmos en la STL son funciones que operan sobre contenedores, proporcionando operaciones útiles como búsqueda, ordenación, modificación y más.
+            </p>
+            <ul>
+                <li><code>std::sort</code>: Ordena los elementos de un contenedor.</li>
+                <li><code>std::find</code>: Busca un elemento en un rango de un contenedor.</li>
+                <li><code>std::reverse</code>: Invierte el orden de los elementos en un rango.</li>
+                <li><code>std::count</code>: Cuenta el número de ocurrencias de un valor en un rango.</li>
+                <li><code>std::accumulate</code> (de la librería <code>&lt;numeric&gt;</code>): Suma los elementos de un rango.</li>
+                <li><code>std::for_each</code>: Aplica una función a cada elemento en un rango.</li>
+                <li><code>std::remove_if</code>: Elimina elementos que cumplen una condición específica.</li>
+                <li><code>std::transform</code>: Aplica una función a un rango y guarda el resultado en otro rango.</li>
+            </ul>
 
-    <h3>Ejemplos de uso</h3>
-    <pre><code>// Ordena el vector `vec` en orden ascendente
+            <h3>Ejemplos de uso</h3>
+            <pre><code>// Ordena el vector `vec` en orden ascendente
 std::sort(vec.begin(), vec.end());
 
 // Busca `valor` en el vector `vec`
@@ -290,10 +290,9 @@ std::remove_if(vec.begin(), vec.end(), esPar);
 // Eleva al cuadrado cada elemento de `vec`
 int elevarAlCuadrado(int n) { return n * n; }
 std::transform(vec.begin(), vec.end(), vec.begin(), elevarAlCuadrado);
-    </code></pre>
-</section>
+            </code></pre>
+        </section>
 
-        
         <section class="navegacion-modulo">
             <p>Practica</p>
             <a href="practica.html" class="boton-practica">Ir a la Práctica del modulo</a>
