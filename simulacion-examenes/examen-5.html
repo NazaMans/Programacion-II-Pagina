@@ -26,56 +26,50 @@
         <span id="displayTemporizador">00:00:00</span>
       </section>
 
-      <!-- Igual estructura del anterior, pero con otros 2 ejercicios -->
       <section>
-        <h3>Ejercicio 1: Inventario de Productos</h3>
+        <h3>Ejercicio 1: Gestión de Tramos</h3>
         <ul>
           <li>
-            <strong>Consigna:</strong> Guardar productos con nombre, precio y
-            stock en una tabla.
+            <strong>Consigna:</strong> Realizar un programa con Qt que permita manejar un listado de tramos, como puede verse en la interfaz de arriba. El programa debe cumplir con los siguientes puntos.
           </li>
           <li>
             <strong>Elementos de Qt a utilizar:</strong>
-            <code>QLineEdit, QPushButton, QTableWidget, QMessageBox</code>.
+            <code>QComboBox, QLineEdit (3), QPushButton (6), QDialog, QMessageBox, vector (std::vector)</code>.
           </li>
           <li><strong>Puntos que debe cumplir:</strong></li>
-          <li>Validar entrada vacia con QMessageBox.</li>
-          <li>Si el stock es menor de 5 debe darse una advertencia de que es poco stock.</li>
+          <li>Modelar el objeto "Tramo" con los atributos id (índice), nombre, distancia (km) y combustible (litros).</li>
+          <li>Modelar un objeto "ListadoTramos" con un vector (C++) de tramos como atributo y los métodos de agregar, editar, quitar, calcularPromedio, mayorTramo y menorTramo.</li>
+          <li>Al elegir 'agregar' el programa debe agregar un nuevo tramo empleando el diálogo de abajo.</li>
+          <li>Al elegir 'editar' el programa debe modificar el tramo elegido empleando el diálogo de abajo, mostrando los datos del tramo a editar.</li>
+          <li>Al elegir 'quitar' preguntar al usuario si desea quitar el tramo elegido.</li>
+          <li>Al elegir 'mostrar cálculos' el programa debe mostrar en un QMessageBox el promedio de distancias, el tramo con mayor distancia y el tramo con menor consumo de combustible.</li>
         </ul>
-         <img
-          src="../fotos/Examen2-F1.png"
-          alt="Descripción"
-          width="300"
-          height="200"
-          style="display: block; margin: auto"
-        />
+        <img src="../fotos/Examen5-F1p1.png" alt="Descripción" width="300" height="200" style="display: block; margin: auto;">
+        <br>
+        <img src="../fotos/Examen5-F1p2.png" aalt="Descripción" width="300" height="200" style="display: block; margin: auto;">
       </section>
 
       <section>
-        <h3>Ejercicio 2: Velocidad de Ventilador</h3>
+        <h3>Ejercicio 2: Gestión de Películas</h3>
         <ul>
           <li>
-            <strong>Consigna:</strong> Control de velocidad con un slider.
-            Mostrar advertencia al máximo.
+            <strong>Consigna:</strong> Desarrolla un programa en Qt que gestione una lista de películas, permitiendo agregar, eliminar y buscar títulos.
           </li>
           <li>
             <strong>Elementos de Qt a utilizar:</strong>
-            <code>QSlider, QLCDNumber, QPushButton, QMessageBox</code>.
+            <code>QLineEdit, QPushButton (4), QListWidget, QDialog, QMessageBox, std::vector, QMessageBox</code>.
           </li>
           <li><strong>Puntos que debe cumplir:</strong></li>
-          <li>
-            El QMessageBox debe mostrar una alerta al llegar 65 de velocidad.
-          </li>
-          <li>El boton reiniciara la velocidad a 10.</li>
-          <li>Al iniciar el programa la velocidad al nivel minimo (0).</li>
+          <li>Modelar el objeto "Película" con los atributos: título, director y año de estreno.</li>
+          <li>El programa debe permitir agregar una nueva película a la lista.</li>
+          <li>Debe ser posible eliminar una película seleccionada de la lista.</li>
+          <li>Al seleccionar una película, debe mostrarse la información completa (título, director, año) en un QMessageBox.</li>
+          <li>Validar que los campos de entrada no estén vacíos antes de agregar una película.</li>
+          <li>Si se presiona eliminar y no se selecciono una pelicula debe saltar un Warning</li>
         </ul>
-        <img
-          src="../fotos/Examen2-F2.png"
-          alt="Descripción"
-          width="300"
-          height="200"
-          style="display: block; margin: auto"
-        />
+        <img src="../fotos/Examen5-F2p1.png" alt="Descripción" width="300" height="200" style="display: block; margin: auto;">
+        <br>
+        <img src="../fotos/Examen5-F2p2.png" alt="Descripción" width="300" height="200" style="display: block; margin: auto;">
       </section>
     </main>
 
@@ -87,7 +81,6 @@
         >Volver al Índice Principal</a
       >
     </section>
-
 
     <script>
       let startTime;
