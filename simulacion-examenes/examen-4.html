@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="icon" href="favicon.ico" type="image/x-icon">
+    <title>Ejercicios de Programación: Qt y C++</title>
+    <link rel="stylesheet" href="../css/style.css" />
+  </head>
+  <body>
+    <header>
+      <h1>Ejercicios de Programación: Qt y C++</h1>
+      <nav>
+        <a href="../index.html">Volver al Índice Principal</a>
+      </nav>
+    </header>
+
+    <main>
+      <section class="timer-container">
+        <h2>Control de Tiempo para Actividades</h2>
+        <p>
+          Usa el botón de abajo para iniciar y detener un temporizador que te
+          ayude a medir el tiempo que dedicas a cada ejercicio.
+        </p>
+        <button id="iniciarTemporizador">Iniciar Temporizador</button>
+        <span id="displayTemporizador">00:00:00</span>
+      </section>
+
+      <section>
+        <h3>Ejercicio 1: Simulador de cajero</h3>
+        <ul>
+          <li>
+            <strong>Consigna:</strong> Simula una aplicacion que permita ingresar y retirar dinero de una cuenta bancaria 
+          </li>
+          <li>
+            <strong>Elementos de Qt a utilizar:</strong>
+            <code>QDoubleSpinBox, QPushButton (4), QLCDNumber, QListWidget, lista (std::list&lt;QString&gt;)</code>.
+          </li>
+          <li><strong>Puntos que debe cumplir:</strong></li>
+          <li>Modelar el objeto "Cuenta" con atributos como "listaMovimientos, dineroCuenta" y sus respectivos metodos para ingresar o retornar estos datos (agregarDinero, retirarDinero y agregarMovimiento, etc)</li>
+          <li>Validar campos vacios.</li>
+          <li>Validar retiro de dinero superior a la existente en cuenta</li>
+          <li>Mostrar todo esto en un QLCDNumber</li>
+          <li>Por cada movimiento (retiro o ingreso) se debe mostrar en el QListWidget algo como (Se retiro $50 de la cuenta)</li>
+          <li>El boton Cancelar setea el QDoubleSpinBox en 0,00</li>
+          <li>El boton salir debe cerrar la ventana</li>
+        </ul>
+         <img src="../fotos/Examen4-F1.png" alt="Descripción" width="300" height="200" style="display: block; margin: auto;">
+          
+      </section>
+
+      <section>
+        <h3>Ejercicio 2: Crear un juego de adivinar el numero</h3>
+        <ul>
+          <li>
+            <strong>Consigna:</strong> Crea una aplicacion que permita al usuario elegir si el juego debe ser de 1 a 10, 1 a 50 o 1 a 100, y luego adivinar el numero aleatorio
+          </li>
+          <li>
+            <strong>Elementos de Qt a utilizar:</strong>
+            <code>QComboBox, QLabel, QLineEdit, QPushButton (2)</code>.
+          </li>
+          <li><strong>Puntos que debe cumplir:</strong></li>
+          <li>Al iniciar el programa debe generarse un numero aleatorio entre 1 a 10</li>
+          <li>Al momento de cambiar la opcion del QComboBox debe generarse un nuevo numero aleatorio con ese rango seleccionado</li>
+          <li>El juego debe indicar el rango en un label (Adivine el numero entre X y Z)</li>
+          <li>El usuario ingresa un numero en el QLineEdit y debe presionar intentar</li>
+          <li>El programa debe indicar si el numero es muy bajo, muy alto o correcto mediante un QLabel o QMessageBox</li>
+          <li>Por cada intento se debe sumar 1 al contador de intentos</li>
+          <li>El boton reiniciar debe generar un nuevo numero aleatorio</li>
+        </ul>
+        <img src="../fotos/Examen4-F2.png" alt="Descripción" width="300" height="200" style="display: block; margin: auto;">
+      </section>
+    </main>
+
+    <section class="navegacion-modulo">
+      <a
+        href="../index.html"
+        class="boton-practica"
+        style="background-color: #007bff"
+        >Volver al Índice Principal</a
+      >
+    </section>
+
+    <footer>
+      <p>Fin de los Proyectos Simples</p>
+    </footer>
+
+    <script>
+      let startTime;
+      let timerInterval;
+      let isRunning = false;
+      const startButton = document.getElementById("iniciarTemporizador");
+      const display = document.getElementById("displayTemporizador");
+
+      function formatTime(totalSeconds) {
+        const h = String(Math.floor(totalSeconds / 3600)).padStart(2, "0");
+        const m = String(Math.floor((totalSeconds % 3600) / 60)).padStart(
+          2,
+          "0"
+        );
+        const s = String(totalSeconds % 60).padStart(2, "0");
+        return `${h}:${m}:${s}`;
+      }
+
+      function updateTimer() {
+        const elapsed = Math.floor((Date.now() - startTime) / 1000);
+        display.textContent = formatTime(elapsed);
+      }
+
+      startButton.addEventListener("click", () => {
+        if (!isRunning) {
+          startTime = Date.now();
+          timerInterval = setInterval(updateTimer, 1000);
+          startButton.textContent = "Detener Temporizador";
+          startButton.style.backgroundColor = "var(--secondary-accent-darker)";
+          isRunning = true;
+        } else {
+          clearInterval(timerInterval);
+          startButton.textContent = "Iniciar Temporizador";
+          startButton.style.backgroundColor = "var(--secondary-accent)";
+          isRunning = false;
+        }
+      });
+    </script>
+  </body>
+</html>
